@@ -44,7 +44,12 @@ input, select, textarea { font-family: inherit; }
   width: 100%; max-width: 380px; background: #fff; border: 1px solid var(--ink-100);
   border-radius: 1rem; box-shadow: var(--shadow-soft); padding: 32px;
 }
-.login-card .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; margin-bottom: 24px; color: var(--flow-700); }
+.login-card .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; margin-bottom: 24px; color: var(--flow-700); }
+.brand-logo-img {
+  height: 34px; width: 34px; border-radius: 9px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  object-fit: cover;
+}
 .login-card .brand-mark {
   height: 34px; width: 34px; border-radius: 9px; color: #fff; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
