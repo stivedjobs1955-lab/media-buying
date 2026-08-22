@@ -146,26 +146,80 @@ function updateCalculator() {
     calcBudgetVal.textContent = `$${formatNumber(usd)}`;
   }
 
-  // 1$ uchun o'rtacha 500 ta qamrov (oxvat)
-  const minReach = Math.round(usd * 450);
-  const maxReach = Math.round(usd * 550);
-  if (calcReachVal) {
-    calcReachVal.textContent = `${formatNumber(minReach)} – ${formatNumber(maxReach)}`;
+  // Normalized progress parameter 0..1
+  const t = Math.max(0, Math.min(1, sliderVal / 100));
+
+  // Realistic ROAS: Curves gently sideways (diminishing return curve)
+  // At $500: ~3.2x – 5.0x
+  // At $10k: ~2.8x – 4.2x
+  // At $50k: ~2.5x – 3.8x
+  // At $100k: ~2.3x – 3.5x
+  // At $1M: ~2.0x – 3.0x
+  const minRoasNum = Math.max(2.0, (3.3 - t * 1.3));
+  const maxRoasNum = Math.max(3.0, (4.8 - t * 1.8));
+
+  if (calcRoasVal) {
+    calcRoasVal.textContent = `${minRoasNum.toFixed(1)}x – ${maxRoasNum.toFixed(1)}x`;
   }
 
-  // 1$ uchun 0.3 tadan 1 tagacha lid
-  const minLeads = Math.max(1, Math.round(usd * 0.3));
-  const maxLeads = Math.max(1, Math.round(usd * 1.0));
+  // Expected Gross Revenue (Savdo hajmi)
+  const minRev = Math.round(usd * minRoasNum);
+  const maxRev = Math.round(usd * maxRoasNum);
+  const calcRevenueVal = document.getElementById('calcRevenueVal');
+  if (calcRevenueVal) {
+    calcRevenueVal.textContent = `$${formatNumber(minRev)} – $${formatNumber(maxRev)}`;
+  }
+
+  // Expected Qualified Leads (realistic CPL gently rises with scale)
+  const cplMin = 4.5 + t * 4.5;
+  const cplMax = 8.5 + t * 6.5;
+  const minLeads = Math.max(1, Math.round(usd / cplMax));
+  const maxLeads = Math.max(1, Math.round(usd / cplMin));
   if (calcLeadsVal) {
     calcLeadsVal.textContent = `${formatNumber(minLeads)} – ${formatNumber(maxLeads)} ${leadsUnit}`;
   }
 
-  // ROAS: 1.5x dan boshlanib byudjet $1M gacha yetganda 100x gacha borishi mumkin
-  const ratio = Math.max(0, Math.min(1, sliderVal / 100));
-  const minRoas = (1.5 + ratio * 28.5).toFixed(1);
-  const maxRoas = Math.round(3.0 + ratio * 97.0);
-  if (calcRoasVal) {
-    calcRoasVal.textContent = `${minRoas}x – ${maxRoas}x`;
+  // Estimated Reach (realistic CPM ~$3.5 - $6.5)
+  const minReach = Math.round(usd * (160 - t * 25));
+  const maxReach = Math.round(usd * (240 - t * 40));
+  if (calcReachVal) {
+    if (usd >= 100000) {
+      calcReachVal.textContent = `${(minReach / 1000000).toFixed(1)}M – ${(maxReach / 1000000).toFixed(1)}M`;
+    } else {
+      calcReachVal.textContent = `${formatNumber(minReach)} – ${formatNumber(maxReach)}`;
+    }
+  }
+
+  // Update Tier Badge and Curve Note
+  const climbTierBadge = document.getElementById('climbTierBadge');
+  const climbCurveNote = document.getElementById('climbCurveNote');
+  let tierName = '';
+  let curveNote = '';
+
+  if (usd < 3000) {
+    tierName = currentLang === 'ru' ? '🧪 Тест и валидация' : (currentLang === 'en' ? '🧪 Test & Validation' : '🧪 Test & Validatsiya');
+    curveNote = currentLang === 'ru' ? 'Быстрый старт ROI' : (currentLang === 'en' ? 'Agile initial ROI' : 'Tezkor boshlang\'ich ROI');
+  } else if (usd < 30000) {
+    tierName = currentLang === 'ru' ? '🚀 Оптимальный масштаб (Sweet Spot)' : (currentLang === 'en' ? '🚀 Optimal Scale (Sweet Spot)' : '🚀 Optimal masshtab (Sweet Spot)');
+    curveNote = currentLang === 'ru' ? 'Максимальная эффективность' : (currentLang === 'en' ? 'Peak Efficiency' : 'Maksimal samaradorlik');
+  } else if (usd < 150000) {
+    tierName = currentLang === 'ru' ? '⚡ Высокообъемный рост' : (currentLang === 'en' ? '⚡ High-Volume Scaling' : '⚡ Yuqori hajmli o\'sish');
+    curveNote = currentLang === 'ru' ? 'Устойчивый объем продаж' : (currentLang === 'en' ? 'Steady Sales Volume' : 'Barqaror savdo hajmi');
+  } else {
+    tierName = currentLang === 'ru' ? '🏢 Корпоративное лидерство' : (currentLang === 'en' ? '🏢 Enterprise Market Leadership' : '🏢 Korporativ yetakchilik');
+    curveNote = currentLang === 'ru' ? 'Глобальный охват рынка' : (currentLang === 'en' ? 'Global Market Reach' : 'Global bozor qamrovi');
+  }
+
+  if (climbTierBadge) climbTierBadge.textContent = tierName;
+  if (climbCurveNote) climbCurveNote.textContent = curveNote;
+
+  // Move Tracker Dot along SVG Curve
+  const trackerDot = document.getElementById('climbTrackerDot');
+  if (trackerDot) {
+    const dotX = Math.round(t * 590 + 5);
+    const dotY = Math.round(110 - Math.pow(t, 0.42) * 94);
+    trackerDot.setAttribute('cx', dotX);
+    trackerDot.setAttribute('cy', dotY);
   }
 }
 
@@ -178,7 +232,7 @@ if (calcSlider) {
 // Enable clicking / selecting ANY metric box in calculator
 calcMetricBoxes.forEach((box) => {
   box.addEventListener('click', () => {
-    calcMetricBoxes.forEach((b) => b.classList.remove('highlight'));
+    document.querySelectorAll('.calc-metric-box').forEach((b) => b.classList.remove('highlight'));
     box.classList.add('highlight');
   });
 });
