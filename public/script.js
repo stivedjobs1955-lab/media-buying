@@ -148,26 +148,24 @@ function updateCalculator() {
   // Normalized progress parameter 0..1
   const t = Math.max(0, Math.min(1, sliderVal / 100));
 
-  // Realistic ROAS: $10k dan keyin tikka uchmaydi, 2.0x – 5.0x oralig'ida realistik tebranadi
-  const minRoasNum = Math.max(2.0, (3.3 - t * 1.3));
-  const maxRoasNum = Math.max(3.0, (4.8 - t * 1.8));
+  // Prognoz ROAS: Keng va jozibador oraliq (3.2x dan to 25x+ gacha)
+  const minRoasNum = (3.2 + t * 3.6).toFixed(1);
+  const maxRoasNum = (7.5 + t * 17.5).toFixed(1);
 
   if (calcRoasVal) {
-    calcRoasVal.textContent = `${minRoasNum.toFixed(1)}x – ${maxRoasNum.toFixed(1)}x`;
+    calcRoasVal.textContent = `${minRoasNum}x – ${maxRoasNum}x`;
   }
 
-  // Expected Qualified Leads (CPL gently rises realistically from $4.5 to $12)
-  const cplMin = 4.5 + t * 4.5;
-  const cplMax = 8.5 + t * 6.5;
-  const minLeads = Math.max(1, Math.round(usd / cplMax));
-  const maxLeads = Math.max(1, Math.round(usd / cplMin));
+  // Kutilayotgan lidlar: Keng va erkin oraliq (1$ = ~0.35 dan 1.8 tagacha lid)
+  const minLeads = Math.max(1, Math.round(usd * (0.35 - t * 0.05)));
+  const maxLeads = Math.max(1, Math.round(usd * (1.80 - t * 0.15)));
   if (calcLeadsVal) {
     calcLeadsVal.textContent = `${formatNumber(minLeads)} – ${formatNumber(maxLeads)} ${leadsUnit}`;
   }
 
-  // Estimated Reach (CPM ~$3.5 - $6.5)
-  const minReach = Math.round(usd * (160 - t * 25));
-  const maxReach = Math.round(usd * (240 - t * 40));
+  // Taxminiy qamrov (Oxvat): 1$ uchun ~400 tadan 850 tagacha qamrov
+  const minReach = Math.round(usd * 400);
+  const maxReach = Math.round(usd * 850);
   if (calcReachVal) {
     if (usd >= 100000) {
       calcReachVal.textContent = `${(minReach / 1000000).toFixed(1)}M – ${(maxReach / 1000000).toFixed(1)}M`;
