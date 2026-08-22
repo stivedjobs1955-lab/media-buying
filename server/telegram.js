@@ -1,7 +1,7 @@
 const https = require('node:https');
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '***TELEGRAM_BOT_TOKEN_REDACTED***';
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID || '';
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID || '***TELEGRAM_CHAT_ID_REDACTED***';
 
 /**
  * Send a message via Telegram Bot API
