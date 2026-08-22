@@ -1,3 +1,9 @@
+// Meta Pixel — track outbound Telegram/phone clicks as "Contact"
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="tel:"], a[href*="t.me/"]');
+  if (link && typeof fbq === 'function') fbq('track', 'Contact');
+});
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
@@ -78,6 +84,7 @@ if (contactForm) {
           return;
         }
         if (formSuccess) formSuccess.classList.add('show');
+        if (typeof fbq === 'function') fbq('track', 'Lead');
         contactForm.reset();
       })
       .catch(() => {
