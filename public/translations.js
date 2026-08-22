@@ -53,8 +53,12 @@ const TRANSLATIONS = {
     'analysis.f3.text': "Kampaniyalar kuzatuvi to'xtamaydi — byudjet oshib ketishi yoki samaradorlik pasayishi darhol aniqlanib, sozlash o'sha kuniyoq amalga oshiriladi.",
     'analysis.f3.stat': "Kampaniya kuzatuvi va tezkor optimallashtirish",
 
-    'clients.title': "Bizga ishongan mijozlar",
-    'clients.subtitle': "Turli sohadagi brendlar va shaxsiy loyihalar bilan media-baying bo'yicha hamkorlik qildik.",
+    'clients.eyebrow': "HAMKORLIK VA KEYSLAR",
+    'clients.title': "Bizga ishongan brendlar va shaxslar",
+    'clients.subtitle': "Har bir loyiha ortida o'lchanadigan sof daromad va doimiy lidlar oqimi turibdi.",
+    'clients.stat1': "Faol hamkor brendlar",
+    'clients.stat2': "O'rtacha ROAS o'sishi",
+    'clients.stat3': "Jami jalb qilingan lidlar",
 
     'process.title': "Ishlash jarayonimiz",
     'process.subtitle': "Har bir loyiha besh bosqichdan o'tadi — tasodifga o'rin qolmaydi.",
@@ -181,8 +185,12 @@ const TRANSLATIONS = {
     'analysis.f3.text': "Наблюдение за кампаниями не прекращается — перерасход бюджета или падение эффективности выявляется мгновенно, и корректировка вносится в тот же день.",
     'analysis.f3.stat': "Мониторинг кампаний и быстрая оптимизация",
 
-    'clients.title': "Клиенты, которые нам доверяют",
-    'clients.subtitle': "Мы сотрудничали в медиабайинге с брендами и личными проектами из разных сфер.",
+    'clients.eyebrow': "ПОРТФОЛИО И ДОВЕРИЕ",
+    'clients.title': "Бренды и проекты, которые нам доверяют",
+    'clients.subtitle': "За каждым проектом стоит измеримая прибыль и стабильный поток целевых заявок.",
+    'clients.stat1': "Активных партнеров",
+    'clients.stat2': "Средний рост ROAS",
+    'clients.stat3': "Привлечено лидов",
 
     'process.title': "Наш рабочий процесс",
     'process.subtitle': "Каждый проект проходит пять этапов — места случайности не остаётся.",
@@ -309,8 +317,12 @@ const TRANSLATIONS = {
     'analysis.f3.text': "Campaign monitoring never stops — budget overruns or performance drops are detected instantly, and adjustments happen the same day.",
     'analysis.f3.stat': "Campaign monitoring and rapid optimization",
 
-    'clients.title': "Clients who trust us",
-    'clients.subtitle': "We've partnered on media buying with brands and personal projects across many industries.",
+    'clients.eyebrow': "PARTNERS & SHOWCASE",
+    'clients.title': "Brands and leaders who trust us",
+    'clients.subtitle': "Behind every project stands measurable net profit and a steady stream of qualified leads.",
+    'clients.stat1': "Active partner brands",
+    'clients.stat2': "Average ROAS growth",
+    'clients.stat3': "Total leads generated",
 
     'process.title': "Our workflow",
     'process.subtitle': "Every project goes through five stages — no room left for guesswork.",

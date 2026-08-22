@@ -26,16 +26,15 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach((el) => el.classList.add('in'));
 }
 
-// Clients marquee
-const clientsTrack = document.getElementById('clientsTrack');
-if (clientsTrack) {
-  const originalCards = Array.from(clientsTrack.children);
+// Clients marquee tracks (Row 1 & Row 2)
+document.querySelectorAll('.clients-track').forEach((track) => {
+  const originalCards = Array.from(track.children);
   originalCards.forEach((card) => {
     const clone = card.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
-    clientsTrack.appendChild(clone);
+    track.appendChild(clone);
   });
-}
+});
 
 // Pageview tracking
 fetch('/api/track', {
