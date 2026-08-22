@@ -119,20 +119,31 @@ function formatNumber(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
+// Convert 0..100 logarithmic slider scale to $500 .. $1,000,000 USD
+function sliderToBudget(val) {
+  const min = Math.log(500);
+  const max = Math.log(1000000);
+  const scale = (max - min) / 100;
+  const raw = Math.exp(min + scale * val);
+
+  if (raw < 1000) return Math.round(raw / 50) * 50;
+  if (raw < 10000) return Math.round(raw / 250) * 250;
+  if (raw < 50000) return Math.round(raw / 1000) * 1000;
+  if (raw < 200000) return Math.round(raw / 5000) * 5000;
+  if (raw < 500000) return Math.round(raw / 25000) * 25000;
+  return Math.round(raw / 50000) * 50000;
+}
+
 function updateCalculator() {
   if (!calcSlider) return;
-  const budget = parseInt(calcSlider.value, 10);
+  const sliderVal = parseInt(calcSlider.value, 10);
+  const usd = sliderToBudget(sliderVal);
   const currentLang = localStorage.getItem('unique_lang') || 'uz';
-  const currencyUnit = currentLang === 'ru' ? 'сум' : (currentLang === 'en' ? 'UZS' : "so'm");
   const leadsUnit = currentLang === 'ru' ? 'лидов' : (currentLang === 'en' ? 'leads' : 'ta lid');
 
-  // 1 USD ~ 13 000 UZS
-  const usd = budget / 13000;
-
-  // Format budget display with approximate USD
-  const usdFormatted = Math.round(usd);
+  // Format budget display in USD ($)
   if (calcBudgetVal) {
-    calcBudgetVal.textContent = `${formatNumber(budget)} ${currencyUnit} (~$${usdFormatted})`;
+    calcBudgetVal.textContent = `$${formatNumber(usd)}`;
   }
 
   // 1$ uchun o'rtacha 500 ta qamrov (oxvat)
@@ -146,13 +157,13 @@ function updateCalculator() {
   const minLeads = Math.max(1, Math.round(usd * 0.3));
   const maxLeads = Math.max(1, Math.round(usd * 1.0));
   if (calcLeadsVal) {
-    calcLeadsVal.textContent = `${minLeads} – ${maxLeads} ${leadsUnit}`;
+    calcLeadsVal.textContent = `${formatNumber(minLeads)} – ${formatNumber(maxLeads)} ${leadsUnit}`;
   }
 
-  // ROAS: 1.5x dan boshlanib byudjet kattalashgan sari 100x gacha borishi mumkin
-  const progressRatio = Math.min(1, Math.max(0, (budget - 3000000) / (50000000 - 3000000)));
-  const minRoas = (1.5 + progressRatio * 18.5).toFixed(1);
-  const maxRoas = Math.round(3.0 + progressRatio * 97.0);
+  // ROAS: 1.5x dan boshlanib byudjet $1M gacha yetganda 100x gacha borishi mumkin
+  const ratio = Math.max(0, Math.min(1, sliderVal / 100));
+  const minRoas = (1.5 + ratio * 28.5).toFixed(1);
+  const maxRoas = Math.round(3.0 + ratio * 97.0);
   if (calcRoasVal) {
     calcRoasVal.textContent = `${minRoas}x – ${maxRoas}x`;
   }

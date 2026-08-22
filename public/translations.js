@@ -109,9 +109,10 @@ const TRANSLATIONS = {
 
     'hero.liveStatus': "Jonli monitoring faol (24/7)",
 
+    'calc.eyebrow': "BYUDJET VA DAROMAD",
     'calc.title': "Byudjet va daromad kalkulyatori",
-    'calc.subtitle': "Oylik reklama byudjetingizni tanlang va kutilayotgan ko'rsatkichlarni hisoblang",
-    'calc.label': "Oylik reklama byudjeti:",
+    'calc.subtitle': "Oylik reklama byudjetingizni ($) tanlang va kutilayotgan ko'rsatkichlarni hisoblang",
+    'calc.label': "Oylik reklama byudjeti ($):",
     'calc.reach': "Taxminiy qamrov",
     'calc.leads': "Kutilayotgan lidlar",
     'calc.roas': "Prognoz ROAS",
@@ -253,9 +254,10 @@ const TRANSLATIONS = {
 
     'hero.liveStatus': "Активный живой мониторинг (24/7)",
 
+    'calc.eyebrow': "БЮДЖЕТ И ОТДАЧА",
     'calc.title': "Калькулятор бюджета и отдачи",
-    'calc.subtitle': "Выберите ваш рекламный бюджет и рассчитайте потенциальные результаты",
-    'calc.label': "Ежемесячный рекламный бюджет:",
+    'calc.subtitle': "Выберите ваш рекламный бюджет ($) и рассчитайте потенциальные результаты",
+    'calc.label': "Ежемесячный рекламный бюджет ($):",
     'calc.reach': "Примерный охват",
     'calc.leads': "Ожидаемые лиды",
     'calc.roas': "Прогноз ROAS",
@@ -394,9 +396,10 @@ const TRANSLATIONS = {
     'contact.sideText': "Have a question or need a faster answer — reach out through the channels below.",
     'hero.liveStatus': "Live monitoring active (24/7)",
 
+    'calc.eyebrow': "BUDGET & ROI",
     'calc.title': "Budget & ROI Calculator",
-    'calc.subtitle': "Select your monthly advertising budget and estimate potential performance",
-    'calc.label': "Monthly ad budget:",
+    'calc.subtitle': "Select your monthly advertising budget ($) and estimate potential performance",
+    'calc.label': "Monthly ad budget ($):",
     'calc.reach': "Estimated Reach",
     'calc.leads': "Expected Leads",
     'calc.roas': "Projected ROAS",
