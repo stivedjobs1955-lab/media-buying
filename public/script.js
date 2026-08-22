@@ -90,10 +90,18 @@ if (contactForm) {
   });
 }
 
-// Scroll Progress Bar
+// Scroll Progress Bar & Fixed Header Blur State
 const scrollProgress = document.getElementById('scrollProgress');
+const siteHeader = document.querySelector('.site-header');
 window.addEventListener('scroll', () => {
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  if (siteHeader) {
+    if (scrollTop > 15) {
+      siteHeader.classList.add('scrolled');
+    } else {
+      siteHeader.classList.remove('scrolled');
+    }
+  }
   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
   const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
   if (scrollProgress) scrollProgress.style.width = `${progress}%`;
