@@ -26,8 +26,7 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach((el) => el.classList.add('in'));
 }
 
-// Clients marquee — duplicate the cards once inside the same track so the
-// 0% -> -50% scroll loops seamlessly (the two halves are identical).
+// Clients marquee
 const clientsTrack = document.getElementById('clientsTrack');
 if (clientsTrack) {
   const originalCards = Array.from(clientsTrack.children);
@@ -38,23 +37,23 @@ if (clientsTrack) {
   });
 }
 
-// Pageview tracking (for the admin panel's stats)
+// Pageview tracking
 fetch('/api/track', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ path: location.pathname, referrer: document.referrer }),
 }).catch(() => {});
 
-// Contact form — submits the lead to the CRM (visible in /admin)
+// Contact form
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
 const formError = document.getElementById('formError');
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    formError.style.display = 'none';
+    if (formError) formError.style.display = 'none';
     const submitBtn = contactForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
 
     const payload = {
       name: document.getElementById('name').value,
@@ -71,12 +70,27 @@ if (contactForm) {
     })
       .then((r) => r.json().then((data) => ({ ok: r.ok, data })))
       .then(({ ok, data }) => {
-        submitBtn.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
         if (!ok) {
-          formError.textContent = data.error || 'Xatolik yuz berdi, qayta urinib ko\'ring.';
-          formError.style.display = 'block';
+          if (formError) {
+            formError.textContent = data.error || 'Xatolik yuz berdi, qayta urinib ko\'ring.';
+            formError.style.display = 'block';
+          }
           return;
         }
+        if (formSuccess) formSuccess.classList.add('show');
+        contactForm.reset();
+      })
+      .catch(() => {
+        if (submitBtn) submitBtn.disabled = false;
+        if (formError) {
+          formError.textContent = 'Serverga ulanib bo\'lmadi. Birozdan so\'ng qayta urinib ko\'ring.';
+          formError.style.display = 'block';
+        }
+      });
+  });
+}
+
 // Scroll Progress Bar
 const scrollProgress = document.getElementById('scrollProgress');
 window.addEventListener('scroll', () => {
@@ -92,6 +106,7 @@ const calcBudgetVal = document.getElementById('calcBudgetVal');
 const calcReachVal = document.getElementById('calcReachVal');
 const calcLeadsVal = document.getElementById('calcLeadsVal');
 const calcRoasVal = document.getElementById('calcRoasVal');
+const calcMetricBoxes = document.querySelectorAll('.calc-metric-box');
 
 function formatNumber(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -132,8 +147,17 @@ function updateCalculator() {
 
 if (calcSlider) {
   calcSlider.addEventListener('input', updateCalculator);
+  calcSlider.addEventListener('change', updateCalculator);
   updateCalculator();
 }
+
+// Enable clicking / selecting ANY metric box in calculator
+calcMetricBoxes.forEach((box) => {
+  box.addEventListener('click', () => {
+    calcMetricBoxes.forEach((b) => b.classList.remove('highlight'));
+    box.classList.add('highlight');
+  });
+});
 
 // FAQ Accordion
 const faqItems = document.querySelectorAll('.faq-item');

@@ -528,19 +528,30 @@ button { font-family: inherit; cursor: pointer; }
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
 }
 .calc-metric-box {
-  background: var(--ink-50); border: 1px solid var(--ink-100);
-  border-radius: 0.9rem; padding: 20px 16px; text-align: center;
-  transition: transform .2s ease, border-color .2s ease;
+  background: var(--ink-50); border: 2px solid var(--ink-100);
+  border-radius: 1rem; padding: 22px 18px; text-align: center;
+  cursor: pointer; user-select: none;
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.calc-metric-box:hover { transform: translateY(-3px); }
-.calc-metric-box.highlight {
-  background: linear-gradient(135deg, var(--flow-50), #f0f9ff);
+.calc-metric-box:hover {
+  transform: translateY(-4px);
   border-color: var(--flow-300);
+  background: #fff;
+  box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.08);
 }
-.calc-m-icon { font-size: 1.6rem; margin-bottom: 6px; }
-.calc-m-label { font-size: 0.82rem; font-weight: 600; color: var(--ink-500); margin-bottom: 6px; }
-.calc-m-val { font-size: 1.15rem; font-weight: 800; color: var(--ink-900); }
-.calc-metric-box.highlight .calc-m-val { color: var(--flow-700); font-size: 1.25rem; }
+.calc-metric-box:active {
+  transform: translateY(-1px) scale(0.98);
+}
+.calc-metric-box.highlight {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-color: var(--flow-500);
+  box-shadow: 0 12px 24px -6px rgba(37, 99, 235, 0.18);
+  transform: translateY(-4px);
+}
+.calc-m-icon { font-size: 1.75rem; margin-bottom: 8px; }
+.calc-m-label { font-size: 0.85rem; font-weight: 600; color: var(--ink-600); margin-bottom: 8px; }
+.calc-m-val { font-size: 1.25rem; font-weight: 800; color: var(--ink-900); transition: color .2s ease; }
+.calc-metric-box.highlight .calc-m-val { color: var(--flow-700); font-size: 1.35rem; }
 
 /* -------------------- faq accordion -------------------- */
 .faq-accordion { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
