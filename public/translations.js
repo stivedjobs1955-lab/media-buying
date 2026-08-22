@@ -126,9 +126,17 @@ const TRANSLATIONS = {
     'faq.q4': "Qaysi reklama kanali (Meta, Telegram, Google) bizga mos keladi?",
     'faq.a4': "Bepul konsultatsiyada mahsulotingiz, maqsadli auditoriyangiz va raqobatingizni o'rganib, aynan qaysi kanal eng yuqori foyda (ROAS) keltirishini aniq hisoblab beramiz.",
 
-    'footer.analysis': "Tahlil",
-    'footer.contact': "Aloqa",
+    'footer.tagline': "Meta, Google, Yandex va Telegram reklamalarini raqamlar bilan boshqarib, har bir so'mni sof daromadga aylantiramiz.",
+    'footer.colServices': "Xizmatlar",
+    'footer.colNav': "Tezkor o'tish",
+    'footer.colContact': "Bog'lanish",
+    'footer.analysis': "Tahlil & Target",
+    'footer.calc': "Byudjet Kalkulyatori",
+    'footer.faq': "FAQ (Savollar)",
+    'footer.contact': "Konsultatsiya olish",
     'footer.offer': "Ommaviy oferta",
+    'footer.rights': "© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.",
+    'footer.city': "Toshkent, O'zbekiston",
   },
 
   ru: {
@@ -258,9 +266,17 @@ const TRANSLATIONS = {
     'faq.q4': "Какая площадка лучше подойдет для нашего бизнеса?",
     'faq.a4': "На бесплатной консультации мы анализируем вашу сферу, целевую аудиторию и конкурентов, чтобы подобрать платформы с максимальной отдачей (ROAS).",
 
-    'footer.analysis': "Аналитика",
-    'footer.contact': "Контакты",
+    'footer.tagline': "Управляем таргетированной рекламой в Meta, Google, Yandex и Telegram на основе цифр, превращая каждый сум в чистую прибыль.",
+    'footer.colServices': "Услуги",
+    'footer.colNav': "Навигация",
+    'footer.colContact': "Контакты",
+    'footer.analysis': "Аналитика и таргет",
+    'footer.calc': "Калькулятор ROI",
+    'footer.faq': "Вопросы и ответы (FAQ)",
+    'footer.contact': "Получить консультацию",
     'footer.offer': "Публичная оферта",
+    'footer.rights': "© 2026 Unique Media Buying Agency. Все права защищены.",
+    'footer.city': "Ташкент, Узбекистан",
   },
 
   en: {
@@ -387,9 +403,17 @@ const TRANSLATIONS = {
     'faq.q4': "Which advertising platform is right for our business?",
     'faq.a4': "In a free consultation we analyze your niche, target audience, and competition to determine which channels will deliver the highest ROAS.",
 
-    'footer.analysis': "Analytics",
-    'footer.contact': "Contact",
+    'footer.tagline': "Managing targeted advertising across Meta, Google, Yandex and Telegram with precision numbers to turn ad spend into pure profit.",
+    'footer.colServices': "Services",
+    'footer.colNav': "Navigation",
+    'footer.colContact': "Contact Us",
+    'footer.analysis': "Analytics & Targeting",
+    'footer.calc': "ROI Calculator",
+    'footer.faq': "FAQ",
+    'footer.contact': "Get a Consultation",
     'footer.offer': "Public Offer",
+    'footer.rights': "© 2026 Unique Media Buying Agency. All rights reserved.",
+    'footer.city': "Tashkent, Uzbekistan",
   },
 };
 
