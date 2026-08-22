@@ -99,7 +99,7 @@ const TRANSLATIONS = {
     'contact.phoneLabel': "Telefon",
     'contact.emailNote': "Email manzili hozircha vaqtinchalik — o'zingizning haqiqiy pochtangizga almashtiring.",
 
-    'hero.liveStatus': "● Jonli monitoring faol (24/7)",
+    'hero.liveStatus': "Jonli monitoring faol (24/7)",
 
     'calc.title': "Byudjet va daromad kalkulyatori",
     'calc.subtitle': "Oylik reklama byudjetingizni tanlang va kutilayotgan ko'rsatkichlarni hisoblang",
@@ -227,7 +227,7 @@ const TRANSLATIONS = {
     'contact.phoneLabel': "Телефон",
     'contact.emailNote': "Email пока временный — замените на свою настоящую почту.",
 
-    'hero.liveStatus': "● Активный живой мониторинг (24/7)",
+    'hero.liveStatus': "Активный живой мониторинг (24/7)",
 
     'calc.title': "Калькулятор бюджета и отдачи",
     'calc.subtitle': "Выберите ваш рекламный бюджет и рассчитайте потенциальные результаты",
