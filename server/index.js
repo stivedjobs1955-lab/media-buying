@@ -1,3 +1,4 @@
+require('dotenv').config({ path: require('node:path').join(__dirname, '.env') });
 const express = require('express');
 const path = require('node:path');
 const { ensureDefaultAdmin } = require('./db');
@@ -16,6 +17,7 @@ app.use('/api/leads', require('./routes/leads'));
 app.use('/api/stats', require('./routes/stats'));
 app.use('/api/track', require('./routes/track'));
 app.use('/api/legal', require('./routes/legal'));
+app.use('/api/bookings', require('./routes/bookings'));
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));

@@ -211,3 +211,29 @@ input, select, textarea { font-family: inherit; }
 @media (max-width: 560px) {
   .kanban-board { grid-template-columns: 1fr; }
 }
+
+/* ---------- admin calendar ---------- */
+.admin-cal-wrap { padding: 20px 22px; border-bottom: 1px solid var(--ink-100); }
+.admin-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.admin-cal-nav span { font-weight: 700; font-size: 0.9rem; }
+.admin-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.admin-cal-dow { text-align: center; font-size: 0.7rem; color: var(--ink-400); font-weight: 600; padding-bottom: 4px; }
+.admin-cal-day {
+  aspect-ratio: 1; border-radius: 0.6rem; border: 1px solid var(--ink-100); background: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.8rem; color: var(--ink-700); gap: 2px; position: relative;
+}
+.admin-cal-day:hover { background: var(--ink-50); }
+.admin-cal-day.empty { visibility: hidden; cursor: default; }
+.admin-cal-day.today { border-color: var(--flow-400); font-weight: 700; }
+.admin-cal-day.selected { background: var(--flow-600); color: #fff; border-color: var(--flow-600); }
+.admin-cal-day .badge {
+  font-size: 0.62rem; background: var(--flow-100); color: var(--flow-700); border-radius: 999px;
+  padding: 0 5px; line-height: 1.3;
+}
+.admin-cal-day.selected .badge { background: rgba(255,255,255,0.25); color: #fff; }
+
+.meet-link-cell a { color: var(--flow-600); font-weight: 600; font-size: 0.8rem; }
+.meet-link-input {
+  border: 1px solid var(--ink-100); border-radius: 0.5rem; padding: 5px 8px; font-size: 0.76rem; width: 150px;
+}

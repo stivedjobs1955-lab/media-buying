@@ -35,6 +35,21 @@ db.exec(`
     referrer TEXT,
     created_at TEXT NOT NULL
   );
+
+  CREATE TABLE IF NOT EXISTS bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    lead_id INTEGER,
+    name TEXT NOT NULL,
+    phone TEXT,
+    date TEXT NOT NULL,
+    time TEXT NOT NULL,
+    notes TEXT,
+    status TEXT NOT NULL DEFAULT 'confirmed',
+    meet_link TEXT,
+    calendar_event_id TEXT,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY (lead_id) REFERENCES leads(id)
+  );
 `);
 
 function hashPassword(password, salt) {

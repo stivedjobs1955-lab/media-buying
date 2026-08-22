@@ -161,6 +161,7 @@ function loadAll() {
   loadStats();
   loadLeads();
   loadDay(document.getElementById('dayFilterInput').value || todayStr());
+  loadBookings();
 }
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
@@ -325,4 +326,195 @@ if (getToken()) {
   showDashboard();
 } else {
   showLogin();
+}
+
+/* ---------------- Bookings calendar ---------------- */
+
+const BOOKING_STATUS_LABELS = {
+  pending_meet: "Meet kutilmoqda",
+  confirmed: "Tasdiqlangan",
+  cancelled: "Bekor qilingan",
+  done: "Bo'lib o'tgan",
+};
+
+let allBookings = [];
+let calViewYear, calViewMonth;
+let calSelectedDay = null;
+let calActiveRange = 'day';
+
+(function initBookingsCalendar() {
+  const now = new Date();
+  calViewYear = now.getFullYear();
+  calViewMonth = now.getMonth();
+
+  document.getElementById('adminCalPrev').addEventListener('click', () => {
+    calViewMonth -= 1;
+    if (calViewMonth < 0) { calViewMonth = 11; calViewYear -= 1; }
+    renderAdminCalGrid();
+  });
+  document.getElementById('adminCalNext').addEventListener('click', () => {
+    calViewMonth += 1;
+    if (calViewMonth > 11) { calViewMonth = 0; calViewYear += 1; }
+    renderAdminCalGrid();
+  });
+
+  document.getElementById('calRangeTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.status-tab');
+    if (!btn) return;
+    calActiveRange = btn.dataset.range;
+    calSelectedDay = null;
+    Array.from(document.getElementById('calRangeTabs').children).forEach((c) => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderAdminCalGrid();
+    renderBookingsTable();
+  });
+})();
+
+function loadBookings() {
+  authFetch('/api/bookings')
+    .then((r) => r.json())
+    .then((rows) => {
+      allBookings = rows;
+      renderAdminCalGrid();
+      renderBookingsTable();
+    })
+    .catch(() => {});
+}
+
+function pad2(n) { return String(n).padStart(2, '0'); }
+function dateStrOf(y, m, d) { return `${y}-${pad2(m + 1)}-${pad2(d)}`; }
+
+function renderAdminCalGrid() {
+  const monthNames = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+  document.getElementById('adminCalLabel').textContent = `${monthNames[calViewMonth]} ${calViewYear}`;
+
+  const grid = document.getElementById('adminCalGrid');
+  grid.innerHTML = '';
+  ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh'].forEach((d) => {
+    const el = document.createElement('div');
+    el.className = 'admin-cal-dow';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(calViewYear, calViewMonth, 1);
+  const startOffset = firstDay.getDay();
+  const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+  const today = todayStr();
+
+  const countByDate = {};
+  allBookings.forEach((b) => { countByDate[b.date] = (countByDate[b.date] || 0) + 1; });
+
+  for (let i = 0; i < startOffset; i++) {
+    const el = document.createElement('div');
+    el.className = 'admin-cal-day empty';
+    grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = dateStrOf(calViewYear, calViewMonth, d);
+    const el = document.createElement('div');
+    el.className = 'admin-cal-day';
+    if (dateStr === today) el.classList.add('today');
+    if (calSelectedDay === dateStr) el.classList.add('selected');
+    const count = countByDate[dateStr];
+    el.innerHTML = `<span>${d}</span>${count ? `<span class="badge">${count}</span>` : ''}`;
+    el.addEventListener('click', () => {
+      calSelectedDay = (calSelectedDay === dateStr) ? null : dateStr;
+      renderAdminCalGrid();
+      renderBookingsTable();
+    });
+    grid.appendChild(el);
+  }
+}
+
+function getRangeBounds() {
+  const now = new Date();
+  const today = todayStr();
+  if (calActiveRange === 'day') return { from: today, to: today };
+  if (calActiveRange === 'week') {
+    const day = now.getDay() || 7; // Monday=1..Sunday=7
+    const monday = new Date(now);
+    monday.setDate(now.getDate() - day + 1);
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    return { from: monday.toISOString().slice(0, 10), to: sunday.toISOString().slice(0, 10) };
+  }
+  const first = new Date(now.getFullYear(), now.getMonth(), 1);
+  const last = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  return { from: first.toISOString().slice(0, 10), to: last.toISOString().slice(0, 10) };
+}
+
+function renderBookingsTable() {
+  const tbody = document.getElementById('bookingsBody');
+  let rows;
+  if (calSelectedDay) {
+    rows = allBookings.filter((b) => b.date === calSelectedDay);
+  } else {
+    const { from, to } = getRangeBounds();
+    rows = allBookings.filter((b) => b.date >= from && b.date <= to);
+  }
+
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Bu oraliqda band qilingan konsultatsiya yo\'q</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = rows.map((b) => `
+    <tr data-id="${b.id}">
+      <td>${escapeHtml(b.date)}</td>
+      <td>${escapeHtml(b.time)}</td>
+      <td>${escapeHtml(b.name)}</td>
+      <td><a href="tel:${escapeAttr(b.phone || '')}">${escapeHtml(b.phone || '—')}</a></td>
+      <td class="meet-link-cell">
+        ${b.meet_link
+          ? `<a href="${escapeAttr(b.meet_link)}" target="_blank" rel="noopener">Meet havolasi</a>`
+          : `<input type="text" class="meet-link-input" placeholder="Meet havolasini qo'ying" data-id="${b.id}">`}
+      </td>
+      <td>
+        <select class="status-select" data-id="${b.id}">
+          ${Object.entries(BOOKING_STATUS_LABELS).map(([val, label]) => `
+            <option value="${val}" ${b.status === val ? 'selected' : ''}>${label}</option>
+          `).join('')}
+        </select>
+      </td>
+      <td><button class="btn-danger delete-booking-btn" data-id="${b.id}" style="padding:6px 12px; font-size:0.78rem;">O'chirish</button></td>
+    </tr>
+  `).join('');
+
+  tbody.querySelectorAll('.meet-link-input').forEach((input) => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const id = input.dataset.id;
+      const val = input.value.trim();
+      if (!val) return;
+      authFetch(`/api/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ meetLink: val, status: 'confirmed' }),
+      }).then(() => loadBookings());
+    });
+  });
+
+  tbody.querySelectorAll('.status-select').forEach((sel) => {
+    sel.addEventListener('change', () => {
+      const id = sel.dataset.id;
+      authFetch(`/api/bookings/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: sel.value }),
+      }).then(() => {
+        const b = allBookings.find((x) => String(x.id) === String(id));
+        if (b) b.status = sel.value;
+      });
+    });
+  });
+
+  tbody.querySelectorAll('.delete-booking-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!confirm('Ushbu band qilishni o\'chirmoqchimisiz?')) return;
+      const id = btn.dataset.id;
+      authFetch(`/api/bookings/${id}`, { method: 'DELETE' }).then(() => loadBookings());
+    });
+  });
 }

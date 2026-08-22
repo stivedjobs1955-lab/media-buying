@@ -124,6 +124,35 @@
       </div>
       <div class="kanban-board" id="kanbanBoard"></div>
     </div>
+
+    <div class="leads-section" style="margin-top:24px;">
+      <div class="leads-head">
+        <h3>📅 Kalendar — konsultatsiyalar</h3>
+        <div class="status-tabs" id="calRangeTabs">
+          <button class="status-tab active" data-range="day">Kun</button>
+          <button class="status-tab" data-range="week">Hafta</button>
+          <button class="status-tab" data-range="month">Oy</button>
+        </div>
+      </div>
+      <div class="admin-cal-wrap">
+        <div class="admin-cal-nav">
+          <button class="btn-secondary" id="adminCalPrev">‹ Oldingi</button>
+          <span id="adminCalLabel"></span>
+          <button class="btn-secondary" id="adminCalNext">Keyingi ›</button>
+        </div>
+        <div class="admin-cal-grid" id="adminCalGrid"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="leads-table">
+          <thead>
+            <tr>
+              <th>Sana</th><th>Vaqt</th><th>Ism</th><th>Telefon</th><th>Google Meet</th><th>Status</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

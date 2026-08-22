@@ -85,6 +85,9 @@ if (contactForm) {
         }
         if (formSuccess) formSuccess.classList.add('show');
         if (typeof fbq === 'function') fbq('track', 'Lead');
+        if (typeof window.openBookingModal === 'function') {
+          window.openBookingModal({ leadId: data.id, name: payload.name, phone: payload.phone });
+        }
         contactForm.reset();
       })
       .catch(() => {

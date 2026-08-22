@@ -544,6 +544,43 @@ src="https://www.facebook.com/tr?id=1818835219280965&ev=PageView&noscript=1"
 
 </main>
 
+<!-- BOOKING POPUP (Calendly-style) -->
+<div class="booking-overlay" id="bookingOverlay">
+  <div class="booking-modal">
+    <button class="booking-close" id="bookingClose" aria-label="Yopish">&times;</button>
+
+    <div id="bookingStepPicker">
+      <h3>Bepul konsultatsiya uchun vaqt tanlang</h3>
+      <div class="booking-layout">
+        <div class="booking-calendar">
+          <div class="booking-cal-head">
+            <button type="button" id="calPrev">‹</button>
+            <span id="calMonthLabel"></span>
+            <button type="button" id="calNext">›</button>
+          </div>
+          <div class="booking-cal-grid" id="calGrid"></div>
+        </div>
+        <div class="booking-slots">
+          <div class="booking-slots-title" id="slotsTitle">Avval sanani tanlang</div>
+          <div class="booking-slots-list" id="slotsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bookingStepConfirm" style="display:none;">
+      <div class="booking-success-icon">✓</div>
+      <h3 id="bookingConfirmTitle">Band qilinmoqda...</h3>
+      <p id="bookingConfirmText"></p>
+      <a id="bookingMeetLink" class="btn-primary" href="#" target="_blank" rel="noopener" style="display:none;">
+        Google Meet'ga o'tish
+      </a>
+      <div>
+        <button type="button" class="btn-secondary" id="bookingDoneBtn">Yopish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -623,5 +660,6 @@ src="https://www.facebook.com/tr?id=1818835219280965&ev=PageView&noscript=1"
 
 <script src="translations.js"></script>
 <script src="script.js"></script>
+<script src="booking.js"></script>
 </body>
 </html>

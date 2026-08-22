@@ -1,21 +1,19 @@
 const https = require('node:https');
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '***TELEGRAM_BOT_TOKEN_REDACTED***';
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID || '***TELEGRAM_CHAT_ID_REDACTED***';
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-/**
- * Send a message via Telegram Bot API
- */
 function sendTelegramMessage(text, chatId = CHAT_ID) {
   if (!BOT_TOKEN || !chatId) {
-    console.warn('[Telegram] Bot token or Chat ID is missing. Message not sent.');
+    console.warn('[Telegram] Bot token yoki Chat ID .env da sozlanmagan. Xabar yuborilmadi.');
     return Promise.resolve(false);
   }
 
   const payload = JSON.stringify({
     chat_id: chatId,
-    text: text,
+    text,
     parse_mode: 'HTML',
+    disable_web_page_preview: true,
   });
 
   return new Promise((resolve) => {
@@ -59,9 +57,6 @@ function sendTelegramMessage(text, chatId = CHAT_ID) {
   });
 }
 
-/**
- * Notify new lead
- */
 async function notifyNewLead(lead) {
   const time = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
 
@@ -74,18 +69,12 @@ async function notifyNewLead(lead) {
     `💬 <b>Izoh:</b> ${escapeHtml(lead.message || '—')}\n\n` +
     `🕒 <b>Vaqt:</b> ${time}`;
 
-  const targetChats = (process.env.TELEGRAM_CHAT_ID || CHAT_ID || '')
-    .split(',')
-    .map((id) => id.trim())
-    .filter(Boolean);
+  await sendTelegramMessage(text);
+}
 
-  if (targetChats.length > 0) {
-    for (const id of targetChats) {
-      await sendTelegramMessage(text, id);
-    }
-  } else {
-    console.log('[Telegram] No TELEGRAM_CHAT_ID configured yet.');
-  }
+// Umumiy admin xabarnomasi — booking (konsultatsiya band qilish) uchun ishlatiladi
+async function notifyAdmin(text) {
+  await sendTelegramMessage(text);
 }
 
 function escapeHtml(str) {
@@ -95,4 +84,4 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-module.exports = { sendTelegramMessage, notifyNewLead };
+module.exports = { sendTelegramMessage, notifyNewLead, notifyAdmin };
