@@ -116,8 +116,8 @@ function updateCalculator() {
   if (!calcSlider) return;
   const budget = parseInt(calcSlider.value, 10);
   const currentLang = localStorage.getItem('unique_lang') || 'uz';
-  const currencyUnit = currentLang === 'ru' ? 'сум' : "so'm";
-  const leadsUnit = currentLang === 'ru' ? 'лидов' : 'ta lid';
+  const currencyUnit = currentLang === 'ru' ? 'сум' : (currentLang === 'en' ? 'UZS' : "so'm");
+  const leadsUnit = currentLang === 'ru' ? 'лидов' : (currentLang === 'en' ? 'leads' : 'ta lid');
 
   // 1 USD ~ 13 000 UZS
   const usd = budget / 13000;

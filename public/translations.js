@@ -352,14 +352,58 @@ const TRANSLATIONS = {
     'contact.success': "Thank you! We'll be in touch shortly.",
     'contact.sideTitle': "Get in touch directly",
     'contact.sideText': "Have a question or need a faster answer — reach out through the channels below.",
-    'contact.phoneLabel': "Phone",
-    'contact.emailNote': "This email is a placeholder for now — replace it with your real address.",
+    'hero.liveStatus': "Live monitoring active (24/7)",
+
+    'calc.title': "Budget & ROI Calculator",
+    'calc.subtitle': "Select your monthly advertising budget and estimate potential performance",
+    'calc.label': "Monthly ad budget:",
+    'calc.reach': "Estimated Reach",
+    'calc.leads': "Expected Leads",
+    'calc.roas': "Projected ROAS",
+    'calc.people': "people",
+    'calc.leadsUnit': "leads",
+    'calc.cta': "Achieve this result",
+
+    'faq.title': "Frequently Asked Questions",
+    'faq.subtitle': "Answers to key questions about cooperation, budget and timeline",
+    'faq.q1': "What is the minimum budget to get started?",
+    'faq.a1': "Depending on your business niche and platform, the minimum ad budget starts from 3,000,000 – 5,000,000 UZS per month. This allows testing creatives and building an initial stable lead stream.",
+    'faq.q2': "How soon can we see the first results?",
+    'faq.a2': "First leads typically arrive within 24-48 hours after launch. Over 7-10 days algorithms optimize to achieve the best cost per lead.",
+    'faq.q3': "How do we track reports and performance?",
+    'faq.a3': "You receive detailed weekly reports (ad spend, lead count, CPL, conversion rate), plus 24/7 communication in a dedicated Telegram group.",
+    'faq.q4': "Which advertising platform is right for our business?",
+    'faq.a4': "In a free consultation we analyze your niche, target audience, and competition to determine which channels will deliver the highest ROAS.",
 
     'footer.analysis': "Analytics",
     'footer.contact': "Contact",
     'footer.offer': "Public Offer",
   },
 };
+
+const LANG_OPTIONS = [
+  { code: 'uz', label: 'UZ', flag: '🇺🇿', name: "O'zbekcha" },
+  { code: 'ru', label: 'RU', flag: '🇷🇺', name: 'Русский' },
+  { code: 'en', label: 'ENG', flag: '🇬🇧', name: 'English' },
+];
+
+function renderLanguageSwitcher(currentLang) {
+  const switchWrap = document.getElementById('langSwitch');
+  if (!switchWrap) return;
+
+  // Foydalanuvchi joriy tilda bo'lsa, QOLGAN IKKITA tilni ko'rsatamiz
+  const otherLangs = LANG_OPTIONS.filter((l) => l.code !== currentLang);
+
+  switchWrap.innerHTML = otherLangs.map((l) => `
+    <button data-lang="${l.code}" class="lang-btn" title="${l.name}">
+      <span class="flag">${l.flag}</span> ${l.label}
+    </button>
+  `).join('');
+
+  switchWrap.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+}
 
 function applyLanguage(lang) {
   if (!TRANSLATIONS[lang]) lang = 'uz';
@@ -376,17 +420,12 @@ function applyLanguage(lang) {
     const text = TRANSLATIONS[lang][key];
     if (text !== undefined) el.setAttribute('placeholder', text);
   });
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
+
+  renderLanguageSwitcher(lang);
   if (typeof updateCalculator === 'function') updateCalculator();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('unique_lang') || 'uz';
   applyLanguage(saved);
-
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
-  });
 });
