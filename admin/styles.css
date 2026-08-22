@@ -12,7 +12,15 @@
 }
 * { box-sizing: border-box; }
 body {
-  margin: 0; font-family: 'Inter', system-ui, sans-serif; background: var(--ink-50);
+  margin: 0; font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 40%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+  background-attachment: fixed;
   color: var(--ink-900); -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
@@ -24,6 +32,13 @@ input, select, textarea { font-family: inherit; }
 /* ---------- login ---------- */
 .login-wrap {
   min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+  background-color: #0f172a;
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
 }
 .login-card {
   width: 100%; max-width: 380px; background: #fff; border: 1px solid var(--ink-100);
