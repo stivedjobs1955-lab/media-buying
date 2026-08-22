@@ -118,19 +118,33 @@ function formatNumber(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-// Convert 0..100 logarithmic slider scale to $500 .. $1,000,000 USD
+// Convert 0..300 slider scale to $500 .. $1,000,000 USD matching marks at exactly 0, 100, 200, 300
 function sliderToBudget(val) {
-  const min = Math.log(500);
-  const max = Math.log(1000000);
-  const scale = (max - min) / 100;
-  const raw = Math.exp(min + scale * val);
+  if (val <= 0) return 500;
+  if (val >= 300) return 1000000;
 
-  if (raw < 1000) return Math.round(raw / 50) * 50;
-  if (raw < 10000) return Math.round(raw / 250) * 250;
-  if (raw < 50000) return Math.round(raw / 1000) * 1000;
-  if (raw < 200000) return Math.round(raw / 5000) * 5000;
-  if (raw < 500000) return Math.round(raw / 25000) * 25000;
-  return Math.round(raw / 50000) * 50000;
+  if (val <= 100) {
+    // Segment 1: $500 -> $10 000 (val 0 -> 100)
+    const ratio = val / 100;
+    const raw = 500 * Math.pow(10000 / 500, ratio);
+    if (raw < 2000) return Math.round(raw / 100) * 100;
+    if (raw < 5000) return Math.round(raw / 250) * 250;
+    return Math.round(raw / 500) * 500;
+  } else if (val <= 200) {
+    // Segment 2: $10 000 -> $100 000 (val 100 -> 200)
+    const ratio = (val - 100) / 100;
+    const raw = 10000 * Math.pow(100000 / 10000, ratio);
+    if (raw < 30000) return Math.round(raw / 1000) * 1000;
+    if (raw < 70000) return Math.round(raw / 2500) * 2500;
+    return Math.round(raw / 5000) * 5000;
+  } else {
+    // Segment 3: $100 000 -> $1 000 000 (val 200 -> 300)
+    const ratio = (val - 200) / 100;
+    const raw = 100000 * Math.pow(1000000 / 100000, ratio);
+    if (raw < 300000) return Math.round(raw / 10000) * 10000;
+    if (raw < 700000) return Math.round(raw / 25000) * 25000;
+    return Math.round(raw / 50000) * 50000;
+  }
 }
 
 function updateCalculator() {
@@ -146,7 +160,7 @@ function updateCalculator() {
   }
 
   // Normalized progress parameter 0..1
-  const t = Math.max(0, Math.min(1, sliderVal / 100));
+  const t = Math.max(0, Math.min(1, sliderVal / 300));
 
   // Prognoz ROAS: Keng va jozibador oraliq (3.2x dan to 25x+ gacha)
   const minRoasNum = (3.2 + t * 3.6).toFixed(1);
