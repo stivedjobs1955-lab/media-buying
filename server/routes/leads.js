@@ -1,6 +1,7 @@
 const express = require('express');
 const { db } = require('../db');
 const { requireAuth } = require('../token');
+const { notifyNewLead } = require('../telegram');
 
 const router = express.Router();
 
@@ -12,18 +13,37 @@ router.post('/', (req, res) => {
   if (!name || !String(name).trim() || !phone || !String(phone).trim()) {
     return res.status(400).json({ error: 'Ism va telefon raqami talab qilinadi' });
   }
+
+  const cleanName = String(name).trim().slice(0, 200);
+  const cleanPhone = String(phone).trim().slice(0, 50);
+  const cleanCompany = company ? String(company).trim().slice(0, 200) : null;
+  const cleanBudget = budget ? String(budget).trim().slice(0, 100) : null;
+  const cleanMessage = message ? String(message).trim().slice(0, 2000) : null;
+  const createdAt = new Date().toISOString();
+
   const stmt = db.prepare(`
     INSERT INTO leads (name, phone, company, budget, message, status, source, created_at)
     VALUES (?, ?, ?, ?, ?, 'yangi', 'sayt', ?)
   `);
   const info = stmt.run(
-    String(name).trim().slice(0, 200),
-    String(phone).trim().slice(0, 50),
-    company ? String(company).trim().slice(0, 200) : null,
-    budget ? String(budget).trim().slice(0, 100) : null,
-    message ? String(message).trim().slice(0, 2000) : null,
-    new Date().toISOString(),
+    cleanName,
+    cleanPhone,
+    cleanCompany,
+    cleanBudget,
+    cleanMessage,
+    createdAt
   );
+
+  // Send real-time Telegram notification
+  notifyNewLead({
+    name: cleanName,
+    phone: cleanPhone,
+    company: cleanCompany,
+    budget: cleanBudget,
+    message: cleanMessage,
+    createdAt,
+  }).catch((err) => console.error('[Telegram Notification Error]', err));
+
   res.status(201).json({ id: Number(info.lastInsertRowid) });
 });
 
