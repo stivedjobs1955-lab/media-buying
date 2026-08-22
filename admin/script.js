@@ -72,6 +72,75 @@ logoutBtn.addEventListener('click', () => {
   showLogin();
 });
 
+// ---------- Parolni o'zgartirish modali logikasi ----------
+const passwordModal = document.getElementById('passwordModal');
+const openPasswordModalBtn = document.getElementById('openPasswordModalBtn');
+const closePasswordModalBtn = document.getElementById('closePasswordModalBtn');
+const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+const passwordForm = document.getElementById('passwordForm');
+const passwordAlert = document.getElementById('passwordAlert');
+
+function openPasswordModal() {
+  passwordAlert.className = 'hidden';
+  passwordAlert.textContent = '';
+  passwordForm.reset();
+  passwordModal.classList.remove('hidden');
+}
+
+function closePasswordModal() {
+  passwordModal.classList.add('hidden');
+}
+
+if (openPasswordModalBtn) openPasswordModalBtn.addEventListener('click', openPasswordModal);
+if (closePasswordModalBtn) closePasswordModalBtn.addEventListener('click', closePasswordModal);
+if (cancelPasswordBtn) cancelPasswordBtn.addEventListener('click', closePasswordModal);
+
+passwordForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  passwordAlert.className = 'hidden';
+  passwordAlert.textContent = '';
+
+  const currentPassword = document.getElementById('currentPassword').value;
+  const newPassword = document.getElementById('newPassword').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  if (newPassword !== confirmPassword) {
+    passwordAlert.className = 'alert-error';
+    passwordAlert.textContent = 'Yangi parollar bir-biriga mos kelmadi';
+    return;
+  }
+
+  if (newPassword.length < 6) {
+    passwordAlert.className = 'alert-error';
+    passwordAlert.textContent = 'Yangi parol kamida 6 ta belgidan iborat bo\'lishi kerak';
+    return;
+  }
+
+  authFetch('/api/auth/change-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  })
+    .then((r) => r.json().then((data) => ({ ok: r.ok, data })))
+    .then(({ ok, data }) => {
+      if (!ok) {
+        passwordAlert.className = 'alert-error';
+        passwordAlert.textContent = data.error || 'Xatolik yuz berdi';
+        return;
+      }
+      passwordAlert.className = 'alert-success';
+      passwordAlert.textContent = data.message || 'Parol muvaffaqiyatli yangilandi!';
+      passwordForm.reset();
+      setTimeout(() => {
+        closePasswordModal();
+      }, 1500);
+    })
+    .catch((err) => {
+      passwordAlert.className = 'alert-error';
+      passwordAlert.textContent = err.message || 'Serverga ulanishda xatolik';
+    });
+});
+
 document.getElementById('downloadContractBtn').addEventListener('click', () => {
   authFetch('/api/legal/contract')
     .then((r) => r.blob())

@@ -56,6 +56,38 @@ input, select, textarea { font-family: inherit; }
 .btn-danger { background: var(--red-50); color: var(--red-700); border: 1px solid var(--red-200); }
 .btn-danger:hover { background: #fee2e2; }
 
+/* ---------- modal ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(13, 17, 22, 0.45);
+  backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+  z-index: 100; padding: 20px;
+}
+.modal-card {
+  width: 100%; max-width: 420px; background: #fff; border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 24px;
+}
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;
+}
+.modal-head h3 { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--ink-900); }
+.modal-close {
+  background: none; border: none; font-size: 1.5rem; line-height: 1; color: var(--ink-400);
+  cursor: pointer; padding: 4px; border-radius: 6px;
+}
+.modal-close:hover { color: var(--ink-800); background: var(--ink-100); }
+.modal-actions {
+  display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;
+}
+.alert-error {
+  background: var(--red-50); color: var(--red-700); border: 1px solid var(--red-200);
+  border-radius: 0.7rem; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;
+}
+.alert-success {
+  background: var(--green-50); color: var(--green-700); border: 1px solid var(--green-200);
+  border-radius: 0.7rem; padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;
+}
+
 /* ---------- dashboard shell ---------- */
 .topbar {
   background: #fff; border-bottom: 1px solid var(--ink-100); position: sticky; top: 0; z-index: 10;

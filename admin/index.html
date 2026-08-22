@@ -36,9 +36,39 @@
       <div class="brand"><span class="brand-mark">U</span> Unique Admin</div>
       <div class="topbar-right">
         <span id="adminEmail"></span>
+        <button class="btn-secondary" id="openPasswordModalBtn">🔑 Parolni o'zgartirish</button>
         <button class="btn-secondary" id="downloadContractBtn">Shartnomani yuklab olish</button>
         <button class="btn-secondary" id="logoutBtn">Chiqish</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Parolni o'zgartirish modali -->
+  <div id="passwordModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>🔑 Parolni o'zgartirish</h3>
+        <button class="modal-close" id="closePasswordModalBtn">&times;</button>
+      </div>
+      <div id="passwordAlert" class="hidden"></div>
+      <form id="passwordForm">
+        <div class="field">
+          <label for="currentPassword">Joriy parol</label>
+          <input type="password" id="currentPassword" required placeholder="Hozirgi parolingiz">
+        </div>
+        <div class="field">
+          <label for="newPassword">Yangi parol</label>
+          <input type="password" id="newPassword" required minlength="6" placeholder="Kamida 6 ta belgi">
+        </div>
+        <div class="field">
+          <label for="confirmPassword">Yangi parolni tasdiqlang</label>
+          <input type="password" id="confirmPassword" required minlength="6" placeholder="Yangi parolni qayta tering">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelPasswordBtn">Bekor qilish</button>
+          <button type="submit" class="btn-primary" style="width:auto;">Saqlash</button>
+        </div>
+      </form>
     </div>
   </div>
 
