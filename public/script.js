@@ -119,30 +119,36 @@ function updateCalculator() {
   const currencyUnit = currentLang === 'ru' ? 'сум' : "so'm";
   const leadsUnit = currentLang === 'ru' ? 'лидов' : 'ta lid';
 
-  // Format budget display
-  if (calcBudgetVal) calcBudgetVal.textContent = `${formatNumber(budget)} ${currencyUnit}`;
+  // 1 USD ~ 13 000 UZS
+  const usd = budget / 13000;
 
-  // Estimate Reach (CPM roughly ~25k - 40k UZS)
-  const minReach = Math.round((budget / 45000) * 1000);
-  const maxReach = Math.round((budget / 25000) * 1000);
-  if (calcReachVal) calcReachVal.textContent = `${formatNumber(minReach)} – ${formatNumber(maxReach)}`;
-
-  // Estimate Leads (CPL roughly ~45k - 95k UZS)
-  const minLeads = Math.max(15, Math.round(budget / 95000));
-  const maxLeads = Math.max(30, Math.round(budget / 48000));
-  if (calcLeadsVal) calcLeadsVal.textContent = `${minLeads} – ${maxLeads} ${leadsUnit}`;
-
-  // Estimate ROAS
-  let roasMin = '3.0x';
-  let roasMax = '4.2x';
-  if (budget >= 15000000 && budget < 30000000) {
-    roasMin = '3.4x';
-    roasMax = '4.8x';
-  } else if (budget >= 30000000) {
-    roasMin = '3.8x';
-    roasMax = '5.5x';
+  // Format budget display with approximate USD
+  const usdFormatted = Math.round(usd);
+  if (calcBudgetVal) {
+    calcBudgetVal.textContent = `${formatNumber(budget)} ${currencyUnit} (~$${usdFormatted})`;
   }
-  if (calcRoasVal) calcRoasVal.textContent = `${roasMin} – ${roasMax}`;
+
+  // 1$ uchun o'rtacha 500 ta qamrov (oxvat)
+  const minReach = Math.round(usd * 450);
+  const maxReach = Math.round(usd * 550);
+  if (calcReachVal) {
+    calcReachVal.textContent = `${formatNumber(minReach)} – ${formatNumber(maxReach)}`;
+  }
+
+  // 1$ uchun 0.3 tadan 1 tagacha lid
+  const minLeads = Math.max(1, Math.round(usd * 0.3));
+  const maxLeads = Math.max(1, Math.round(usd * 1.0));
+  if (calcLeadsVal) {
+    calcLeadsVal.textContent = `${minLeads} – ${maxLeads} ${leadsUnit}`;
+  }
+
+  // ROAS: 1.5x dan boshlanib byudjet kattalashgan sari 100x gacha borishi mumkin
+  const progressRatio = Math.min(1, Math.max(0, (budget - 3000000) / (50000000 - 3000000)));
+  const minRoas = (1.5 + progressRatio * 18.5).toFixed(1);
+  const maxRoas = Math.round(3.0 + progressRatio * 97.0);
+  if (calcRoasVal) {
+    calcRoasVal.textContent = `${minRoas}x – ${maxRoas}x`;
+  }
 }
 
 if (calcSlider) {
