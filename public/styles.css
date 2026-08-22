@@ -219,12 +219,12 @@ button { font-family: inherit; cursor: pointer; }
   gap: 56px;
   align-items: center;
 }
-.hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; margin: 20px 0 20px; }
+.hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin: 20px 0 20px; word-break: break-word; }
 .hero p.lead { font-size: 1.15rem; color: var(--ink-500); max-width: 520px; margin-bottom: 32px; line-height: 1.6; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .hero-note { font-size: 0.8rem; color: var(--ink-400); margin-top: 16px; }
 
-.mockup { position: relative; max-width: 420px; margin: 0 auto; }
+.mockup { position: relative; max-width: 420px; width: 100%; margin: 0 auto; }
 .mockup-glow {
   position: absolute; inset: -24px;
   background: linear-gradient(135deg, rgba(96,165,250,.3), rgba(129,140,248,.3));
@@ -238,13 +238,36 @@ button { font-family: inherit; cursor: pointer; }
 .mockup-bars { display: flex; align-items: flex-end; gap: 7px; height: 84px; margin-bottom: 4px; }
 .mockup-bars div { flex: 1; border-radius: 6px 6px 0 0; background: linear-gradient(to top, var(--flow-600), var(--flow-400)); }
 .mockup-float {
-  position: relative; margin-top: -34px; margin-left: 40px; max-width: 210px;
+  position: relative; margin-top: -34px; margin-left: auto; margin-right: 16px; max-width: 220px;
   padding: 16px; box-shadow: var(--shadow-soft-lg); transform: rotate(2deg);
 }
 .mockup-float .cap { font-size: 0.75rem; color: var(--ink-400); margin-bottom: 4px; }
 .mockup-float .stat { font-size: 1.05rem; font-weight: 700; }
 .mockup-progress { margin-top: 10px; height: 6px; background: var(--ink-100); border-radius: 999px; overflow: hidden; }
 .mockup-progress i { display: block; height: 100%; width: 80%; background: var(--flow-500); border-radius: 999px; }
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 48px 0 60px;
+    text-align: left;
+  }
+  .hero h1 { font-size: 2.2rem; }
+  .mockup { max-width: 360px; margin-top: 10px; }
+  .mockup-float { margin-top: -24px; margin-left: auto; }
+}
+
+@media (max-width: 500px) {
+  .hero { padding: 36px 0 48px; gap: 32px; }
+  .hero h1 { font-size: 1.85rem; line-height: 1.2; }
+  .hero p.lead { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; width: 100%; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; }
+  .mockup { max-width: 100%; }
+  .mockup-value { font-size: 1.4rem; }
+  .mockup-float { max-width: 190px; margin-top: -20px; }
+}
 
 /* -------------------- about -------------------- */
 
@@ -253,9 +276,15 @@ button { font-family: inherit; cursor: pointer; }
 }
 .about h2 { font-size: 1.85rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
 .about p { color: var(--ink-500); font-size: 1.02rem; line-height: 1.65; }
-.about .stat-row { display: flex; gap: 32px; margin-top: 28px; }
+.about .stat-row { display: flex; gap: 32px; margin-top: 28px; flex-wrap: wrap; }
 .about .stat-row div b { display: block; font-size: 1.6rem; font-weight: 800; color: var(--flow-700); }
 .about .stat-row div span { font-size: 0.85rem; color: var(--ink-500); }
+
+@media (max-width: 860px) {
+  .about { grid-template-columns: 1fr; gap: 28px; }
+  .about h2 { font-size: 1.6rem; }
+  .about .stat-row { gap: 20px; }
+}
 
 /* -------------------- services grid -------------------- */
 
@@ -504,6 +533,21 @@ button { font-family: inherit; cursor: pointer; }
 .contact-item .icon-tile svg { color: var(--flow-300); }
 .contact-item div span { display: block; font-size: 0.78rem; color: var(--ink-400); }
 .contact-item div b { font-size: 0.95rem; font-weight: 600; }
+
+@media (max-width: 860px) {
+  .contact-wrap { grid-template-columns: 1fr; gap: 24px; }
+  .cta-banner { padding: 40px 24px; }
+  .cta-banner h2 { font-size: 1.5rem; }
+  .section { padding: 60px 0; }
+  .section-head { margin-bottom: 32px; }
+  .section-head h2 { font-size: 1.55rem; }
+}
+
+@media (max-width: 500px) {
+  .container { padding: 0 16px; }
+  .contact-form, .contact-side { padding: 24px 18px; }
+  .section { padding: 48px 0; }
+}
 
 /* -------------------- scroll progress -------------------- */
 .scroll-progress {
