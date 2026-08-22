@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unique — Admin panel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='18' font-weight='800' fill='white' text-anchor='middle'%3EU%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="login-wrap" id="loginView">
+  <div class="login-card">
+    <div class="brand"><span class="brand-mark">U</span> Unique Admin</div>
+    <div class="login-error hidden" id="loginError"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" required autocomplete="username" value="admin@unique.uz">
+      </div>
+      <div class="field">
+        <label for="password">Parol</label>
+        <input type="password" id="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-primary">Kirish</button>
+    </form>
+  </div>
+</div>
+
+<div id="dashboardView" class="hidden">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark">U</span> Unique Admin</div>
+      <div class="topbar-right">
+        <span id="adminEmail"></span>
+        <button class="btn-secondary" id="downloadContractBtn">Shartnomani yuklab olish</button>
+        <button class="btn-secondary" id="logoutBtn">Chiqish</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Jami lidlar</div>
+        <div class="value" id="statTotalLeads">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Bugungi lidlar</div>
+        <div class="value flow" id="statTodayLeads">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Jami tashriflar</div>
+        <div class="value" id="statViews">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Konversiya (lid / tashrif)</div>
+        <div class="value flow" id="statConversion">0%</div>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h3>Byudjet bo'yicha lidlar</h3>
+        <div id="budgetBars"></div>
+      </div>
+      <div class="panel">
+        <h3>So'nggi 7 kun</h3>
+        <div class="trend-row" id="trendRow"></div>
+        <div class="trend-legend">
+          <span><i class="dot" style="background:var(--flow-600);"></i> Lidlar</span>
+          <span><i class="dot" style="background:var(--ink-200);"></i> Tashriflar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:24px;">
+      <h3>Kunlik tashriflar</h3>
+      <div class="day-filter-row">
+        <input type="date" id="dayFilterInput">
+        <button class="btn-secondary" id="dayFilterBtn">Ko'rish</button>
+        <button class="btn-secondary" id="dayFilterTodayBtn">Bugun</button>
+      </div>
+      <div class="day-stat-row" id="dayStatRow"></div>
+      <div id="dayPathsWrap"></div>
+    </div>
+
+    <div class="leads-section">
+      <div class="leads-head">
+        <h3>Lidlar (CRM)</h3>
+      </div>
+      <div class="kanban-board" id="kanbanBoard"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

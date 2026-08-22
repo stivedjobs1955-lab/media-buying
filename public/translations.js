@@ -1,0 +1,345 @@
+const TRANSLATIONS = {
+  uz: {
+    'nav.services': "Xizmatlar",
+    'nav.analysis': "Tahlil va Target",
+    'nav.clients': "Mijozlar",
+    'nav.process': "Jarayon",
+    'nav.founder': "Asoschi",
+    'nav.cta': "Konsultatsiya olish",
+
+    'hero.eyebrow': "MEDIA BUYING AGENTLIGI",
+    'hero.headlinePlain': "Biz shunchaki reklama joylashtirmaymiz.",
+    'hero.headlineHl': "Har bir so'mni natijaga aylantiramiz.",
+    'hero.lead': "Unique — Meta, Google, Yandex va Telegram’da target va byudjet boshqaruvi. Har bir kampaniya raqamlar bilan tahlil qilinadi, shuning uchun reklama xarajat emas — o'sish quroliga aylanadi.",
+    'hero.ctaPrimary': "Konsultatsiya olish",
+    'hero.ctaSecondary': "Tahlil qanday ishlaydi",
+    'hero.note': "Meta Ads · Google Ads · Yandex Direct · Telegram Ads — bitta jamoa, bitta hisobot.",
+
+    'common.som': "so'm",
+    'mockup.roasLabel': "Ushbu oy ROAS",
+    'mockup.cplLabel': "O'rtacha lid narxi",
+
+    'about.eyebrow': "BIZ HAQIMIZDA",
+    'about.title': "Reklama emas — pul ishlab chiqaruvchi target tizim quramiz.",
+    'about.text': "Unique — faqat media-baying bilan shug'ullanadigan tor ixtisoslashgan jamoa. Biz sayt qurmaymiz, brending bilan shug'ullanmaymiz — biz Meta, Google, Yandex va Telegram’da to'g'ri auditoriyaga to'g'ri byudjetni yo'naltirib, natijani raqamlarda ko'rsatamiz.",
+    'about.stat1': "reklama platformasi",
+    'about.stat2': "kampaniya monitoringi",
+    'about.stat3': "diqqat — faqat Media Buying",
+
+    'services.title': "Media Buying xizmatlarimiz",
+    'services.subtitle': "Har bir platforma uchun alohida strategiya — bitta umumiy hisobot va byudjet nazorati.",
+    'services.meta.title': "Meta Ads",
+    'services.meta.text': "Instagram va Facebook’da target reklama — auditoriya segmentatsiyasi, kreativ testlar va byudjet optimallashtirish.",
+    'services.google.title': "Google Ads",
+    'services.google.text': "Qidiruv, Display va YouTube kampaniyalari — yuqori niyatli trafikni jalb qilish va konversiyani oshirish.",
+    'services.yandex.title': "Yandex Direct",
+    'services.yandex.text': "RF va MDH bozorlari uchun qidiruv va RSYA tarmog'ida target reklama boshqaruvi.",
+    'services.telegram.title': "Telegram Ads",
+    'services.telegram.text': "Telegram Ads platformasi orqali katta kanallarda tanlab reklama joylashtirish.",
+    'services.performance.title': "Performance Marketing",
+    'services.performance.text': "KPI, ROAS va CPL bo'yicha maqsad qo'yish, natijalarni haftalik tahlil qilib byudjetni qayta taqsimlash.",
+
+    'analysis.title': "Target yoqamiz — va uni tahlil qilamiz",
+    'analysis.subtitle': "Har bir ijtimoiy tarmoqqa yoqilgan target kampaniya kuzatuvda bo'ladi: qaysi auditoriya ishlayapti, qaysi kreativ konversiya beryapti — barchasi raqamlarda.",
+    'analysis.f1.title': "Kanal bo'yicha samaradorlik",
+    'analysis.f1.text': "Instagram, Facebook, Google va Telegram’dagi har bir kampaniya alohida kuzatiladi — qaysi kanal ko'proq lid berayotgani darhol ko'rinadi va byudjet o'sha tomonga qayta yo'naltiriladi.",
+    'analysis.f2.title': "Auditoriyadan xaridorgacha bo'lgan yo'l",
+    'analysis.f2.text': "Ko'rishdan xaridgacha bo'lgan har bir bosqich o'lchanadi — qayerda auditoriya yo'qotilayotgani aniqlanadi va o'sha bosqich uchun kreativ yoki target qayta sozlanadi.",
+    'analysis.funnel.views': "Ko'rishlar",
+    'analysis.funnel.clicks': "Bosishlar",
+    'analysis.funnel.leads': "Lidlar",
+    'analysis.funnel.purchases': "Xaridlar",
+    'analysis.f3.title': "Real vaqt monitoring",
+    'analysis.f3.text': "Kampaniyalar kuzatuvi to'xtamaydi — byudjet oshib ketishi yoki samaradorlik pasayishi darhol aniqlanib, sozlash o'sha kuniyoq amalga oshiriladi.",
+    'analysis.f3.stat': "Kampaniya kuzatuvi va tezkor optimallashtirish",
+
+    'clients.title': "Bizga ishongan mijozlar",
+    'clients.subtitle': "Turli sohadagi brendlar va shaxsiy loyihalar bilan media-baying bo'yicha hamkorlik qildik.",
+
+    'process.title': "Ishlash jarayonimiz",
+    'process.subtitle': "Har bir loyiha besh bosqichdan o'tadi — tasodifga o'rin qolmaydi.",
+    'process.s1.title': "Tadqiqot",
+    'process.s1.text': "Bozor, raqobat va auditoriyani chuqur tahlil qilamiz.",
+    'process.s2.title': "Strategiya",
+    'process.s2.text': "Aniq maqsad va kanal bo'yicha byudjet rejasi tuziladi.",
+    'process.s3.title': "Ishga tushirish",
+    'process.s3.text': "Kampaniyalar barcha platformalarda ishga tushiriladi.",
+    'process.s4.title': "Optimallashtirish",
+    'process.s4.text': "Natijalar kuniga kuzatilib, byudjet qayta taqsimlanadi.",
+    'process.s5.title': "Kengaytirish",
+    'process.s5.text': "Ishlayotgan kanalga byudjet oshirilib, natija ko'paytiriladi.",
+
+    'founder.title': "Kim bilan ishlaysiz",
+    'founder.subtitle': "Loyihangiz ustida to'g'ridan-to'g'ri asoschi ishlaydi — vositachisiz.",
+    'founder.role': "Asoschi · Media Buying mutaxassisi",
+    'founder.text': "Meta, Google, Yandex va Telegram Ads bo'yicha ixtisoslashgan. Har bir mijoz kampaniyasini shaxsan boshqaradi va natijalarni haftalik tahlil qilib beradi.",
+    'founder.telegramLink': "Telegram orqali yozish",
+
+    'cta.title': "Reklama byudjetingizni natijaga aylantirishga tayyormisiz?",
+    'cta.text': "Bepul konsultatsiyada joriy kampaniyalaringizni tahlil qilib beramiz va qayerda pul isrof bo'layotganini ko'rsatamiz.",
+
+    'contact.title': "Konsultatsiyaga yoziling",
+    'contact.subtitle': "Formani to'ldiring — 24 soat ichida siz bilan bog'lanamiz.",
+    'contact.labelName': "Ismingiz",
+    'contact.phName': "Ism Familiya",
+    'contact.labelPhone': "Telefon raqamingiz",
+    'contact.labelCompany': "Kompaniya / brend nomi",
+    'contact.phCompany': "Masalan: Unique LLC",
+    'contact.labelBudget': "Oylik reklama byudjeti",
+    'contact.budget1': "1 000 000 – 5 000 000 so'm",
+    'contact.budget2': "5 000 000 – 15 000 000 so'm",
+    'contact.budget3': "15 000 000 so'mdan yuqori",
+    'contact.budget4': "Hali aniq emas",
+    'contact.labelMessage': "Qo'shimcha izoh",
+    'contact.phMessage': "Loyihangiz haqida qisqacha yozing",
+    'contact.submit': "Yuborish",
+    'contact.success': "Rahmat! Tez orada siz bilan bog'lanamiz.",
+    'contact.sideTitle': "To'g'ridan-to'g'ri bog'laning",
+    'contact.sideText': "Savolingiz bormi yoki tezroq javob kerakmi — quyidagi kanallar orqali murojaat qiling.",
+    'contact.phoneLabel': "Telefon",
+    'contact.emailNote': "Email manzili hozircha vaqtinchalik — o'zingizning haqiqiy pochtangizga almashtiring.",
+
+    'footer.analysis': "Tahlil",
+    'footer.contact': "Aloqa",
+    'footer.offer': "Ommaviy oferta",
+  },
+
+  ru: {
+    'nav.services': "Услуги",
+    'nav.analysis': "Аналитика и таргет",
+    'nav.clients': "Клиенты",
+    'nav.process': "Процесс",
+    'nav.founder': "Основатель",
+    'nav.cta': "Получить консультацию",
+
+    'hero.eyebrow': "АГЕНТСТВО МЕДИАБАЙИНГА",
+    'hero.headlinePlain': "Мы не просто размещаем рекламу.",
+    'hero.headlineHl': "Мы превращаем каждый сум в результат.",
+    'hero.lead': "Unique — управление таргетом и бюджетом в Meta, Google, Yandex и Telegram. Каждая кампания анализируется в цифрах, поэтому реклама — не расход, а инструмент роста.",
+    'hero.ctaPrimary': "Получить консультацию",
+    'hero.ctaSecondary': "Как работает аналитика",
+    'hero.note': "Meta Ads · Google Ads · Yandex Direct · Telegram Ads — одна команда, один отчёт.",
+
+    'common.som': "сум",
+    'mockup.roasLabel': "ROAS за этот месяц",
+    'mockup.cplLabel': "Средняя цена лида",
+
+    'about.eyebrow': "О НАС",
+    'about.title': "Не реклама — а система таргета, приносящая деньги.",
+    'about.text': "Unique — узкоспециализированная команда, занимающаяся только медиабайингом. Мы не создаём сайты и не занимаемся брендингом — мы направляем нужный бюджет на нужную аудиторию в Meta, Google, Yandex и Telegram и показываем результат в цифрах.",
+    'about.stat1': "рекламные платформы",
+    'about.stat2': "мониторинг кампаний",
+    'about.stat3': "фокус — только Media Buying",
+
+    'services.title': "Наши услуги медиабайинга",
+    'services.subtitle': "Отдельная стратегия для каждой платформы — один общий отчёт и контроль бюджета.",
+    'services.meta.title': "Meta Ads",
+    'services.meta.text': "Таргетированная реклама в Instagram и Facebook — сегментация аудитории, тесты креативов и оптимизация бюджета.",
+    'services.google.title': "Google Ads",
+    'services.google.text': "Кампании в Поиске, Дисплее и YouTube — привлечение трафика с высоким намерением и рост конверсии.",
+    'services.yandex.title': "Yandex Direct",
+    'services.yandex.text': "Управление поисковой и РСЯ рекламой для рынков РФ и СНГ.",
+    'services.telegram.title': "Telegram Ads",
+    'services.telegram.text': "Точечное размещение рекламы в крупных каналах через платформу Telegram Ads.",
+    'services.performance.title': "Performance Marketing",
+    'services.performance.text': "Постановка целей по KPI, ROAS и CPL, еженедельный анализ результатов и перераспределение бюджета.",
+
+    'analysis.title': "Запускаем таргет — и анализируем его",
+    'analysis.subtitle': "Каждая запущенная в соцсетях таргет-кампания под контролем: видно, какая аудитория работает, какой креатив даёт конверсию — всё в цифрах.",
+    'analysis.f1.title': "Эффективность по каналам",
+    'analysis.f1.text': "Каждая кампания в Instagram, Facebook, Google и Telegram отслеживается отдельно — сразу видно, какой канал даёт больше лидов, и бюджет перераспределяется в его пользу.",
+    'analysis.f2.title': "Путь от аудитории до покупателя",
+    'analysis.f2.text': "Измеряется каждый этап от просмотра до покупки — определяется, где теряется аудитория, и для этого этапа настраивается креатив или таргет.",
+    'analysis.funnel.views': "Просмотры",
+    'analysis.funnel.clicks': "Клики",
+    'analysis.funnel.leads': "Лиды",
+    'analysis.funnel.purchases': "Покупки",
+    'analysis.f3.title': "Мониторинг в реальном времени",
+    'analysis.f3.text': "Наблюдение за кампаниями не прекращается — перерасход бюджета или падение эффективности выявляется мгновенно, и корректировка вносится в тот же день.",
+    'analysis.f3.stat': "Мониторинг кампаний и быстрая оптимизация",
+
+    'clients.title': "Клиенты, которые нам доверяют",
+    'clients.subtitle': "Мы сотрудничали в медиабайинге с брендами и личными проектами из разных сфер.",
+
+    'process.title': "Наш рабочий процесс",
+    'process.subtitle': "Каждый проект проходит пять этапов — места случайности не остаётся.",
+    'process.s1.title': "Исследование",
+    'process.s1.text': "Глубоко анализируем рынок, конкурентов и аудиторию.",
+    'process.s2.title': "Стратегия",
+    'process.s2.text': "Составляется чёткий план бюджета по каналам и целям.",
+    'process.s3.title': "Запуск",
+    'process.s3.text': "Кампании запускаются на всех платформах.",
+    'process.s4.title': "Оптимизация",
+    'process.s4.text': "Результаты отслеживаются ежедневно, бюджет перераспределяется.",
+    'process.s5.title': "Масштабирование",
+    'process.s5.text': "Бюджет увеличивается на работающий канал, результат мультиплицируется.",
+
+    'founder.title': "С кем вы работаете",
+    'founder.subtitle': "Над вашим проектом напрямую работает основатель — без посредников.",
+    'founder.role': "Основатель · Специалист по Media Buying",
+    'founder.text': "Специализируется на Meta, Google, Yandex и Telegram Ads. Лично ведёт кампанию каждого клиента и еженедельно анализирует результаты.",
+    'founder.telegramLink': "Написать в Telegram",
+
+    'cta.title': "Готовы превратить рекламный бюджет в результат?",
+    'cta.text': "На бесплатной консультации мы проанализируем ваши текущие кампании и покажем, где теряются деньги.",
+
+    'contact.title': "Запишитесь на консультацию",
+    'contact.subtitle': "Заполните форму — свяжемся с вами в течение 24 часов.",
+    'contact.labelName': "Ваше имя",
+    'contact.phName': "Имя Фамилия",
+    'contact.labelPhone': "Ваш номер телефона",
+    'contact.labelCompany': "Компания / название бренда",
+    'contact.phCompany': "Например: Unique LLC",
+    'contact.labelBudget': "Ежемесячный рекламный бюджет",
+    'contact.budget1': "1 000 000 – 5 000 000 сум",
+    'contact.budget2': "5 000 000 – 15 000 000 сум",
+    'contact.budget3': "более 15 000 000 сум",
+    'contact.budget4': "Пока не определено",
+    'contact.labelMessage': "Дополнительный комментарий",
+    'contact.phMessage': "Кратко опишите ваш проект",
+    'contact.submit': "Отправить",
+    'contact.success': "Спасибо! Мы скоро свяжемся с вами.",
+    'contact.sideTitle': "Связаться напрямую",
+    'contact.sideText': "Если есть вопрос или нужен быстрый ответ — обращайтесь по каналам ниже.",
+    'contact.phoneLabel': "Телефон",
+    'contact.emailNote': "Email пока временный — замените на свою настоящую почту.",
+
+    'footer.analysis': "Аналитика",
+    'footer.contact': "Контакты",
+    'footer.offer': "Публичная оферта",
+  },
+
+  en: {
+    'nav.services': "Services",
+    'nav.analysis': "Analytics & Targeting",
+    'nav.clients': "Clients",
+    'nav.process': "Process",
+    'nav.founder': "Founder",
+    'nav.cta': "Get a consultation",
+
+    'hero.eyebrow': "MEDIA BUYING AGENCY",
+    'hero.headlinePlain': "We don't just run ads.",
+    'hero.headlineHl': "We turn every dollar into a result.",
+    'hero.lead': "Unique manages targeting and budget across Meta, Google, Yandex and Telegram. Every campaign is analyzed in numbers, so advertising isn't a cost — it's a growth engine.",
+    'hero.ctaPrimary': "Get a consultation",
+    'hero.ctaSecondary': "How the analytics works",
+    'hero.note': "Meta Ads · Google Ads · Yandex Direct · Telegram Ads — one team, one report.",
+
+    'common.som': "UZS",
+    'mockup.roasLabel': "ROAS this month",
+    'mockup.cplLabel': "Average lead cost",
+
+    'about.eyebrow': "ABOUT US",
+    'about.title': "Not advertising — a targeting system that generates revenue.",
+    'about.text': "Unique is a narrowly specialized team that only does media buying. We don't build websites or handle branding — we route the right budget to the right audience on Meta, Google, Yandex and Telegram, and show the result in numbers.",
+    'about.stat1': "ad platforms",
+    'about.stat2': "campaign monitoring",
+    'about.stat3': "focus — Media Buying only",
+
+    'services.title': "Our media buying services",
+    'services.subtitle': "A separate strategy for each platform — one shared report and budget control.",
+    'services.meta.title': "Meta Ads",
+    'services.meta.text': "Targeted advertising on Instagram and Facebook — audience segmentation, creative testing and budget optimization.",
+    'services.google.title': "Google Ads",
+    'services.google.text': "Search, Display and YouTube campaigns — attracting high-intent traffic and boosting conversion.",
+    'services.yandex.title': "Yandex Direct",
+    'services.yandex.text': "Search and display network advertising management for the Russia and CIS markets.",
+    'services.telegram.title': "Telegram Ads",
+    'services.telegram.text': "Selective ad placement in large channels via the Telegram Ads platform.",
+    'services.performance.title': "Performance Marketing",
+    'services.performance.text': "Setting goals for CPL, ROAS and KPIs, weekly result analysis and budget reallocation.",
+
+    'analysis.title': "We run targeting — and analyze it",
+    'analysis.subtitle': "Every targeted campaign launched on social media is monitored: which audience is working, which creative converts — all in numbers.",
+    'analysis.f1.title': "Performance by channel",
+    'analysis.f1.text': "Every campaign on Instagram, Facebook, Google and Telegram is tracked separately — it's immediately clear which channel delivers more leads, and budget is redirected there.",
+    'analysis.f2.title': "The path from audience to buyer",
+    'analysis.f2.text': "Every stage from view to purchase is measured — pinpointing where the audience drops off, so the creative or targeting is adjusted for that stage.",
+    'analysis.funnel.views': "Views",
+    'analysis.funnel.clicks': "Clicks",
+    'analysis.funnel.leads': "Leads",
+    'analysis.funnel.purchases': "Purchases",
+    'analysis.f3.title': "Real-time monitoring",
+    'analysis.f3.text': "Campaign monitoring never stops — budget overruns or performance drops are detected instantly, and adjustments happen the same day.",
+    'analysis.f3.stat': "Campaign monitoring and rapid optimization",
+
+    'clients.title': "Clients who trust us",
+    'clients.subtitle': "We've partnered on media buying with brands and personal projects across many industries.",
+
+    'process.title': "Our workflow",
+    'process.subtitle': "Every project goes through five stages — no room left for guesswork.",
+    'process.s1.title': "Research",
+    'process.s1.text': "We deeply analyze the market, competitors and audience.",
+    'process.s2.title': "Strategy",
+    'process.s2.text': "A clear goal and channel-by-channel budget plan is built.",
+    'process.s3.title': "Launch",
+    'process.s3.text': "Campaigns go live across all platforms.",
+    'process.s4.title': "Optimization",
+    'process.s4.text': "Results are tracked daily and budget is reallocated.",
+    'process.s5.title': "Scaling",
+    'process.s5.text': "Budget is increased on the channel that's working, multiplying the result.",
+
+    'founder.title': "Who you work with",
+    'founder.subtitle': "The founder works on your project directly — no middlemen.",
+    'founder.role': "Founder · Media Buying specialist",
+    'founder.text': "Specializes in Meta, Google, Yandex and Telegram Ads. Personally manages every client's campaign and analyzes results weekly.",
+    'founder.telegramLink': "Message on Telegram",
+
+    'cta.title': "Ready to turn your ad budget into results?",
+    'cta.text': "In a free consultation we'll analyze your current campaigns and show you exactly where money is being wasted.",
+
+    'contact.title': "Book a consultation",
+    'contact.subtitle': "Fill out the form — we'll get back to you within 24 hours.",
+    'contact.labelName': "Your name",
+    'contact.phName': "First and last name",
+    'contact.labelPhone': "Your phone number",
+    'contact.labelCompany': "Company / brand name",
+    'contact.phCompany': "e.g. Unique LLC",
+    'contact.labelBudget': "Monthly ad budget",
+    'contact.budget1': "1,000,000 – 5,000,000 UZS",
+    'contact.budget2': "5,000,000 – 15,000,000 UZS",
+    'contact.budget3': "Over 15,000,000 UZS",
+    'contact.budget4': "Not sure yet",
+    'contact.labelMessage': "Additional notes",
+    'contact.phMessage': "Briefly describe your project",
+    'contact.submit': "Submit",
+    'contact.success': "Thank you! We'll be in touch shortly.",
+    'contact.sideTitle': "Get in touch directly",
+    'contact.sideText': "Have a question or need a faster answer — reach out through the channels below.",
+    'contact.phoneLabel': "Phone",
+    'contact.emailNote': "This email is a placeholder for now — replace it with your real address.",
+
+    'footer.analysis': "Analytics",
+    'footer.contact': "Contact",
+    'footer.offer': "Public Offer",
+  },
+};
+
+function applyLanguage(lang) {
+  if (!TRANSLATIONS[lang]) lang = 'uz';
+  document.documentElement.lang = lang;
+  localStorage.setItem('unique_lang', lang);
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const text = TRANSLATIONS[lang][key];
+    if (text !== undefined) el.textContent = text;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-ph');
+    const text = TRANSLATIONS[lang][key];
+    if (text !== undefined) el.setAttribute('placeholder', text);
+  });
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('unique_lang') || 'uz';
+  applyLanguage(saved);
+
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+});
