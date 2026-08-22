@@ -161,97 +161,7 @@
     </div>
   </section>
 
-  <!-- CLIMB DASHBOARD & REALISTIC SCALING TRAJECTORY -->
-  <section class="section tinted" id="kalkulyator">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow" data-i18n="calc.eyebrow">MASSHTABLASH BOSQICHLARI</span>
-        <h2 style="margin-top:16px;" data-i18n="calc.title">Masshtablash va Daromad Trayektoriyasi</h2>
-        <p data-i18n="calc.subtitle">Byudjet oshishi bilan natijalar qanday o'sishini (Climb Dashboard) real raqamlar bilan tahlil qiling</p>
-      </div>
-      <div class="card calc-card reveal">
-        <div class="calc-slider-wrap">
-          <div class="calc-slider-head">
-            <div>
-              <span data-i18n="calc.label">Oylik reklama byudjeti:</span>
-              <span class="climb-tier-badge" id="climbTierBadge">🚀 Optimal masshtab (Sweet Spot)</span>
-            </div>
-            <span class="calc-budget-val" id="calcBudgetVal">$10 000</span>
-          </div>
-          <input type="range" id="calcSlider" min="0" max="100" step="1" value="38" class="calc-slider">
-          <div class="calc-range-marks">
-            <span>$500 <small>(Test)</small></span>
-            <span>$10 000 <small>(Sweet Spot)</small></span>
-            <span>$100 000 <small>(Kengayish)</small></span>
-            <span>$1 000 000+ <small>(Liderlik)</small></span>
-          </div>
-        </div>
 
-        <!-- CLIMB TRAJECTORY CHART (Visual SVG Growth Curve) -->
-        <div class="climb-chart-wrap">
-          <div class="climb-chart-header">
-            <span class="climb-chart-title" data-i18n="calc.chartTitle">📈 Masshtab o'sish trayektoriyasi (Scaling Curve)</span>
-            <span class="climb-chart-note" id="climbCurveNote">Maksimal samaradorlik</span>
-          </div>
-          <div class="climb-svg-container">
-            <svg viewBox="0 0 600 120" preserveAspectRatio="none" class="climb-svg">
-              <defs>
-                <linearGradient id="climbGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#2563eb" stopOpacity="0.25" />
-                  <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.15" />
-                  <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.05" />
-                </linearGradient>
-              </defs>
-              <!-- Grid guideline -->
-              <line x1="0" y1="35" x2="600" y2="35" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4" />
-              <line x1="0" y1="75" x2="600" y2="75" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4" />
-              <!-- Area fill under logarithmic curve -->
-              <path d="M 0,110 C 60,70 120,40 220,32 C 340,24 460,20 600,16 L 600,120 L 0,120 Z" fill="url(#climbGrad)" />
-              <!-- Smooth diminishing return scaling curve line -->
-              <path d="M 0,110 C 60,70 120,40 220,32 C 340,24 460,20 600,16" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round" />
-              <!-- Interactive position tracker dot -->
-              <circle id="climbTrackerDot" cx="220" cy="32" r="7" fill="#001aff" stroke="#ffffff" stroke-width="3" />
-            </svg>
-          </div>
-          <div class="climb-axis-labels">
-            <span>$500</span>
-            <span>$10 000</span>
-            <span>$50 000</span>
-            <span>$250 000</span>
-            <span>$1 000 000</span>
-          </div>
-        </div>
-
-        <!-- 4 REALISTIC METRIC CARDS -->
-        <div class="calc-metrics-grid four-cols">
-          <div class="calc-metric-box highlight">
-            <div class="calc-m-icon">💰</div>
-            <div class="calc-m-label" data-i18n="calc.revenue">Kutilayotgan savdo</div>
-            <div class="calc-m-val" id="calcRevenueVal">$28 000 – $42 000</div>
-          </div>
-          <div class="calc-metric-box">
-            <div class="calc-m-icon">📈</div>
-            <div class="calc-m-label" data-i18n="calc.roas">Prognoz ROAS</div>
-            <div class="calc-m-val" id="calcRoasVal">2.8x – 4.2x</div>
-          </div>
-          <div class="calc-metric-box">
-            <div class="calc-m-icon">📥</div>
-            <div class="calc-m-label" data-i18n="calc.leads">Kutilayotgan lidlar</div>
-            <div class="calc-m-val" id="calcLeadsVal">1 100 – 2 200 ta lid</div>
-          </div>
-          <div class="calc-metric-box">
-            <div class="calc-m-icon">🎯</div>
-            <div class="calc-m-label" data-i18n="calc.reach">Taxminiy qamrov</div>
-            <div class="calc-m-val" id="calcReachVal">1.6M – 2.4M</div>
-          </div>
-        </div>
-
-        <div style="text-align:center; margin-top: 28px;">
-          <a href="#aloqa" class="btn-primary" data-i18n="calc.cta">Shu natijaga erishish</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- TARGETING & ANALYSIS -->
   <section class="section tinted" id="natijalar">
@@ -606,7 +516,7 @@
       <div class="footer-col">
         <h4 class="footer-col-title" data-i18n="footer.colNav">Tezkor o'tish</h4>
         <ul class="footer-nav-list">
-          <li><a href="#kalkulyator" data-i18n="footer.calc">Byudjet Kalkulyatori</a></li>
+          <li><a href="#xizmatlar" data-i18n="nav.services">Xizmatlar</a></li>
           <li><a href="#natijalar" data-i18n="footer.analysis">Tahlil & Target</a></li>
           <li><a href="#mijozlar" data-i18n="clients.eyebrow">Hamkorlar & Keyslar</a></li>
           <li><a href="#faq" data-i18n="footer.faq">FAQ (Savollar)</a></li>
