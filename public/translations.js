@@ -99,6 +99,29 @@ const TRANSLATIONS = {
     'contact.phoneLabel': "Telefon",
     'contact.emailNote': "Email manzili hozircha vaqtinchalik — o'zingizning haqiqiy pochtangizga almashtiring.",
 
+    'hero.liveStatus': "● Jonli monitoring faol (24/7)",
+
+    'calc.title': "Byudjet va daromad kalkulyatori",
+    'calc.subtitle': "Oylik reklama byudjetingizni tanlang va kutilayotgan ko'rsatkichlarni hisoblang",
+    'calc.label': "Oylik reklama byudjeti:",
+    'calc.reach': "Taxminiy qamrov",
+    'calc.leads': "Kutilayotgan lidlar",
+    'calc.roas': "Prognoz ROAS",
+    'calc.people': "kishi",
+    'calc.leadsUnit': "ta lid",
+    'calc.cta': "Shu natijaga erishish",
+
+    'faq.title': "Ko'p beriladigan savollar",
+    'faq.subtitle': "Hamkorlik, natijalar va byudjet bo'yicha muhim savollarga javoblar",
+    'faq.q1': "Media buying uchun minimal byudjet qancha bo'lishi kerak?",
+    'faq.a1': "Biznes yo'nalishi va platformaga qarab minimal reklama byudjeti oyiga 3 000 000 – 5 000 000 so'mdan boshlanadi. Bu sinov kreativlarini tekshirish va dastlabki barqaror lidlar oqimini shakllantirish uchun yetarli.",
+    'faq.q2': "Birinchi natijalarni qancha vaqtda ko'rishimiz mumkin?",
+    'faq.a2': "Reklama kampaniyalari ishga tushgandan so'ng dastlabki lidlar 24-48 soat ichida kela boshlaydi. 7-10 kun ichida esa algoritmlar o'rganib, lid narxi optimal darajaga tushadi.",
+    'faq.q3': "Hisobotlar va natijalarni qanday kuzatib boramiz?",
+    'faq.a3': "Sizga haftalik batafsil hisobot (sarflangan byudjet, lidlar soni, lid narxi, konversiya) taqdim etiladi. Shuningdek, 24/7 shaxsiy Telegram guruhda doimiy aloqada bo'lamiz.",
+    'faq.q4': "Qaysi reklama kanali (Meta, Telegram, Google) bizga mos keladi?",
+    'faq.a4': "Bepul konsultatsiyada mahsulotingiz, maqsadli auditoriyangiz va raqobatingizni o'rganib, aynan qaysi kanal eng yuqori foyda (ROAS) keltirishini aniq hisoblab beramiz.",
+
     'footer.analysis': "Tahlil",
     'footer.contact': "Aloqa",
     'footer.offer': "Ommaviy oferta",
@@ -203,6 +226,29 @@ const TRANSLATIONS = {
     'contact.sideText': "Если есть вопрос или нужен быстрый ответ — обращайтесь по каналам ниже.",
     'contact.phoneLabel': "Телефон",
     'contact.emailNote': "Email пока временный — замените на свою настоящую почту.",
+
+    'hero.liveStatus': "● Активный живой мониторинг (24/7)",
+
+    'calc.title': "Калькулятор бюджета и отдачи",
+    'calc.subtitle': "Выберите ваш рекламный бюджет и рассчитайте потенциальные результаты",
+    'calc.label': "Ежемесячный рекламный бюджет:",
+    'calc.reach': "Примерный охват",
+    'calc.leads': "Ожидаемые лиды",
+    'calc.roas': "Прогноз ROAS",
+    'calc.people': "чел.",
+    'calc.leadsUnit': "лидов",
+    'calc.cta': "Достичь этого результата",
+
+    'faq.title': "Часто задаваемые вопросы",
+    'faq.subtitle': "Ответы на главные вопросы о сотрудничестве, бюджете и сроках",
+    'faq.q1': "Какой минимальный бюджет нужен для старта?",
+    'faq.a1': "В зависимости от ниши минимальный рекламный бюджет начинается от 3-5 млн сумов в месяц. Это позволяет протестировать креативы и выстроить стабильный поток лидов.",
+    'faq.q2': "Через какое время появятся первые результаты?",
+    'faq.a2': "Первые лиды начинают поступать уже через 24-48 часов после запуска. В течение 7-10 дней алгоритмы обучаются и стоимость лида оптимизируется до лучшего показателя.",
+    'faq.q3': "Как мы сможем отслеживать отчеты и результаты?",
+    'faq.a3': "Вы получаете подробный еженедельный отчёт (расход, количество и цена лидов, конверсия). Также ведется круглосуточная коммуникация в персональном Telegram-чате.",
+    'faq.q4': "Какая площадка лучше подойдет для нашего бизнеса?",
+    'faq.a4': "На бесплатной консультации мы анализируем вашу сферу, целевую аудиторию и конкурентов, чтобы подобрать платформы с максимальной отдачей (ROAS).",
 
     'footer.analysis': "Аналитика",
     'footer.contact': "Контакты",
@@ -333,6 +379,7 @@ function applyLanguage(lang) {
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+  if (typeof updateCalculator === 'function') updateCalculator();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

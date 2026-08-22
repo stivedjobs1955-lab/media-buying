@@ -28,6 +28,7 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
+  <div class="scroll-progress" id="scrollProgress"></div>
 </header>
 
 <main id="home">
@@ -35,7 +36,10 @@
   <!-- HERO -->
   <section class="container hero">
     <div class="reveal">
-      <span class="eyebrow" data-i18n="hero.eyebrow">MEDIA BUYING AGENTLIGI</span>
+      <div class="hero-top-badges">
+        <span class="eyebrow" data-i18n="hero.eyebrow">MEDIA BUYING AGENTLIGI</span>
+        <span class="live-pulse-badge"><i class="pulse-indicator"></i> <span data-i18n="hero.liveStatus">● Jonli monitoring faol (24/7)</span></span>
+      </div>
       <h1><span data-i18n="hero.headlinePlain">Biz shunchaki reklama joylashtirmaymiz.</span> <span class="hl" data-i18n="hero.headlineHl">Har bir so'mni natijaga aylantiramiz.</span></h1>
       <p class="lead" data-i18n="hero.lead">Unique — Meta, Google, Yandex va Telegram’da target va byudjet boshqaruvi. Har bir kampaniya raqamlar bilan tahlil qilinadi, shuning uchun reklama xarajat emas — o'sish quroliga aylanadi.</p>
       <div class="hero-ctas">
@@ -129,6 +133,52 @@
           </div>
           <h3 data-i18n="services.performance.title">Performance Marketing</h3>
           <p data-i18n="services.performance.text">KPI, ROAS va CPL bo'yicha maqsad qo'yish, natijalarni haftalik tahlil qilib byudjetni qayta taqsimlash.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI CALCULATOR -->
+  <section class="section tinted" id="kalkulyator">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="calc.title">Byudjet va daromad kalkulyatori</span>
+        <h2 style="margin-top:16px;" data-i18n="calc.title">Byudjet va daromad kalkulyatori</h2>
+        <p data-i18n="calc.subtitle">Oylik reklama byudjetingizni tanlang va kutilayotgan ko'rsatkichlarni hisoblang</p>
+      </div>
+      <div class="card calc-card reveal">
+        <div class="calc-slider-wrap">
+          <div class="calc-slider-head">
+            <span data-i18n="calc.label">Oylik reklama byudjeti:</span>
+            <span class="calc-budget-val" id="calcBudgetVal">10 000 000 so'm</span>
+          </div>
+          <input type="range" id="calcSlider" min="3000000" max="50000000" step="1000000" value="10000000" class="calc-slider">
+          <div class="calc-range-marks">
+            <span>3 000 000</span>
+            <span>15 000 000</span>
+            <span>30 000 000</span>
+            <span>50 000 000+</span>
+          </div>
+        </div>
+        <div class="calc-metrics-grid">
+          <div class="calc-metric-box">
+            <div class="calc-m-icon">🎯</div>
+            <div class="calc-m-label" data-i18n="calc.reach">Taxminiy qamrov</div>
+            <div class="calc-m-val" id="calcReachVal">150 000 – 250 000</div>
+          </div>
+          <div class="calc-metric-box highlight">
+            <div class="calc-m-icon">📥</div>
+            <div class="calc-m-label" data-i18n="calc.leads">Kutilayotgan lidlar</div>
+            <div class="calc-m-val" id="calcLeadsVal">80 – 160 ta lid</div>
+          </div>
+          <div class="calc-metric-box">
+            <div class="calc-m-icon">📈</div>
+            <div class="calc-m-label" data-i18n="calc.roas">Prognoz ROAS</div>
+            <div class="calc-m-val" id="calcRoasVal">3.2x – 4.5x</div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top: 28px;">
+          <a href="#aloqa" class="btn-primary" data-i18n="calc.cta">Shu natijaga erishish</a>
         </div>
       </div>
     </div>
@@ -306,6 +356,55 @@
     </div>
   </section>
 
+  <!-- FAQ ACCORDION -->
+  <section class="section tinted" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2 style="margin-top:16px;" data-i18n="faq.title">Ko'p beriladigan savollar</h2>
+        <p data-i18n="faq.subtitle">Hamkorlik, natijalar va byudjet bo'yicha muhim savollarga javoblar</p>
+      </div>
+      <div class="faq-accordion reveal">
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span data-i18n="faq.q1">Media buying uchun minimal byudjet qancha bo'lishi kerak?</span>
+            <span class="faq-icon">＋</span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq.a1">Biznes yo'nalishi va platformaga qarab minimal reklama byudjeti oyiga 3 000 000 – 5 000 000 so'mdan boshlanadi. Bu sinov kreativlarini tekshirish va dastlabki barqaror lidlar oqimini shakllantirish uchun yetarli.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span data-i18n="faq.q2">Birinchi natijalarni qancha vaqtda ko'rishimiz mumkin?</span>
+            <span class="faq-icon">＋</span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq.a2">Reklama kampaniyalari ishga tushgandan so'ng dastlabki lidlar 24-48 soat ichida kela boshlaydi. 7-10 kun ichida esa algoritmlar o'rganib, lid narxi optimal darajaga tushadi.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span data-i18n="faq.q3">Hisobotlar va natijalarni qanday kuzatib boramiz?</span>
+            <span class="faq-icon">＋</span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq.a3">Sizga haftalik batafsil hisobot (sarflangan byudjet, lidlar soni, lid narxi, konversiya) taqdim etiladi. Shuningdek, 24/7 shaxsiy Telegram guruhda doimiy aloqada bo'lamiz.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            <span data-i18n="faq.q4">Qaysi reklama kanali (Meta, Telegram, Google) bizga mos keladi?</span>
+            <span class="faq-icon">＋</span>
+          </button>
+          <div class="faq-answer">
+            <p data-i18n="faq.a4">Bepul konsultatsiyada mahsulotingiz, maqsadli auditoriyangiz va raqobatingizni o'rganib, aynan qaysi kanal eng yuqori foyda (ROAS) keltirishini aniq hisoblab beramiz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="section" id="aloqa">
     <div class="container">
@@ -388,6 +487,12 @@
     <p class="footer-copy">© 2026 Unique Performance Agency</p>
   </div>
 </footer>
+
+<!-- Floating Quick Telegram Contact -->
+<a href="https://t.me/otabek_insights" target="_blank" rel="noopener" class="floating-tg-btn" title="Telegram orqali tezkor bog'lanish" aria-label="Telegram">
+  <span class="tg-pulse-ring"></span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+</a>
 
 <script src="translations.js"></script>
 <script src="script.js"></script>

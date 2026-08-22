@@ -427,32 +427,177 @@ button { font-family: inherit; cursor: pointer; }
 .contact-item div span { display: block; font-size: 0.78rem; color: var(--ink-400); }
 .contact-item div b { font-size: 0.95rem; font-weight: 600; }
 
-@media (max-width: 860px) { .contact-wrap { grid-template-columns: 1fr; } }
+/* -------------------- scroll progress -------------------- */
+.scroll-progress {
+  position: absolute; bottom: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--flow-500), var(--deep-500));
+  transition: width .1s linear; z-index: 50;
+}
 
-/* -------------------- footer -------------------- */
+/* -------------------- live pulse badge -------------------- */
+.hero-top-badges {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.live-pulse-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--green-50); border: 1px solid var(--green-200);
+  color: var(--green-700); font-size: 0.78rem; font-weight: 600;
+  padding: 5px 12px; border-radius: 999px;
+}
+.pulse-indicator {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #16a34a; display: inline-block;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  animation: pulseDot 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+@keyframes pulseDot {
+  to { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+}
 
-.site-footer { border-top: 1px solid var(--ink-100); padding: 36px 0; }
-.site-footer .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-.footer-links { display: flex; gap: 24px; font-size: 0.9rem; color: var(--ink-400); }
-.footer-links a:hover { color: var(--ink-700); }
-.footer-copy { font-size: 0.85rem; color: var(--ink-400); }
+/* -------------------- hero float animation -------------------- */
+.mockup {
+  position: relative; max-width: 420px; margin: 0 auto;
+  animation: floatHero 6s ease-in-out infinite;
+}
+@keyframes floatHero {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.mockup-glow {
+  position: absolute; inset: -28px;
+  background: linear-gradient(135deg, rgba(96,165,250,.35), rgba(129,140,248,.35));
+  filter: blur(52px); border-radius: 999px;
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+@keyframes glowPulse {
+  0% { opacity: 0.7; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
 
-/* -------------------- reveal-on-scroll -------------------- */
+/* -------------------- service card hover -------------------- */
+.service-card {
+  position: relative; transition: all .25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--flow-500), var(--deep-500));
+  opacity: 0; transition: opacity .25s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.12), 0 8px 16px -4px rgba(0,0,0,0.04);
+  border-color: var(--flow-200);
+}
+.service-card:hover::before { opacity: 1; }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
+/* -------------------- calculator -------------------- */
+.calc-card {
+  max-width: 760px; margin: 0 auto; padding: 40px;
+  background: #fff; border: 1px solid var(--ink-100);
+  box-shadow: 0 20px 40px -15px rgba(30, 58, 138, 0.08);
+}
+.calc-slider-wrap { margin-bottom: 32px; }
+.calc-slider-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px; font-size: 1rem; font-weight: 600; color: var(--ink-800);
+}
+.calc-budget-val {
+  font-size: 1.35rem; font-weight: 800; color: var(--flow-600);
+  background: var(--flow-50); padding: 4px 14px; border-radius: 8px;
+  border: 1px solid var(--flow-200);
+}
+.calc-slider {
+  width: 100%; height: 8px; border-radius: 4px;
+  background: var(--ink-100); outline: none; -webkit-appearance: none;
+  cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--flow-600); cursor: pointer;
+  border: 3px solid #fff; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+  transition: transform .15s ease;
+}
+.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.calc-range-marks {
+  display: flex; justify-content: space-between; margin-top: 8px;
+  font-size: 0.78rem; color: var(--ink-400); font-weight: 500;
+}
+.calc-metrics-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.calc-metric-box {
+  background: var(--ink-50); border: 1px solid var(--ink-100);
+  border-radius: 0.9rem; padding: 20px 16px; text-align: center;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.calc-metric-box:hover { transform: translateY(-3px); }
+.calc-metric-box.highlight {
+  background: linear-gradient(135deg, var(--flow-50), #f0f9ff);
+  border-color: var(--flow-300);
+}
+.calc-m-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.calc-m-label { font-size: 0.82rem; font-weight: 600; color: var(--ink-500); margin-bottom: 6px; }
+.calc-m-val { font-size: 1.15rem; font-weight: 800; color: var(--ink-900); }
+.calc-metric-box.highlight .calc-m-val { color: var(--flow-700); font-size: 1.25rem; }
 
-/* -------------------- responsive: big breakpoints -------------------- */
+/* -------------------- faq accordion -------------------- */
+.faq-accordion { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: #fff; border: 1px solid var(--ink-100); border-radius: 0.9rem;
+  overflow: hidden; transition: all .2s ease;
+}
+.faq-item.active {
+  border-color: var(--flow-300);
+  box-shadow: 0 4px 16px -2px rgba(37, 99, 235, 0.08);
+}
+.faq-question {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px; background: transparent; border: none; font-size: 1rem;
+  font-weight: 600; text-align: left; color: var(--ink-800); cursor: pointer;
+  transition: color .15s ease;
+}
+.faq-question:hover { color: var(--flow-600); }
+.faq-icon {
+  font-size: 1.2rem; font-weight: 700; color: var(--flow-600);
+  margin-left: 16px; flex-shrink: 0; transition: transform .2s ease;
+}
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height .3s cubic-bezier(0, 1, 0, 1), padding .3s ease;
+  padding: 0 24px;
+}
+.faq-item.active .faq-answer {
+  max-height: 400px; padding: 0 24px 20px 24px;
+  transition: max-height .35s ease-in-out, padding .2s ease;
+}
+.faq-answer p { margin: 0; color: var(--ink-500); line-height: 1.6; font-size: 0.935rem; }
 
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding: 56px 0 64px; }
-  .hero h1 { font-size: 2.25rem; }
-  .about { grid-template-columns: 1fr; }
-  .founder-card { max-width: 100%; }
+/* -------------------- floating quick tg button -------------------- */
+.floating-tg-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #0088cc, #0077b5);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 25px -5px rgba(0, 136, 204, 0.5);
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+}
+.floating-tg-btn:hover {
+  transform: scale(1.1); box-shadow: 0 14px 28px -4px rgba(0, 136, 204, 0.65);
+}
+.tg-pulse-ring {
+  position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid rgba(0, 136, 204, 0.6);
+  animation: tgPulse 2s infinite; pointer-events: none;
+}
+@keyframes tgPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
 }
 
 @media (max-width: 600px) {
-  .section { padding: 64px 0; }
-  .cta-banner { padding: 40px 22px; }
-  .about .stat-row { flex-wrap: wrap; gap: 20px; }
+  .calc-card { padding: 24px 18px; }
+  .calc-metrics-grid { grid-template-columns: 1fr; }
+  .floating-tg-btn { bottom: 20px; right: 20px; width: 48px; height: 48px; }
 }

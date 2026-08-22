@@ -77,13 +77,81 @@ if (contactForm) {
           formError.style.display = 'block';
           return;
         }
-        formSuccess.classList.add('show');
-        contactForm.reset();
-      })
-      .catch(() => {
-        submitBtn.disabled = false;
-        formError.textContent = 'Serverga ulanib bo\'lmadi. Birozdan so\'ng qayta urinib ko\'ring.';
-        formError.style.display = 'block';
-      });
-  });
+// Scroll Progress Bar
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  if (scrollProgress) scrollProgress.style.width = `${progress}%`;
+}, { passive: true });
+
+// Interactive ROI / Byudjet Kalkulyatori
+const calcSlider = document.getElementById('calcSlider');
+const calcBudgetVal = document.getElementById('calcBudgetVal');
+const calcReachVal = document.getElementById('calcReachVal');
+const calcLeadsVal = document.getElementById('calcLeadsVal');
+const calcRoasVal = document.getElementById('calcRoasVal');
+
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+
+function updateCalculator() {
+  if (!calcSlider) return;
+  const budget = parseInt(calcSlider.value, 10);
+  const currentLang = localStorage.getItem('unique_lang') || 'uz';
+  const currencyUnit = currentLang === 'ru' ? 'сум' : "so'm";
+  const leadsUnit = currentLang === 'ru' ? 'лидов' : 'ta lid';
+
+  // Format budget display
+  if (calcBudgetVal) calcBudgetVal.textContent = `${formatNumber(budget)} ${currencyUnit}`;
+
+  // Estimate Reach (CPM roughly ~25k - 40k UZS)
+  const minReach = Math.round((budget / 45000) * 1000);
+  const maxReach = Math.round((budget / 25000) * 1000);
+  if (calcReachVal) calcReachVal.textContent = `${formatNumber(minReach)} – ${formatNumber(maxReach)}`;
+
+  // Estimate Leads (CPL roughly ~45k - 95k UZS)
+  const minLeads = Math.max(15, Math.round(budget / 95000));
+  const maxLeads = Math.max(30, Math.round(budget / 48000));
+  if (calcLeadsVal) calcLeadsVal.textContent = `${minLeads} – ${maxLeads} ${leadsUnit}`;
+
+  // Estimate ROAS
+  let roasMin = '3.0x';
+  let roasMax = '4.2x';
+  if (budget >= 15000000 && budget < 30000000) {
+    roasMin = '3.4x';
+    roasMax = '4.8x';
+  } else if (budget >= 30000000) {
+    roasMin = '3.8x';
+    roasMax = '5.5x';
+  }
+  if (calcRoasVal) calcRoasVal.textContent = `${roasMin} – ${roasMax}`;
+}
+
+if (calcSlider) {
+  calcSlider.addEventListener('input', updateCalculator);
+  updateCalculator();
+}
+
+// FAQ Accordion
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach((item) => {
+  const questionBtn = item.querySelector('.faq-question');
+  if (questionBtn) {
+    questionBtn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+      faqItems.forEach((i) => {
+        i.classList.remove('active');
+        const icon = i.querySelector('.faq-icon');
+        if (icon) icon.textContent = '＋';
+      });
+      if (!isOpen) {
+        item.classList.add('active');
+        const icon = item.querySelector('.faq-icon');
+        if (icon) icon.textContent = '✕';
+      }
+    });
+  }
+});
