@@ -706,6 +706,11 @@
     document.getElementById('articleReadTime').textContent = '⏱ ' + (article.read_time || '7 daqiqa');
     document.getElementById('breadcrumbCat').textContent = article.category.toUpperCase();
 
+    const authorImgEl = document.querySelector('.author-img');
+    if (authorImgEl) {
+      authorImgEl.src = article.author_image || 'images/logo-mark.png';
+    }
+
     const catBadge = document.getElementById('articleCategoryBadge');
     catBadge.textContent = article.category.toUpperCase();
     catBadge.className = 'cat-badge ' + article.category.toLowerCase();
@@ -769,14 +774,23 @@
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug') || 'facebook-instagram-moderation-report-2026';
 
-    // 1. Check client-side dataset first
-    if (typeof ARTICLES_DATA !== 'undefined' && ARTICLES_DATA.length > 0) {
-      const found = ARTICLES_DATA.find(a => a.slug === slug);
-      if (found) {
-        const related = ARTICLES_DATA.filter(a => a.slug !== slug).slice(0, 3);
-        applyArticleData(found, related);
-        return;
-      }
+    // 0. Load user-created articles from localStorage
+    let userArticles = [];
+    try {
+      userArticles = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+    } catch (e) {
+      userArticles = [];
+    }
+
+    const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
+    const allArticles = [...userArticles, ...defaultArticles];
+
+    // 1. Check client-side dataset
+    const found = allArticles.find(a => a.slug === slug);
+    if (found) {
+      const related = allArticles.filter(a => a.slug !== slug).slice(0, 3);
+      applyArticleData(found, related);
+      return;
     }
 
     // 2. Fallback to API

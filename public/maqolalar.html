@@ -87,11 +87,190 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main class="articles-catalog-page">
   <div class="container">
 
-    <!-- Catalog Hero -->
-    <div class="catalog-hero">
-      <span class="eyebrow" data-i18n="articles.eyebrow">BILIM VA TAHLILLAR</span>
-      <h1 data-i18n="articles.title">Media Buying va Target Bo'yicha Maqolalar</h1>
-      <p data-i18n="articles.subtitle">Meta, Google Ads, Telegram va arbitraj bo'yicha eng so'nggi hisobotlar, qo'llanmalar va eksklyuziv keyslar.</p>
+    <!-- Interactive Creator Banner (Replaces static hero) -->
+    <div class="article-creator-banner" id="openStudioBannerBtn" role="button" tabindex="0" title="Maqola yozish studiyasini ochish">
+      <div class="creator-banner-left">
+        <span class="creator-badge">🔥 HAMMUALLIFLIK / KEYS YUKLASH</span>
+        <h1 class="creator-banner-title">Siz ham o'z loyihangiz yoki media buying keysingiz haqida maqola yozib yuklang!</h1>
+        <p class="creator-banner-desc">O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni The Unique Media platformasida minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.</p>
+      </div>
+      <div class="creator-banner-right">
+        <button type="button" class="creator-btn" id="openStudioBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Maqola yozish</span>
+        </button>
+        <span class="creator-badge-sub">✨ Qulay vizual muharrir</span>
+      </div>
+    </div>
+
+    <!-- Article Creator Studio Modal -->
+    <div class="studio-modal-overlay" id="articleStudioModal">
+      <div class="studio-modal-container">
+        <div class="studio-modal-header">
+          <h3 class="studio-modal-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span>Maqola va Keys Yaratish Studiyasi</span>
+          </h3>
+          <button type="button" class="studio-close-btn" id="closeStudioBtn" title="Yopish">&times;</button>
+        </div>
+
+        <div class="studio-modal-body">
+          <!-- Tabs Bar -->
+          <div class="studio-tabs-bar">
+            <button type="button" class="studio-tab-btn active" id="tabEditBtn">✍️ Tahrirlash (Muharrir)</button>
+            <button type="button" class="studio-tab-btn" id="tabPreviewBtn">👁 Jonli Ko'rinish (Preview)</button>
+          </div>
+
+          <!-- Editor Mode -->
+          <div id="studioEditorView">
+            <div class="studio-form-grid">
+              <div class="studio-field-full">
+                <label class="studio-label">Maqola sarlavhasi *</label>
+                <input type="text" id="newArticleTitle" class="studio-input" placeholder="Masalan: 2026-yilda Meta Ads orqali E-Commerce savdosini 3 barobarga oshirish sirlari">
+              </div>
+
+              <div class="studio-field-full">
+                <label class="studio-label">Qisqacha tavsif (Excerpt) *</label>
+                <textarea id="newArticleExcerpt" class="studio-textarea" rows="2" placeholder="Maqolaning eng asosiy mohiyati va foydasi (2-3 jumla)..."></textarea>
+              </div>
+
+              <div>
+                <label class="studio-label">Kategoriya</label>
+                <select id="newArticleCategory" class="studio-select">
+                  <option value="facebook">📘 Facebook & Meta</option>
+                  <option value="google">🔍 Google Ads</option>
+                  <option value="telegram">✈️ Telegram Ads</option>
+                  <option value="linkedin">💼 LinkedIn Ads</option>
+                  <option value="x">🐦 X (Twitter) Ads</option>
+                  <option value="cases">📊 Keyslar & Tahlil</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="studio-label">O'qish vaqti</label>
+                <select id="newArticleReadTime" class="studio-select">
+                  <option value="3 daqiqa">⏱ 3 daqiqa</option>
+                  <option value="5 daqiqa" selected>⏱ 5 daqiqa</option>
+                  <option value="7 daqiqa">⏱ 7 daqiqa</option>
+                  <option value="10 daqiqa">⏱ 10 daqiqa</option>
+                  <option value="15 daqiqa">⏱ 15 daqiqa</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="studio-label">Muallif ismi / Kompaniya nomi</label>
+                <input type="text" id="newArticleAuthor" class="studio-input" placeholder="Ismingiz yoki jamoangiz nomi" value="The Unique Media">
+              </div>
+
+              <div>
+                <label class="studio-label">Muallif rasmi / Avatar (URL)</label>
+                <input type="text" id="newArticleAuthorImg" class="studio-input" placeholder="https://... yoki bo'sh qoldiring" value="images/logo-mark.png">
+              </div>
+
+              <div class="studio-field-full">
+                <label class="studio-label">Teglar (vergul bilan ajrating)</label>
+                <input type="text" id="newArticleTags" class="studio-input" placeholder="Target, MediaBuying, Keys, ECommerce">
+              </div>
+
+              <div class="studio-field-full">
+                <label class="studio-label">Cover rasm (Muqova) *</label>
+                <div class="studio-cover-uploader" id="coverDropZone">
+                  <input type="file" id="coverFileInput" accept="image/*" style="display:none;">
+                  <div id="coverUploadPrompt">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="1.8" style="margin-bottom:6px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <p style="margin:0; font-size:0.92rem; font-weight:600; color:#334155;">Rasmni bu yerga tashlang yoki <span style="color:#0284c7; text-decoration:underline;">kompyuterdan tanlang</span></p>
+                    <small style="color:#94a3b8;">Tavsiya etiladi: 16:9 format (1200x675)</small>
+                  </div>
+                  <img id="coverPreviewImg" class="studio-cover-preview" alt="Cover preview" style="display:none;">
+                </div>
+                <div style="margin-top:8px; display:flex; gap:8px;">
+                  <input type="url" id="coverUrlInput" class="studio-input" placeholder="Yoki rasm havolasini (URL) kiriting (masalan: https://images.unsplash.com/...)">
+                  <button type="button" class="tool-btn" id="btnClearCover" style="display:none; white-space:nowrap; color:#ef4444;">❌ O'chirish</button>
+                </div>
+              </div>
+
+              <div class="studio-field-full">
+                <label class="studio-label">Maqola to'liq matni va tarkibi *</label>
+                <div class="studio-editor-box">
+                  <!-- Toolbar -->
+                  <div class="studio-toolbar">
+                    <div class="tool-btn-group">
+                      <button type="button" class="tool-btn" data-cmd="formatBlock" data-val="h1" title="Bosh sarlavha (H1)"><b>H1</b></button>
+                      <button type="button" class="tool-btn" data-cmd="formatBlock" data-val="h2" title="Katta sarlavha (H2)"><b>H2</b></button>
+                      <button type="button" class="tool-btn" data-cmd="formatBlock" data-val="h3" title="Kichik sarlavha (H3)"><b>H3</b></button>
+                      <button type="button" class="tool-btn" data-cmd="formatBlock" data-val="p" title="Oddiy matn (P)">P</button>
+                    </div>
+
+                    <div class="tool-btn-group">
+                      <button type="button" class="tool-btn" data-cmd="bold" title="Qalin (Bold)"><b>B</b></button>
+                      <button type="button" class="tool-btn" data-cmd="italic" title="Yotiq (Italic)"><i>I</i></button>
+                      <button type="button" class="tool-btn" data-cmd="underline" title="Tagiga chizilgan"><u>U</u></button>
+                      <button type="button" class="tool-btn" data-cmd="strikeThrough" title="Ustiga chizilgan"><s>S</s></button>
+                    </div>
+
+                    <div class="tool-btn-group">
+                      <button type="button" class="tool-btn" data-cmd="insertUnorderedList" title="Nuqtali ro'yxat">• Ro'yxat</button>
+                      <button type="button" class="tool-btn" data-cmd="insertOrderedList" title="Raqamli ro'yxat">1. Ro'yxat</button>
+                    </div>
+
+                    <!-- Colors -->
+                    <div style="display:flex; align-items:center; gap:4px;">
+                      <span style="font-size:0.75rem; color:#64748b; font-weight:600;">Rang:</span>
+                      <input type="color" id="editorTextColor" class="tool-color-picker" value="#0f172a" title="Matn rangi">
+                      <input type="color" id="editorBgColor" class="tool-color-picker" value="#fef08a" title="Fon/Belgilash rangi">
+                    </div>
+
+                    <!-- Inserts -->
+                    <button type="button" class="tool-btn" id="btnInsertLink" title="Havola qo'shish">🔗 Havola</button>
+                    <button type="button" class="tool-btn" id="btnInsertImage" title="Matn ichiga rasm joylash">🖼 Rasm</button>
+                    <input type="file" id="inlineImageInput" accept="image/*" style="display:none;">
+                    <button type="button" class="tool-btn" id="btnInsertTable" title="Jadval joylash">📊 Jadval</button>
+                    <button type="button" class="tool-btn" id="btnInsertCallout" title="Infoblok joylash">💡 Eslatma</button>
+                  </div>
+
+                  <!-- ContentEditable Canvas -->
+                  <div id="studioEditorCanvas" class="studio-editor-content" contenteditable="true" spellcheck="false">
+                    <p class="lead-paragraph">Ushbu maqolada loyihamiz bo'yicha erishilgan asosiy natijalar va qo'llanilgan amaliy media buying strategiyalarini batafsil tahlil qilamiz...</p>
+                    <h2>1. Loyiha haqida va boshlang'ich vazifa</h2>
+                    <p>Biznes turi, maqsadli auditoriya va boshlang'ich byudjet parametrlari haqida qisqacha ma'lumot...</p>
+                    <h2>2. Qo'llanilgan strategiya va testlar</h2>
+                    <p>Qaysi auditoriyalar, kreativ formatlari va takliflar eng yuqori konversiyani bergani...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview Mode -->
+          <div id="studioPreviewView" style="display:none;">
+            <div style="max-width:800px; margin:0 auto; padding:24px; background:#ffffff; border:1px solid #e2e8f0; border-radius:12px;">
+              <span id="prevBadge" style="display:inline-block; padding:4px 10px; background:#0f172a; color:#fff; border-radius:6px; font-size:0.75rem; font-weight:700; margin-bottom:12px;">FACEBOOK</span>
+              <h1 id="prevTitle" style="font-size:2rem; font-weight:800; color:#0f172a; margin-bottom:12px; line-height:1.25;">Sarlavha...</h1>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+                <img id="prevAuthorImg" src="images/logo-mark.png" alt="Author" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid #e2e8f0;">
+                <p id="prevMeta" style="color:#64748b; font-size:0.88rem; margin:0;">The Unique Media · ⏱ 5 daqiqa · Bugun</p>
+              </div>
+              <div style="width:100%; aspect-ratio:16/9; max-height:420px; overflow:hidden; border-radius:12px; margin-bottom:24px; background:#f1f5f9; display:flex; align-items:center; justify-content:center;">
+                <img id="prevCover" src="" style="width:100%; height:100%; object-fit:cover; display:none;" alt="Cover">
+              </div>
+              <div id="prevContent" class="article-body-content" style="font-size:1.05rem; line-height:1.75; color:#334155;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="studio-modal-footer">
+          <div class="studio-footer-left">
+            <span id="draftStatusText">💾 Qoralamalar brauzeringizda saqlanadi</span>
+          </div>
+          <div class="studio-footer-right">
+            <button type="button" class="btn-studio-draft" id="btnSaveDraft">Qoralamani saqlash</button>
+            <button type="button" class="btn-studio-publish" id="btnPublishArticle">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span>Maqolani Nashr Qilish</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CPA.RIP style Filter Bar & Search -->
@@ -266,6 +445,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }
 
+  // Get user articles from localStorage merged with client dataset
+  function getAllArticles() {
+    let userArticles = [];
+    try {
+      userArticles = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+    } catch (e) {
+      userArticles = [];
+    }
+    const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
+    return [...userArticles, ...defaultArticles];
+  }
+
   // Articles & Filter System (CPA.RIP style)
   const articlesGrid = document.getElementById('articlesGrid');
   const categoryTabs = document.querySelectorAll('#articleCategoryTabs .cpa-tab');
@@ -300,7 +491,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="cpa-card-excerpt">${a.excerpt}</p>
             <div class="cpa-card-footer">
               <div class="cpa-author-info">
-                <img src="images/logo-mark.png" alt="Unique" class="cpa-author-avatar">
+                <img src="${a.author_image || 'images/logo-mark.png'}" alt="Author" class="cpa-author-avatar">
                 <span>${a.author || 'The Unique Media'}</span>
               </div>
               <div class="cpa-meta-right">
@@ -316,43 +507,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function filterLocalArticles() {
-    if (typeof ARTICLES_DATA === 'undefined') return [];
-    return ARTICLES_DATA.filter((a) => {
-      const matchCat = currentCategory === 'all' || a.category.toLowerCase() === currentCategory.toLowerCase();
+    const all = getAllArticles();
+    return all.filter((a) => {
+      const matchCat = currentCategory === 'all' || (a.category && a.category.toLowerCase() === currentCategory.toLowerCase());
       const q = currentSearch.trim().toLowerCase();
-      const matchSearch = !q || a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) || (a.tags && JSON.stringify(a.tags).toLowerCase().includes(q));
+      const matchSearch = !q || (a.title && a.title.toLowerCase().includes(q)) || (a.excerpt && a.excerpt.toLowerCase().includes(q)) || (a.tags && JSON.stringify(a.tags).toLowerCase().includes(q));
       return matchCat && matchSearch;
     });
   }
 
   async function fetchAndRenderArticles() {
     if (!articlesGrid) return;
-
-    // Fast direct render from client dataset (always shows all 40 articles)
-    if (typeof ARTICLES_DATA !== 'undefined' && ARTICLES_DATA.length > 0) {
-      const filtered = filterLocalArticles();
-      renderArticlesList(filtered);
-      return;
-    }
-    
-    // Fallback to API if client dataset is not available
-    try {
-      const params = new URLSearchParams();
-      if (currentCategory && currentCategory !== 'all') {
-        params.set('category', currentCategory);
-      }
-      if (currentSearch.trim()) {
-        params.set('search', currentSearch.trim());
-      }
-
-      const res = await fetch('/api/articles?' + params.toString());
-      if (!res.ok) throw new Error('API offline');
-      const articles = await res.json();
-      renderArticlesList(articles);
-    } catch (err) {
-      // Empty state
-      renderArticlesList([]);
-    }
+    const filtered = filterLocalArticles();
+    renderArticlesList(filtered);
   }
 
   if (categoryTabs.length > 0) {
@@ -378,6 +545,532 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   if (articlesGrid) {
     fetchAndRenderArticles();
+  }
+
+  /* =========================================================================
+     ARTICLE CREATOR STUDIO CONTROLLER
+     ========================================================================= */
+  const studioModal = document.getElementById('articleStudioModal');
+  const openStudioBannerBtn = document.getElementById('openStudioBannerBtn');
+  const openStudioBtn = document.getElementById('openStudioBtn');
+  const closeStudioBtn = document.getElementById('closeStudioBtn');
+
+  const tabEditBtn = document.getElementById('tabEditBtn');
+  const tabPreviewBtn = document.getElementById('tabPreviewBtn');
+  const studioEditorView = document.getElementById('studioEditorView');
+  const studioPreviewView = document.getElementById('studioPreviewView');
+
+  const titleInput = document.getElementById('newArticleTitle');
+  const excerptInput = document.getElementById('newArticleExcerpt');
+  const categorySelect = document.getElementById('newArticleCategory');
+  const readTimeSelect = document.getElementById('newArticleReadTime');
+  const authorInput = document.getElementById('newArticleAuthor');
+  const authorImgInput = document.getElementById('newArticleAuthorImg');
+  const tagsInput = document.getElementById('newArticleTags');
+  const editorCanvas = document.getElementById('studioEditorCanvas');
+
+  // Cover image controls
+  const coverDropZone = document.getElementById('coverDropZone');
+  const coverFileInput = document.getElementById('coverFileInput');
+  const coverUrlInput = document.getElementById('coverUrlInput');
+  const coverPreviewImg = document.getElementById('coverPreviewImg');
+  const coverUploadPrompt = document.getElementById('coverUploadPrompt');
+  const btnClearCover = document.getElementById('btnClearCover');
+
+  // Draft & Publish buttons
+  const btnSaveDraft = document.getElementById('btnSaveDraft');
+  const btnPublishArticle = document.getElementById('btnPublishArticle');
+  const draftStatusText = document.getElementById('draftStatusText');
+
+  let currentCoverDataUrl = '';
+
+  function openStudio() {
+    if (!studioModal) return;
+    studioModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    restoreDraftIfAvailable();
+  }
+
+  function closeStudio() {
+    if (!studioModal) return;
+    studioModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (openStudioBannerBtn) {
+    openStudioBannerBtn.addEventListener('click', (e) => {
+      openStudio();
+    });
+  }
+
+  if (openStudioBtn) {
+    openStudioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openStudio();
+    });
+  }
+
+  if (closeStudioBtn) {
+    closeStudioBtn.addEventListener('click', closeStudio);
+  }
+
+  if (studioModal) {
+    studioModal.addEventListener('click', (e) => {
+      if (e.target === studioModal) closeStudio();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && studioModal && studioModal.classList.contains('open')) {
+      closeStudio();
+    }
+  });
+
+  // Tab switching
+  function switchTab(mode) {
+    if (mode === 'preview') {
+      tabEditBtn.classList.remove('active');
+      tabPreviewBtn.classList.add('active');
+      studioEditorView.style.display = 'none';
+      studioPreviewView.style.display = 'block';
+      updatePreview();
+    } else {
+      tabPreviewBtn.classList.remove('active');
+      tabEditBtn.classList.add('active');
+      studioPreviewView.style.display = 'none';
+      studioEditorView.style.display = 'block';
+    }
+  }
+
+  if (tabEditBtn && tabPreviewBtn) {
+    tabEditBtn.addEventListener('click', () => switchTab('edit'));
+    tabPreviewBtn.addEventListener('click', () => switchTab('preview'));
+  }
+
+  function updatePreview() {
+    const title = titleInput.value.trim() || 'Sarlavhasiz maqola';
+    const cat = categorySelect.value;
+    const author = authorInput.value.trim() || 'The Unique Media';
+    const authorImg = authorImgInput.value.trim() || 'images/logo-mark.png';
+    const readTime = readTimeSelect.value || '5 daqiqa';
+    const content = editorCanvas.innerHTML;
+    const coverSrc = currentCoverDataUrl || coverUrlInput.value.trim();
+
+    document.getElementById('prevTitle').textContent = title;
+    document.getElementById('prevBadge').textContent = cat.toUpperCase();
+    document.getElementById('prevAuthorImg').src = authorImg;
+    document.getElementById('prevMeta').textContent = `${author} · ⏱ ${readTime} · Bugun`;
+    document.getElementById('prevContent').innerHTML = content;
+
+    const prevCover = document.getElementById('prevCover');
+    if (coverSrc) {
+      prevCover.src = coverSrc;
+      prevCover.style.display = 'block';
+    } else {
+      prevCover.style.display = 'none';
+    }
+  }
+
+  // Cover image handling
+  function setCoverImage(src) {
+    currentCoverDataUrl = src;
+    if (src) {
+      coverPreviewImg.src = src;
+      coverPreviewImg.style.display = 'block';
+      coverUploadPrompt.style.display = 'none';
+      if (btnClearCover) btnClearCover.style.display = 'inline-flex';
+    } else {
+      coverPreviewImg.src = '';
+      coverPreviewImg.style.display = 'none';
+      coverUploadPrompt.style.display = 'block';
+      if (btnClearCover) btnClearCover.style.display = 'none';
+      coverFileInput.value = '';
+    }
+  }
+
+  if (coverDropZone) {
+    coverDropZone.addEventListener('click', (e) => {
+      if (e.target !== btnClearCover) {
+        coverFileInput.click();
+      }
+    });
+
+    coverDropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      coverDropZone.style.borderColor = '#0284c7';
+      coverDropZone.style.background = '#f0f9ff';
+    });
+
+    coverDropZone.addEventListener('dragleave', () => {
+      coverDropZone.style.borderColor = '#cbd5e1';
+      coverDropZone.style.background = '#f8fafc';
+    });
+
+    coverDropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      coverDropZone.style.borderColor = '#cbd5e1';
+      coverDropZone.style.background = '#f8fafc';
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleCoverFile(e.dataTransfer.files[0]);
+      }
+    });
+  }
+
+  if (coverFileInput) {
+    coverFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleCoverFile(e.target.files[0]);
+      }
+    });
+  }
+
+  function handleCoverFile(file) {
+    if (!file.type.startsWith('image/')) {
+      alert("Iltimos, rasm formatidagi fayl tanlang!");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setCoverImage(ev.target.result);
+      if (coverUrlInput) coverUrlInput.value = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  if (coverUrlInput) {
+    coverUrlInput.addEventListener('input', (e) => {
+      const url = e.target.value.trim();
+      if (url) {
+        setCoverImage(url);
+      } else {
+        if (!currentCoverDataUrl.startsWith('data:')) {
+          setCoverImage('');
+        }
+      }
+    });
+  }
+
+  if (btnClearCover) {
+    btnClearCover.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setCoverImage('');
+      if (coverUrlInput) coverUrlInput.value = '';
+    });
+  }
+
+  // WYSIWYG Toolbar actions
+  document.querySelectorAll('.studio-toolbar .tool-btn[data-cmd]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      const val = btn.getAttribute('data-val') || null;
+      document.execCommand(cmd, false, val);
+      editorCanvas.focus();
+    });
+  });
+
+  const textColorPicker = document.getElementById('editorTextColor');
+  if (textColorPicker) {
+    textColorPicker.addEventListener('input', (e) => {
+      document.execCommand('foreColor', false, e.target.value);
+    });
+  }
+
+  const bgColorPicker = document.getElementById('editorBgColor');
+  if (bgColorPicker) {
+    bgColorPicker.addEventListener('input', (e) => {
+      document.execCommand('hiliteColor', false, e.target.value);
+    });
+  }
+
+  // Insert Link
+  const btnInsertLink = document.getElementById('btnInsertLink');
+  if (btnInsertLink) {
+    btnInsertLink.addEventListener('click', () => {
+      const url = prompt("Havola manzilini (URL) kiriting:", "https://");
+      if (url && url !== "https://") {
+        document.execCommand('createLink', false, url);
+      }
+    });
+  }
+
+  // Insert Inline Image
+  const btnInsertImage = document.getElementById('btnInsertImage');
+  const inlineImageInput = document.getElementById('inlineImageInput');
+  if (btnInsertImage && inlineImageInput) {
+    btnInsertImage.addEventListener('click', () => {
+      const choice = confirm("Rasmni kompyuterdan tanlashni xohlaysizmi?\n(OK = Kompyuterdan tanlash, Bekor qilish = URL kiritish)");
+      if (choice) {
+        inlineImageInput.click();
+      } else {
+        const imgUrl = prompt("Rasm havolasini (URL) kiriting:", "https://");
+        if (imgUrl && imgUrl !== "https://") {
+          insertHtmlAtCursor(`<p><img src="${imgUrl}" alt="Maqola rasmi" style="max-width:100%; border-radius:8px; margin:16px 0; aspect-ratio:16/9; object-fit:cover;"></p><p><br></p>`);
+        }
+      }
+    });
+
+    inlineImageInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          insertHtmlAtCursor(`<p><img src="${ev.target.result}" alt="Maqola rasmi" style="max-width:100%; border-radius:8px; margin:16px 0;"></p><p><br></p>`);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // Insert Table
+  const btnInsertTable = document.getElementById('btnInsertTable');
+  if (btnInsertTable) {
+    btnInsertTable.addEventListener('click', () => {
+      const tableHtml = `
+        <div class="table-responsive">
+          <table class="article-table">
+            <thead>
+              <tr>
+                <th>Ko'rsatkich (Metrika)</th>
+                <th>Oldingi natija</th>
+                <th>Yangi natija</th>
+                <th>O'sish / O'zgarish</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Konversiya darajasi (CR)</strong></td>
+                <td>1.4%</td>
+                <td>3.9%</td>
+                <td><span class="badge badge-success">+178%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Lid narxi (CPA)</strong></td>
+                <td>$12.50</td>
+                <td>$4.80</td>
+                <td><span class="badge badge-success">-61.6%</span></td>
+              </tr>
+              <tr>
+                <td><strong>Reklama daromadi (ROAS)</strong></td>
+                <td>1.7x</td>
+                <td>4.2x</td>
+                <td><span class="badge badge-success">+147%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><br></p>
+      `;
+      insertHtmlAtCursor(tableHtml);
+    });
+  }
+
+  // Insert Callout Box
+  const btnInsertCallout = document.getElementById('btnInsertCallout');
+  if (btnInsertCallout) {
+    btnInsertCallout.addEventListener('click', () => {
+      const type = prompt("Qaysi turdagi eslatma qo'shmoqchisiz?\n1: 💡 Maslahat (Tavsiya)\n2: ⚠️ Ogohlantirish (Alert)\n3: 📌 Muhim Eslatma", "1");
+      let calloutClass = "note";
+      let title = "💡 Amaliy Maslahat:";
+      if (type === "2") {
+        calloutClass = "alert";
+        title = "⚠️ Muhim Ogohlantirish:";
+      } else if (type === "3") {
+        calloutClass = "tip";
+        title = "📌 Eslatma:";
+      }
+      const calloutHtml = `
+        <div class="article-callout ${calloutClass}">
+          <strong>${title}</strong>
+          <p>Ushbu strategiyani qo'llashda budjetni bosqichma-bosqich oshirish va har bir audit natijasini qayd etib borish lozim.</p>
+        </div>
+        <p><br></p>
+      `;
+      insertHtmlAtCursor(calloutHtml);
+    });
+  }
+
+  function insertHtmlAtCursor(html) {
+    editorCanvas.focus();
+    const sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      let range = sel.getRangeAt(0);
+      range.deleteContents();
+      const el = document.createElement('div');
+      el.innerHTML = html;
+      const frag = document.createDocumentFragment();
+      let node, lastNode;
+      while ((node = el.firstChild)) {
+        lastNode = frag.appendChild(node);
+      }
+      range.insertNode(frag);
+      if (lastNode) {
+        range = range.cloneRange();
+        range.setStartAfter(lastNode);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    } else {
+      editorCanvas.innerHTML += html;
+    }
+  }
+
+  // Draft Saving
+  function saveDraft() {
+    const draft = {
+      title: titleInput.value,
+      excerpt: excerptInput.value,
+      category: categorySelect.value,
+      readTime: readTimeSelect.value,
+      author: authorInput.value,
+      authorImg: authorImgInput.value,
+      tags: tagsInput.value,
+      coverUrl: coverUrlInput.value,
+      coverDataUrl: currentCoverDataUrl,
+      content: editorCanvas.innerHTML,
+      savedAt: new Date().toISOString()
+    };
+    localStorage.setItem('unique_article_draft', JSON.stringify(draft));
+    if (draftStatusText) {
+      draftStatusText.textContent = `✅ Qoralama saqlandi (${new Date().toLocaleTimeString()})`;
+      setTimeout(() => {
+        draftStatusText.textContent = '💾 Qoralamalar brauzeringizda saqlanadi';
+      }, 4000);
+    }
+  }
+
+  function restoreDraftIfAvailable() {
+    try {
+      const saved = localStorage.getItem('unique_article_draft');
+      if (saved) {
+        const draft = JSON.parse(saved);
+        if (draft.title && !titleInput.value) titleInput.value = draft.title;
+        if (draft.excerpt && !excerptInput.value) excerptInput.value = draft.excerpt;
+        if (draft.category) categorySelect.value = draft.category;
+        if (draft.readTime) readTimeSelect.value = draft.readTime;
+        if (draft.author) authorInput.value = draft.author;
+        if (draft.authorImg) authorImgInput.value = draft.authorImg;
+        if (draft.tags) tagsInput.value = draft.tags;
+        if (draft.coverDataUrl) {
+          setCoverImage(draft.coverDataUrl);
+        } else if (draft.coverUrl) {
+          coverUrlInput.value = draft.coverUrl;
+          setCoverImage(draft.coverUrl);
+        }
+        if (draft.content && editorCanvas.innerHTML.includes('Ushbu maqolada')) {
+          editorCanvas.innerHTML = draft.content;
+        }
+      }
+    } catch (e) {}
+  }
+
+  if (btnSaveDraft) {
+    btnSaveDraft.addEventListener('click', saveDraft);
+  }
+
+  // Auto-save draft every 15 seconds while open
+  setInterval(() => {
+    if (studioModal && studioModal.classList.contains('open')) {
+      if (titleInput.value.trim()) {
+        saveDraft();
+      }
+    }
+  }, 15000);
+
+  // Helper for generating slug
+  function generateSlug(text) {
+    const from = "àáäâèéëêìíïîòóöôùúüûñçдёжфйцчшщыюяабвгдезийклмнопрстуъьэ";
+    const to   = "aaaaeeeeiiiioooouuuuncdeyzhfytshtshchshshyuyuaabvgdezijklmnoprstu--e";
+    let str = text.toLowerCase().trim();
+    for (let i = 0; i < from.length; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+    str = str.replace(/[^a-z0-9\s-]/g, '')
+             .replace(/[\s-]+/g, '-')
+             .replace(/^-+|-+$/g, '');
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    return (str || 'maqola') + '-' + randomSuffix;
+  }
+
+  // Publish Article
+  if (btnPublishArticle) {
+    btnPublishArticle.addEventListener('click', async () => {
+      const title = titleInput.value.trim();
+      const excerpt = excerptInput.value.trim();
+      const category = categorySelect.value;
+      const readTime = readTimeSelect.value;
+      const author = authorInput.value.trim() || 'The Unique Media';
+      const authorImg = authorImgInput.value.trim() || 'images/logo-mark.png';
+      const rawTags = tagsInput.value.trim();
+      const content = editorCanvas.innerHTML.trim();
+      const cover = currentCoverDataUrl || coverUrlInput.value.trim() || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';
+
+      if (!title) {
+        alert("Iltimos, maqola sarlavhasini kiriting!");
+        titleInput.focus();
+        return;
+      }
+      if (!excerpt) {
+        alert("Iltimos, maqola qisqacha tavsifini (Excerpt) kiriting!");
+        excerptInput.focus();
+        return;
+      }
+      if (!content || content.length < 20) {
+        alert("Iltimos, maqola matnini to'liq yozing!");
+        editorCanvas.focus();
+        return;
+      }
+
+      const tagsArray = rawTags ? rawTags.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean) : [category.toUpperCase(), 'MediaBuying', 'Keys'];
+      const slug = generateSlug(title);
+
+      const newArticle = {
+        id: 'user_' + Date.now(),
+        slug: slug,
+        title: title,
+        excerpt: excerpt,
+        category: category,
+        read_time: readTime,
+        author: author,
+        author_image: authorImg,
+        image_url: cover,
+        created_at: new Date().toISOString(),
+        tags: tagsArray,
+        content: content
+      };
+
+      // 1. Save to localStorage user articles
+      let existingUserArticles = [];
+      try {
+        existingUserArticles = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+      } catch (e) {
+        existingUserArticles = [];
+      }
+      existingUserArticles.unshift(newArticle);
+      localStorage.setItem('unique_user_articles', JSON.stringify(existingUserArticles));
+
+      // 2. Clear draft
+      localStorage.removeItem('unique_article_draft');
+
+      // 3. Attempt API sync if backend exists
+      try {
+        await fetch('/api/articles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newArticle)
+        });
+      } catch (err) {}
+
+      // 4. Update UI grid immediately
+      fetchAndRenderArticles();
+
+      // 5. Close studio & notify user
+      closeStudio();
+      alert("🎉 Tabriklaymiz! Maqolangiz muvaffaqiyatli nashr qilindi va katalogga joylashtirildi.");
+
+      // 6. Direct redirect to the published article reader page
+      window.location.href = `/maqola?slug=${encodeURIComponent(slug)}`;
+    });
   }
 </script>
 </body>
