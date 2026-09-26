@@ -1,11 +1,22 @@
 const TRANSLATIONS = {
   uz: {
     'nav.services': "Xizmatlar",
+    'nav.articles': "Maqolalar",
     'nav.analysis': "Tahlil va Target",
     'nav.clients': "Mijozlar",
     'nav.process': "Jarayon",
     'nav.founder': "Asoschi",
     'nav.cta': "Konsultatsiya olish",
+
+    'articles.eyebrow': "BILIM VA TAHLILLAR",
+    'articles.title': "Media Buying va Target Bo'yicha Maqolalar",
+    'articles.subtitle': "Meta, Google Ads, Telegram va arbitraj bo'yicha eng so'nggi hisobotlar, qo'llanmalar va eksklyuziv keyslar.",
+    'articles.filterAll': "Barchasi",
+    'articles.searchPlaceholder': "Mavzuni qidirish (masalan: moderatsiya, Meta)...",
+    'articles.readTime': "o'qish",
+    'articles.views': "ko'rildi",
+    'articles.readMore': "Batafsil o'qish",
+    'articles.notFound': "Maqolalar topilmadi. Boshqa so'z bilan qidirib ko'ring.",
 
     'hero.eyebrow': "MEDIA BUYING AGENTLIGI",
     'hero.headlineHl': "Har bir so'mni",
@@ -146,11 +157,22 @@ const TRANSLATIONS = {
 
   ru: {
     'nav.services': "Услуги",
+    'nav.articles': "Статьи",
     'nav.analysis': "Аналитика и таргет",
     'nav.clients': "Клиенты",
     'nav.process': "Процесс",
     'nav.founder': "Основатель",
     'nav.cta': "Получить консультацию",
+
+    'articles.eyebrow': "ЗНАНИЯ И АНАЛИТИКА",
+    'articles.title': "Статьи по Media Buying и Таргету",
+    'articles.subtitle': "Свежие отчеты, гайды и кейсы по Meta, Google Ads, Telegram и арбитражу трафика.",
+    'articles.filterAll': "Все",
+    'articles.searchPlaceholder': "Поиск по теме (например: модерация, Meta)...",
+    'articles.readTime': "чтения",
+    'articles.views': "просмотров",
+    'articles.readMore': "Читать подробнее",
+    'articles.notFound': "Статьи не найдены. Попробуйте другой запрос.",
 
     'hero.eyebrow': "АГЕНТСТВО МЕДИАБАЙИНГА",
     'hero.headlineHl': "Превращаем каждый сум",
@@ -291,11 +313,22 @@ const TRANSLATIONS = {
 
   en: {
     'nav.services': "Services",
+    'nav.articles': "Articles",
     'nav.analysis': "Analytics & Targeting",
     'nav.clients': "Clients",
     'nav.process': "Process",
     'nav.founder': "Founder",
     'nav.cta': "Get a consultation",
+
+    'articles.eyebrow': "KNOWLEDGE & INSIGHTS",
+    'articles.title': "Media Buying & Performance Articles",
+    'articles.subtitle': "Latest reports, actionable guides, and exclusive case studies on Meta, Google Ads, Telegram, and traffic arbitrage.",
+    'articles.filterAll': "All",
+    'articles.searchPlaceholder': "Search by topic (e.g. moderation, Meta)...",
+    'articles.readTime': "read",
+    'articles.views': "views",
+    'articles.readMore': "Read article",
+    'articles.notFound': "No articles found. Try another query.",
 
     'hero.eyebrow': "MEDIA BUYING AGENCY",
     'hero.headlineHl': "Turning every sum",

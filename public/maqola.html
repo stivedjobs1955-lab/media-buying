@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Maqola — Unique Media Buying</title>
+<meta name="description" id="pageDesc" content="Media buying, target va performance marketing bo'yicha eksklyuziv maqolalar va tahlillar.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Dedicated Article View Styles */
+  .article-page {
+    padding-top: 90px;
+    padding-bottom: 80px;
+    background: #fdfdfd;
+  }
+  .article-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--ink-500);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .breadcrumb-nav a {
+    color: var(--flow-600);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .breadcrumb-nav a:hover {
+    color: var(--flow-800);
+    text-decoration: underline;
+  }
+  .breadcrumb-nav .sep {
+    opacity: 0.5;
+  }
+  .article-header {
+    margin-bottom: 30px;
+  }
+  .article-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .cat-badge {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+  .cat-badge.facebook { background: #e0f2fe; color: #0284c7; }
+  .cat-badge.google { background: #fef3c7; color: #d97706; }
+  .cat-badge.telegram { background: #e0f2fe; color: #0088cc; }
+  .cat-badge.cases { background: #dcfce7; color: #16a34a; }
+  
+  .article-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--ink-950);
+    margin-bottom: 20px;
+  }
+  @media (max-width: 768px) {
+    .article-title { font-size: 1.7rem; }
+  }
+  .article-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 1px solid var(--ink-100);
+    border-bottom: 1px solid var(--ink-100);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .author-info-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .author-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e2e8f0;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .author-details {
+    display: flex;
+    flex-direction: column;
+  }
+  .author-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink-900);
+  }
+  .article-date-time {
+    font-size: 0.82rem;
+    color: var(--ink-500);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .article-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .share-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+  .share-btn.tg { background: #0088cc; color: #fff; border-color: #0088cc; }
+  .share-btn.tg:hover { background: #0077b5; }
+
+  .featured-image-wrap {
+    margin-bottom: 36px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    background: #f8fafc;
+  }
+  .featured-image-wrap img {
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: cover;
+  }
+
+  /* Table of contents */
+  .toc-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .toc-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink-900);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .toc-list li {
+    margin-bottom: 8px;
+  }
+  .toc-list a {
+    color: var(--flow-600);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+  .toc-list a:hover {
+    text-decoration: underline;
+  }
+
+  /* Article Content Typography */
+  .article-body-content {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: #334155;
+  }
+  .article-body-content p {
+    margin-bottom: 1.4rem;
+  }
+  .article-body-content .lead-paragraph {
+    font-size: 1.22rem;
+    line-height: 1.65;
+    color: #1e293b;
+    font-weight: 500;
+  }
+  .article-body-content h2 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  .article-body-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .article-body-content ul, .article-body-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .article-body-content li {
+    margin-bottom: 0.6rem;
+  }
+
+  /* Tables */
+  .table-responsive {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.92rem;
+  }
+  .article-table th {
+    background: #f1f5f9;
+    padding: 12px 16px;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 2px solid #cbd5e1;
+  }
+  .article-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+  }
+  .article-table tr:hover td {
+    background: #f8fafc;
+  }
+
+  /* Callouts */
+  .article-callout {
+    padding: 18px 22px;
+    border-radius: 10px;
+    margin: 24px 0;
+    border-left: 4px solid;
+    background: #f8fafc;
+  }
+  .article-callout.note {
+    border-color: #3b82f6;
+    background: #eff6ff;
+  }
+  .article-callout.alert {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+  .article-callout.tip {
+    border-color: #10b981;
+    background: #f0fdf4;
+  }
+  .article-callout strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.98rem;
+  }
+  .article-callout p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .badge-warning { background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+  .badge-success { background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+
+  /* Tags */
+  .article-tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+  }
+  .tag-item {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .tag-item:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  /* Bottom CTA Banner */
+  .article-cta-box {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin-top: 48px;
+    text-align: center;
+  }
+  .article-cta-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .article-cta-box p {
+    color: #bfdbfe;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Related section */
+  .related-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #e2e8f0;
+  }
+  .related-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #0f172a;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .related-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  }
+  .related-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+  .related-card-content {
+    padding: 14px;
+  }
+  .related-card-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+  .related-card-meta {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
+    
+    <div class="header-right-group">
+      <nav class="nav-links">
+        <a href="index.html#maqolalar">Maqolalar</a>
+        <a href="index.html#xizmatlar">Xizmatlar</a>
+        <a href="index.html#aloqa" class="btn-primary btn-sm">Konsultatsiya olish</a>
+      </nav>
+    </div>
+  </div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+</header>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+      <a href="index.html#home">Bosh sahifa</a>
+      <span class="sep">/</span>
+      <a href="index.html#maqolalar">Maqolalar</a>
+      <span class="sep">/</span>
+      <span id="breadcrumbCat">Facebook</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="article-header">
+      <div class="article-badge-row">
+        <span class="cat-badge facebook" id="articleCategoryBadge">Facebook</span>
+        <span class="article-date-time" id="articleReadTime">⏱ 7 daqiqa o‘qish</span>
+      </div>
+      <h1 class="article-title" id="articleTitle">2026-yilning birinchi yarmi bo‘yicha Facebook va Instagram kontent moderatsiyasi hisoboti</h1>
+
+      <div class="article-meta-bar">
+        <div class="author-info-box">
+          <img src="images/logo-mark.png" alt="Unique" class="author-img">
+          <div class="author-details">
+            <span class="author-name" id="articleAuthor">Unique Media Buying</span>
+            <span class="article-date-time" id="articleDate">14-sentabr 2026</span>
+          </div>
+        </div>
+
+        <div class="article-actions">
+          <a href="https://t.me/share/url?url=https://unique.uz/maqola.html&text=Facebook+va+Instagram+moderatsiya+hisoboti" id="tgShareBtn" target="_blank" rel="noopener" class="share-btn tg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Ulashish
+          </a>
+          <button type="button" class="share-btn" id="copyLinkBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Nusxa olish
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="featured-image-wrap" id="featuredImageWrap">
+      <img src="https://cpa.rip/wp-content/uploads/2026/09/234512343-2.png" alt="Maqola rasmi" id="articleCoverImg">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body-content" id="articleBody">
+      <p class="lead-paragraph">Meta kompaniyasi 2026-yilning birinchi yarim yilligi (H1 2026) bo‘yicha Facebook va Instagram platformalarida kontent moderatsiyasi, blokirovkalar, apellatsiyalar, soxta akkauntlar va spamga qarshi kurash bo‘yicha rasmiy hisobotini e’lon qildi. Quyida media buyerlar va targetologlar uchun eng muhim tahlillar keltirilgan.</p>
+
+      <h2>1. Umumiy moderatsiya ko‘rsatkichlari</h2>
+      <p>Meta moderatsiya tizimi bir vaqtning o‘zida bir nechta yo‘nalishda ishlaydi. 2026-yilning birinchi yarmida:</p>
+      <ul>
+        <li><strong>Facebook’da:</strong> 487 million ta kontent birligi o‘chirildi (2025-yilning 2-yarmiga nisbatan <strong>8.1% kamaygan</strong>).</li>
+        <li><strong>Instagram’da:</strong> 213 million ta kontent birligi o‘chirildi (o‘tgan davrga nisbatan <strong>4.8% kamaygan</strong>).</li>
+      </ul>
+
+      <div class="table-responsive">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Davr (Period)</th>
+              <th>Facebook (O‘chirilgan kontent)</th>
+              <th>Instagram (O‘chirilgan kontent)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Q2 2026</strong></td>
+              <td>259 mln</td>
+              <td>102 mln</td>
+            </tr>
+            <tr>
+              <td><strong>Q1 2026</strong></td>
+              <td>228 mln</td>
+              <td>111 mln</td>
+            </tr>
+            <tr>
+              <td><strong>Q4 2025</strong></td>
+              <td>271 mln</td>
+              <td>137 mln</td>
+            </tr>
+            <tr>
+              <td><strong>Q3 2025</strong></td>
+              <td>259 mln</td>
+              <td>86.8 mln</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Meta qoidalarni qanchalik aniq qo‘llamoqda? (Xato blokirovkalar)</h2>
+      <p>Moderatsiya algoritmlarining aniqlik darajasi ko‘p hollarda 90% atrofida saqlanib qolmoqda. Biroq 2026-yilning 1-choragida (Q1) Facebook’da aniqlik darajasi <strong>85.19% – 87.02%</strong> gacha pasaygan (Instagram’da esa 91%+ barqaror bo‘lgan).</p>
+      
+      <div class="article-callout note">
+        <strong>💡 Soxta signallar (False positives — nohaq bloklar):</strong>
+        <p>2026-yilning birinchi yarmida tizim xatoligi sababli Facebook’da <strong>57.9 – 59.2 million</strong>, Instagram’da esa <strong>18.5 – 19.3 million</strong> kontent adashib cheklovga uchragan. Instagram’da noto‘g‘ri bloklashlar soni o‘tgan yilga nisbatan sezilarli darajada kamaygan.</p>
+      </div>
+
+      <h2>3. Adult (Kattalar uchun) kontent va apellatsiyalar</h2>
+      <p>Meta jinsiy xarakterdagi va taqiqlangan adult-kontentga nisbatan choralarni kuchaytirdi:</p>
+      <ul>
+        <li><strong>Facebook:</strong> 44.4 mln kontentga chora ko‘rildi (+34% o‘sish).</li>
+        <li><strong>Instagram:</strong> 24.2 mln kontentga chora ko‘rildi (+67% o‘sish).</li>
+      </ul>
+      <p>Ayniqsa, 2026-yilning 2-choragida keskin sakrash kuzatildi: birgina Q2 da Facebook’da 27.8 mln, Instagram’da 16.1 mln adult kontent cheklandi.</p>
+
+      <h3>Apellatsiyalar va qayta tiklash (Restored) statistikasi:</h3>
+      <div class="table-responsive">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Davr</th>
+              <th>Platforma</th>
+              <th>Apellatsiya berildi</th>
+              <th>Qayta tiklandi</th>
+              <th>Muvaffaqiyat ulushi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>H1 2026</strong></td>
+              <td><strong>Facebook</strong></td>
+              <td>1.32 mln</td>
+              <td>229 ming</td>
+              <td><span class="badge badge-warning">17.3%</span></td>
+            </tr>
+            <tr>
+              <td><strong>H1 2026</strong></td>
+              <td><strong>Instagram</strong></td>
+              <td>1.89 mln</td>
+              <td>266 ming</td>
+              <td><span class="badge badge-warning">14.1%</span></td>
+            </tr>
+            <tr>
+              <td>H2 2025</td>
+              <td>Facebook</td>
+              <td>2.09 mln</td>
+              <td>989 ming</td>
+              <td><span class="badge">47.3%</span></td>
+            </tr>
+            <tr>
+              <td>H2 2025</td>
+              <td>Instagram</td>
+              <td>1.49 mln</td>
+              <td>316 ming</td>
+              <td><span class="badge">21.2%</span></td>
+            </tr>
+            <tr>
+              <td>H1 2025</td>
+              <td>Facebook</td>
+              <td>4.90 mln</td>
+              <td>3.17 mln</td>
+              <td><span class="badge badge-success">64.7%</span></td>
+            </tr>
+            <tr>
+              <td>H1 2025</td>
+              <td>Instagram</td>
+              <td>3.00 mln</td>
+              <td>1.74 mln</td>
+              <td><span class="badge badge-success">58.0%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="article-callout alert">
+        <strong>⚠️ Muhim tendensiya:</strong>
+        <p>2025-yilda shikoyatlarning 58–64% qismi ijobiy qanoatlantirilgan bo‘lsa, 2026-yilda bu ko‘rsatkich <strong>14–17% gacha tushib ketdi</strong>. Ya’ni Meta o‘z qarorlarini qayta ko‘rib chiqishda ancha qat’iy va kamdan-kam hollarda blokni yechmoqda.</p>
+      </div>
+
+      <h2>4. Soxta (Feyk) akkauntlar</h2>
+      <p>2026-yilning birinchi yarmida Meta Facebook’da <strong>2.02 milliard</strong> dona soxta akkauntni blokladi (H2 2025-dagi 1.80 milliarddan ko‘p).</p>
+      <ul>
+        <li>Akkauntlarning <strong>99.9%</strong> qismi Meta sun’iy intellekti va algoritmlari tomonidan avtomatik aniqlangan, insoniy shikoyatlar ulushi esa bor-yo‘g‘i <strong>0.1%</strong> ni tashkil etgan.</li>
+        <li>Shuningdek, tizim har kuni ro‘yxatdan o‘tishga urinayotgan millionlab feyk akkauntlarni hali yaratilmasidanoq to‘xtatib qolmoqda.</li>
+      </ul>
+
+      <div class="article-callout tip">
+        <strong>🔍 Qiziqarli keys:</strong>
+        <p>Meta’ning <em>Adversarial Threat Report</em> hisobotida qayd etilishicha, Pokistonda 575 mingta oldindan tayyorlab qo‘yilgan nofaol akkauntlar "zaxirasi" fosh etilgan. Ular keyinchalik firibgarlik va noqonuniy sxemalarda foydalanish uchun saqlab kelingan.</p>
+      </div>
+
+      <h2>5. Spam bilan kurash</h2>
+      <p>Spam — bu sun’iy ravishda qamrovni oshirish, botlar va ko‘p sonli akkauntlar orqali bir xil kontentni ommalashtirishga urinishdir.</p>
+      <ul>
+        <li>2026-yilning 1-yarmida <strong>Facebook’da 162.9 mln</strong>, <strong>Instagram’da esa 97.7 mln</strong> spam holatlariga cheklov qo‘yildi.</li>
+        <li>Facebook’da o‘chirilgan spam hajmi 2025-yilning shu davriga nisbatan <strong>69% ga kamaygan</strong>.</li>
+      </ul>
+
+      <h2>💡 Arbitrajchilar va Media Buyerlar uchun amaliy xulosalar</h2>
+      <ol class="article-key-takeaways">
+        <li><strong>Apellatsiyalarga ortiqcha umid bog‘lamang:</strong> Bloklangan akkaunt yoki reklamalarni apellatsiya orqali qaytarish imkoniyati 4 barobarga qisqardi. Zaxira akkauntlar tizimini yo‘lga qo‘yish lozim.</li>
+        <li><strong>Sifatli farm va trust profillarga e’tibor bering:</strong> Meta AI algoritmlari feyk akkauntlarni inson shikoyatisiz 99.9% aniqlik bilan tutmoqda. Sifatli farm, trust va ishonchli rezident proksilar ahamiyati har qachongidan yuqori.</li>
+        <li><strong>Kreativlarda qat’iy filtrlash:</strong> Adult va trigger so‘zlarga ega kreativlar uchun neyrotarmoq tekshiruvi yanada kuchaytirilgan. Oq ro‘yxatdagi domenlar va toza lendlinglar ishlatilishi zarur.</li>
+      </ol>
+    </article>
+
+    <!-- Tags -->
+    <div class="article-tags-wrap" id="articleTagsWrap">
+      <a href="index.html#maqolalar" class="tag-item">#Facebook</a>
+      <a href="index.html#maqolalar" class="tag-item">#Instagram</a>
+      <a href="index.html#maqolalar" class="tag-item">#Meta</a>
+      <a href="index.html#maqolalar" class="tag-item">#Moderatsiya</a>
+      <a href="index.html#maqolalar" class="tag-item">#MediaBuying</a>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="article-cta-box">
+      <h3>Reklama kampaniyalaringizni professional darajaga ko'taring</h3>
+      <p>Meta, Google va Telegram reklamalarida budjetni to'g'ri taqsimlab, blokirovkalarsiz yuqori konversiyaga erishish uchun biz bilan bog'laning.</p>
+      <a href="index.html#aloqa" class="btn-primary" style="background:#fff; color:#1e3a8a; font-weight:700;">Bepul konsultatsiya olish</a>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related-section" id="relatedSection" style="display:none;">
+      <h3 class="related-title">O‘xshash maqolalar va tahlillar</h3>
+      <div class="related-grid" id="relatedGrid">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / totalHeight) * 100;
+    const bar = document.getElementById('scrollProgress');
+    if (bar) bar.style.width = progress + '%';
+  });
+
+  // Fetch article data
+  async function loadArticle() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug') || 'facebook-instagram-moderation-report-2026';
+
+    try {
+      const res = await fetch('/api/articles/' + encodeURIComponent(slug));
+      if (!res.ok) throw new Error('Maqola topilmadi');
+      const data = await res.json();
+      const article = data.article;
+
+      document.getElementById('pageTitle').textContent = article.title + ' — Unique Media Buying';
+      document.getElementById('pageDesc').setAttribute('content', article.excerpt);
+      document.getElementById('articleTitle').textContent = article.title;
+      document.getElementById('articleBody').innerHTML = article.content;
+      document.getElementById('articleAuthor').textContent = article.author || 'Unique Media Buying';
+      document.getElementById('articleReadTime').textContent = '⏱ ' + (article.read_time || '7 daqiqa');
+      document.getElementById('breadcrumbCat').textContent = article.category.toUpperCase();
+
+      const catBadge = document.getElementById('articleCategoryBadge');
+      catBadge.textContent = article.category.toUpperCase();
+      catBadge.className = 'cat-badge ' + article.category.toLowerCase();
+
+      // Date formatting
+      if (article.created_at) {
+        const d = new Date(article.created_at);
+        document.getElementById('articleDate').textContent = d.toLocaleDateString('uz-UZ', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      // Cover image
+      const coverImg = document.getElementById('articleCoverImg');
+      if (article.image_url) {
+        coverImg.src = article.image_url;
+      } else {
+        document.getElementById('featuredImageWrap').style.display = 'none';
+      }
+
+      // Tags
+      const tagsWrap = document.getElementById('articleTagsWrap');
+      if (Array.isArray(article.tags) && article.tags.length > 0) {
+        tagsWrap.innerHTML = article.tags.map(t => `<a href="index.html#maqolalar" class="tag-item">#${t}</a>`).join('');
+      } else {
+        tagsWrap.style.display = 'none';
+      }
+
+      // Share TG
+      const tgBtn = document.getElementById('tgShareBtn');
+      tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`;
+
+      // Copy link
+      document.getElementById('copyLinkBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          alert("Havola nusxalandi!");
+        });
+      });
+
+      // Related articles
+      if (data.related && data.related.length > 0) {
+        const grid = document.getElementById('relatedGrid');
+        grid.innerHTML = data.related.map(r => `
+          <a href="maqola.html?slug=${encodeURIComponent(r.slug)}" class="related-card">
+            ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}">` : ''}
+            <div class="related-card-content">
+              <h4 class="related-card-title">${r.title}</h4>
+              <div class="related-card-meta">${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()}</div>
+            </div>
+          </a>
+        `).join('');
+        document.getElementById('relatedSection').style.display = 'block';
+      }
+
+    } catch (err) {
+      document.getElementById('articleBody').innerHTML = `<p style="color:#ef4444; font-weight:600;">Maqolani yuklashda xatolik yuz berdi: ${err.message}</p>`;
+    }
+  }
+
+  loadArticle();
+</script>
+</body>
+</html>

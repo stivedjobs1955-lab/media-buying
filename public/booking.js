@@ -151,6 +151,8 @@
           confirmText.textContent = `${dateLabel}, soat ${selectedTime} — konsultatsiyangiz qabul qilindi. Google Meet havolasini tez orada Telegram/telefon orqali yuboramiz.`;
         }
         if (typeof fbq === 'function') fbq('track', 'Schedule');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'schedule_meeting', lead_id: currentLead.leadId, booking_date: selectedDate, booking_time: selectedTime });
       })
       .catch(() => {
         doneBtn.style.display = '';

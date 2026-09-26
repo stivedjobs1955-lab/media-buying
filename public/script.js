@@ -1,7 +1,10 @@
-// Meta Pixel — track outbound Telegram/phone clicks as "Contact"
+// Track outbound Telegram/phone clicks as "Contact" (Meta Pixel + GTM dataLayer)
 document.addEventListener('click', (e) => {
   const link = e.target.closest('a[href^="tel:"], a[href*="t.me/"]');
-  if (link && typeof fbq === 'function') fbq('track', 'Contact');
+  if (!link) return;
+  if (typeof fbq === 'function') fbq('track', 'Contact');
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'contact_click', contact_type: link.href.startsWith('tel:') ? 'phone' : 'telegram' });
 });
 
 // Mobile nav toggle
@@ -85,6 +88,8 @@ if (contactForm) {
         }
         if (formSuccess) formSuccess.classList.add('show');
         if (typeof fbq === 'function') fbq('track', 'Lead');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'generate_lead', lead_id: data.id });
         if (typeof window.openBookingModal === 'function') {
           window.openBookingModal({ leadId: data.id, name: payload.name, phone: payload.phone });
         }
@@ -231,3 +236,124 @@ faqItems.forEach((item) => {
     });
   }
 });
+
+// ==========================================================================
+// Articles & Filter System (CPA.RIP style)
+// ==========================================================================
+const articlesGrid = document.getElementById('articlesGrid');
+const categoryTabs = document.querySelectorAll('#articleCategoryTabs .cpa-tab');
+const searchInput = document.getElementById('articleSearchInput');
+
+let currentCategory = 'all';
+let currentSearch = '';
+let searchDebounceTimer = null;
+
+async function fetchAndRenderArticles() {
+  if (!articlesGrid) return;
+  
+  try {
+    const params = new URLSearchParams();
+    if (currentCategory && currentCategory !== 'all') {
+      params.set('category', currentCategory);
+    }
+    if (currentSearch.trim()) {
+      params.set('search', currentSearch.trim());
+    }
+
+    const res = await fetch('/api/articles?' + params.toString());
+    if (!res.ok) throw new Error('API offline');
+    const articles = await res.json();
+
+    if (!articles || articles.length === 0) {
+      const currentLang = localStorage.getItem('unique_lang') || 'uz';
+      const notFoundText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.notFound'])
+        ? TRANSLATIONS[currentLang]['articles.notFound']
+        : 'Maqolalar topilmadi.';
+      articlesGrid.innerHTML = `<div class="cpa-empty-state"><p>${notFoundText}</p></div>`;
+      return;
+    }
+
+    articlesGrid.innerHTML = articles.map((a) => {
+      const dateStr = a.created_at ? new Date(a.created_at).toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+      return `
+        <a href="maqola.html?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card reveal in" data-category="${a.category}">
+          <div class="cpa-card-thumb-wrap">
+            <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
+            <span class="cpa-badge-overlay">${a.category.toUpperCase()}</span>
+          </div>
+          <div class="cpa-card-body">
+            <h3 class="cpa-card-title">${a.title}</h3>
+            <p class="cpa-card-excerpt">${a.excerpt}</p>
+            <div class="cpa-card-footer">
+              <div class="cpa-author-info">
+                <img src="images/logo-mark.png" alt="Unique" class="cpa-author-avatar">
+                <span>${a.author || 'Unique'}</span>
+              </div>
+              <div class="cpa-meta-right">
+                <span>⏱ ${a.read_time || '5 daqiqa'}</span>
+                <span>•</span>
+                <span>${dateStr}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+
+  } catch (err) {
+    // Fallback for static viewing / client-side filtering of existing cards
+    const cards = articlesGrid.querySelectorAll('.cpa-article-card');
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const cardCat = card.getAttribute('data-category') || '';
+      const cardText = card.textContent.toLowerCase();
+      const matchCat = currentCategory === 'all' || cardCat.toLowerCase() === currentCategory.toLowerCase();
+      const matchSearch = !currentSearch.trim() || cardText.includes(currentSearch.trim().toLowerCase());
+      
+      if (matchCat && matchSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const emptyEl = articlesGrid.querySelector('.cpa-empty-state');
+    if (visibleCount === 0 && cards.length > 0) {
+      if (!emptyEl) {
+        const div = document.createElement('div');
+        div.className = 'cpa-empty-state';
+        div.innerHTML = '<p>Maqolalar topilmadi.</p>';
+        articlesGrid.appendChild(div);
+      }
+    } else if (emptyEl) {
+      emptyEl.remove();
+    }
+  }
+}
+
+if (categoryTabs.length > 0) {
+  categoryTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      categoryTabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentCategory = tab.getAttribute('data-cat') || 'all';
+      fetchAndRenderArticles();
+    });
+  });
+}
+
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => {
+      currentSearch = e.target.value;
+      fetchAndRenderArticles();
+    }, 300);
+  });
+}
+
+if (articlesGrid) {
+  fetchAndRenderArticles();
+}
+

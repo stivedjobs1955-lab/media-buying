@@ -18,6 +18,7 @@ app.use('/api/stats', require('./routes/stats'));
 app.use('/api/track', require('./routes/track'));
 app.use('/api/legal', require('./routes/legal'));
 app.use('/api/bookings', require('./routes/bookings'));
+app.use('/api/articles', require('./routes/articles'));
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
