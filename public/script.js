@@ -274,9 +274,11 @@ async function fetchAndRenderArticles() {
     }
 
     articlesGrid.innerHTML = articles.map((a) => {
-      const dateStr = a.created_at ? new Date(a.created_at).toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+      const d = a.created_at ? new Date(a.created_at) : new Date();
+      const m = d.toLocaleDateString('uz-UZ', { month: 'long', year: 'numeric' });
+      const dateStr = m.charAt(0).toUpperCase() + m.slice(1);
       return `
-        <a href="maqola.html?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card reveal in" data-category="${a.category}">
+        <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card reveal in" data-category="${a.category}">
           <div class="cpa-card-thumb-wrap">
             <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
             <span class="cpa-badge-overlay">${a.category.toUpperCase()}</span>

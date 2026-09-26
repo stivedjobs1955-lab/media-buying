@@ -248,7 +248,70 @@ function ensureSeedArticles() {
       'Unique Media Buying',
       '7 daqiqa',
       128,
-      new Date().toISOString()
+      '2026-09-14T09:00:00.000Z'
+    );
+  }
+
+  // Seed Article 2: Google Ads
+  const googleArticle = db.prepare('SELECT id FROM articles WHERE slug = ?').get('google-ads-pmax-roas-optimization-guide-2026');
+  if (!googleArticle) {
+    db.prepare(`
+      INSERT INTO articles (slug, title, excerpt, content, category, tags, image_url, author, read_time, views, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      'google-ads-pmax-roas-optimization-guide-2026',
+      'Google Ads Performance Max kampaniyalarida ROAS\'ni 3.8x ga ko‘tarish bo‘yicha qo‘llanma',
+      'Smart bidding signallari, salbiy kalit so‘zlar va e-commerce loyihalarida konversiya narxini 45% ga tushirish usullari.',
+      '<p class="lead-paragraph">Google Ads Performance Max kampaniyalari to‘g‘ri ma’lumotlar va aniq auditoriya signallari bilan oziqlantirilsa, an’anaviy qidiruv kampaniyalariga qaraganda ancha yuqori ROAS beradi.</p><h2>Asosiy optimallashtirish bosqichlari</h2><p>1. Konversiya qiymatini to‘g‘ri baholash.<br>2. First-party mijozlar bazasini yuklash.<br>3. Brand Exclusion ro‘yxatini yoqish.</p>',
+      'google',
+      JSON.stringify(['GoogleAds', 'PMax', 'ROAS', 'Performance', 'PPC']),
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+      'Unique Media Buying',
+      '6 daqiqa',
+      94,
+      '2026-09-10T12:00:00.000Z'
+    );
+  }
+
+  // Seed Article 3: Telegram Ads
+  const tgArticle = db.prepare('SELECT id FROM articles WHERE slug = ?').get('telegram-ads-conversion-scaling-strategies');
+  if (!tgArticle) {
+    db.prepare(`
+      INSERT INTO articles (slug, title, excerpt, content, category, tags, image_url, author, read_time, views, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      'telegram-ads-conversion-scaling-strategies',
+      'Telegram Ads rasmiy platformasida konversiyani 2 barobarga oshirish sirlari',
+      'Mavzuli kanallar bo‘yicha aniq target, bot orqali lidlarni qabul qilish va CPM narxini minimal ushlab turish bo‘yicha amaliy tajriba.',
+      '<p class="lead-paragraph">Telegram Ads o‘zbek va MDH bozorida eng toza va yuqori niyatli organik auditoriyani jalb qilish uchun eng kuchli instrumentlardan biriga aylandi.</p><h2>Targeting va Formatlar</h2><p>Telegram kanal va botlarga to‘g‘ridan-to‘g‘ri trafik yo‘naltirish orqali CPA narxini minimal darajada ushlab turish mumkin.</p>',
+      'telegram',
+      JSON.stringify(['TelegramAds', 'Target', 'Lidlar', 'Marketing']),
+      'https://images.unsplash.com/photo-1614680376593-902f749f7ffc?auto=format&fit=crop&w=800&q=80',
+      'Unique Media Buying',
+      '5 daqiqa',
+      112,
+      '2026-09-05T15:00:00.000Z'
+    );
+  }
+
+  // Seed Article 4: Ban prevention
+  const banArticle = db.prepare('SELECT id FROM articles WHERE slug = ?').get('facebook-ads-ban-prevention-antidetect-guide');
+  if (!banArticle) {
+    db.prepare(`
+      INSERT INTO articles (slug, title, excerpt, content, category, tags, image_url, author, read_time, views, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      'facebook-ads-ban-prevention-antidetect-guide',
+      'Facebook va Instagram\'da cheklovlarsiz ishlash: 2026-yilgi trust va anti-detect strategiyasi',
+      'Rezident proksilar, brauzer profillari va Business Manager strukturasini xavfsiz sozlash bo‘yicha qo‘llanma.',
+      '<p class="lead-paragraph">Meta algoritmlarining 2026-yildagi so‘nggi yangilanishlarida bitta qurilma yoki proksidagi shubhali harakat zanjir bo‘ylab barcha bog‘langan hisoblarni bloklashi mumkin.</p><h2>Qanday himoyalanish kerak?</h2><p>1. Har bir profil uchun alohida toza rezident proksi.<br>2. Fingerprint va WebRTC izolatsiyasi.<br>3. Ikki bosqichli 2FA xavfsizlik.</p>',
+      'facebook',
+      JSON.stringify(['Facebook', 'AntiDetect', 'Proksi', 'Arbitraj', 'Xavfsizlik']),
+      'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
+      'Unique Media Buying',
+      '8 daqiqa',
+      147,
+      '2026-08-28T10:00:00.000Z'
     );
   }
 }

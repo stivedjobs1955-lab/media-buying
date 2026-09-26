@@ -1145,3 +1145,24 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--ink-600);
 }
 
+@media (max-width: 640px) {
+  .cpa-articles-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .cpa-filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cpa-search-box {
+    width: 100%;
+    min-width: 0;
+  }
+  .cpa-card-title {
+    font-size: 1.05rem;
+  }
+  .cpa-card-body {
+    padding: 14px 16px;
+  }
+}
+
