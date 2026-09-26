@@ -109,8 +109,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="cpa-tab" data-cat="telegram">
           <span class="tab-icon">✈️</span> Telegram Ads
         </button>
-        <button type="button" class="cpa-tab" data-cat="cases">
-          <span class="tab-icon">💼</span> Keyslar & Tahlil
+        <button type="button" class="cpa-tab" data-cat="linkedin">
+          <span class="tab-icon">💼</span> LinkedIn Ads
+        </button>
+        <button type="button" class="cpa-tab" data-cat="x">
+          <span class="tab-icon">🐦</span> X (Twitter) Ads
         </button>
       </div>
 
@@ -245,11 +248,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="translations.js"></script>
 <script>
-  function formatMonthYear(dateStr) {
+  function formatArticleDate(dateStr) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
-    const m = d.toLocaleDateString('uz-UZ', { month: 'long', year: 'numeric' });
-    return m.charAt(0).toUpperCase() + m.slice(1);
+    if (isNaN(d.getTime())) return dateStr;
+    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+    return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
   }
 
   // Mobile nav toggle
@@ -296,7 +300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
 
       articlesGrid.innerHTML = articles.map((a) => {
-        const dateStr = formatMonthYear(a.created_at);
+        const dateStr = formatArticleDate(a.created_at);
         return `
           <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
             <div class="cpa-card-thumb-wrap">

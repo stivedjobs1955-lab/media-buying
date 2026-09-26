@@ -671,11 +671,12 @@
 </footer>
 
 <script>
-  function formatMonthYear(dateStr) {
+  function formatArticleDate(dateStr) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
-    const m = d.toLocaleDateString('uz-UZ', { month: 'long', year: 'numeric' });
-    return m.charAt(0).toUpperCase() + m.slice(1);
+    if (isNaN(d.getTime())) return dateStr;
+    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+    return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
   }
 
   // Reading progress bar
@@ -709,9 +710,9 @@
       catBadge.textContent = article.category.toUpperCase();
       catBadge.className = 'cat-badge ' + article.category.toLowerCase();
 
-      // Date formatting Month / Year
+      // Date formatting Exact Day Month Year
       if (article.created_at) {
-        document.getElementById('articleDate').textContent = formatMonthYear(article.created_at);
+        document.getElementById('articleDate').textContent = formatArticleDate(article.created_at);
       }
 
       // Cover image
@@ -749,7 +750,7 @@
             ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}" loading="lazy">` : ''}
             <div class="related-card-content">
               <h4 class="related-card-title">${r.title}</h4>
-              <div class="related-card-meta">⏱ ${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()} · ${formatMonthYear(r.created_at)}</div>
+              <div class="related-card-meta">⏱ ${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()} · ${formatArticleDate(r.created_at)}</div>
             </div>
           </a>
         `).join('');
