@@ -591,6 +591,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function openStudio() {
     if (!studioModal) return;
     studioModal.classList.add('open');
+    studioModal.classList.add('active');
+    studioModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     restoreDraftIfAvailable();
   }
@@ -598,6 +600,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function closeStudio() {
     if (!studioModal) return;
     studioModal.classList.remove('open');
+    studioModal.classList.remove('active');
+    studioModal.style.display = 'none';
     document.body.style.overflow = '';
   }
 

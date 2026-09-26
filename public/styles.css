@@ -1312,8 +1312,9 @@ button { font-family: inherit; cursor: pointer; }
   overflow-y: auto;
 }
 
+.studio-modal-overlay.open,
 .studio-modal-overlay.active {
-  display: flex;
+  display: flex !important;
 }
 
 .studio-modal-container {
