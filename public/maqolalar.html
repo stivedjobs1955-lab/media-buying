@@ -247,6 +247,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="translations.js"></script>
+<script src="articles-data.js"></script>
 <script>
   function formatArticleDate(dateStr) {
     if (!dateStr) return '';
@@ -274,9 +275,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let currentSearch = '';
   let searchDebounceTimer = null;
 
+  function renderArticlesList(articles) {
+    if (!articlesGrid) return;
+    if (!articles || articles.length === 0) {
+      const currentLang = localStorage.getItem('unique_lang') || 'uz';
+      const notFoundText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.notFound'])
+        ? TRANSLATIONS[currentLang]['articles.notFound']
+        : 'Maqolalar topilmadi.';
+      articlesGrid.innerHTML = `<div class="cpa-empty-state"><p>${notFoundText}</p></div>`;
+      return;
+    }
+
+    articlesGrid.innerHTML = articles.map((a) => {
+      const dateStr = formatArticleDate(a.created_at);
+      const catLabel = (a.category === 'facebook' ? 'FACEBOOK' : (a.category === 'google' ? 'GOOGLE ADS' : (a.category === 'telegram' ? 'TELEGRAM ADS' : (a.category === 'linkedin' ? 'LINKEDIN ADS' : (a.category === 'x' ? 'X ADS' : a.category.toUpperCase())))));
+      return `
+        <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
+          <div class="cpa-card-thumb-wrap">
+            <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
+            <span class="cpa-badge-overlay">${catLabel}</span>
+          </div>
+          <div class="cpa-card-body">
+            <h3 class="cpa-card-title">${a.title}</h3>
+            <p class="cpa-card-excerpt">${a.excerpt}</p>
+            <div class="cpa-card-footer">
+              <div class="cpa-author-info">
+                <img src="images/logo-mark.png" alt="Unique" class="cpa-author-avatar">
+                <span>${a.author || 'The Unique Media'}</span>
+              </div>
+              <div class="cpa-meta-right">
+                <span>⏱ ${a.read_time || '6 daqiqa'}</span>
+                <span>•</span>
+                <span>${dateStr}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  function filterLocalArticles() {
+    if (typeof ARTICLES_DATA === 'undefined') return [];
+    return ARTICLES_DATA.filter((a) => {
+      const matchCat = currentCategory === 'all' || a.category.toLowerCase() === currentCategory.toLowerCase();
+      const q = currentSearch.trim().toLowerCase();
+      const matchSearch = !q || a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) || (a.tags && JSON.stringify(a.tags).toLowerCase().includes(q));
+      return matchCat && matchSearch;
+    });
+  }
+
   async function fetchAndRenderArticles() {
     if (!articlesGrid) return;
+
+    // Fast direct render from client dataset (always shows all 40 articles)
+    if (typeof ARTICLES_DATA !== 'undefined' && ARTICLES_DATA.length > 0) {
+      const filtered = filterLocalArticles();
+      renderArticlesList(filtered);
+      return;
+    }
     
+    // Fallback to API if client dataset is not available
     try {
       const params = new URLSearchParams();
       if (currentCategory && currentCategory !== 'all') {
@@ -289,72 +348,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const res = await fetch('/api/articles?' + params.toString());
       if (!res.ok) throw new Error('API offline');
       const articles = await res.json();
-
-      if (!articles || articles.length === 0) {
-        const currentLang = localStorage.getItem('unique_lang') || 'uz';
-        const notFoundText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.notFound'])
-          ? TRANSLATIONS[currentLang]['articles.notFound']
-          : 'Maqolalar topilmadi.';
-        articlesGrid.innerHTML = `<div class="cpa-empty-state"><p>${notFoundText}</p></div>`;
-        return;
-      }
-
-      articlesGrid.innerHTML = articles.map((a) => {
-        const dateStr = formatArticleDate(a.created_at);
-        return `
-          <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
-            <div class="cpa-card-thumb-wrap">
-              <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
-              <span class="cpa-badge-overlay">${a.category.toUpperCase()}</span>
-            </div>
-            <div class="cpa-card-body">
-              <h3 class="cpa-card-title">${a.title}</h3>
-              <p class="cpa-card-excerpt">${a.excerpt}</p>
-              <div class="cpa-card-footer">
-                <div class="cpa-author-info">
-                  <img src="images/logo-mark.png" alt="Unique" class="cpa-author-avatar">
-                  <span>${a.author || 'Unique'}</span>
-                </div>
-                <div class="cpa-meta-right">
-                  <span>⏱ ${a.read_time || '5 daqiqa'}</span>
-                  <span>•</span>
-                  <span>${dateStr}</span>
-                </div>
-              </div>
-            </div>
-          </a>
-        `;
-      }).join('');
-
+      renderArticlesList(articles);
     } catch (err) {
-      // Client-side fallback filter
-      const cards = articlesGrid.querySelectorAll('.cpa-article-card');
-      let visibleCount = 0;
-      cards.forEach((card) => {
-        const cardCat = card.getAttribute('data-category') || '';
-        const cardText = card.textContent.toLowerCase();
-        const matchCat = currentCategory === 'all' || cardCat.toLowerCase() === currentCategory.toLowerCase();
-        const matchSearch = !currentSearch.trim() || cardText.includes(currentSearch.trim().toLowerCase());
-        
-        if (matchCat && matchSearch) {
-          card.style.display = 'flex';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      const emptyEl = articlesGrid.querySelector('.cpa-empty-state');
-      if (visibleCount === 0 && cards.length > 0) {
-        if (!emptyEl) {
-          const div = document.createElement('div');
-          div.className = 'cpa-empty-state';
-          div.innerHTML = '<p>Maqolalar topilmadi.</p>';
-          articlesGrid.appendChild(div);
-        }
-      } else if (emptyEl) {
-        emptyEl.remove();
-      }
+      // Empty state
+      renderArticlesList([]);
     }
   }
 
@@ -375,7 +372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       searchDebounceTimer = setTimeout(() => {
         currentSearch = e.target.value;
         fetchAndRenderArticles();
-      }, 300);
+      }, 200);
     });
   }
 

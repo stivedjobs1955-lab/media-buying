@@ -676,6 +676,8 @@
   </div>
 </footer>
 
+<script src="translations.js"></script>
+<script src="articles-data.js"></script>
 <script>
   function formatArticleDate(dateStr) {
     if (!dateStr) return '';
@@ -693,78 +695,98 @@
     if (bar) bar.style.width = progress + '%';
   });
 
+  function applyArticleData(article, relatedArticles) {
+    if (!article) return;
+
+    document.getElementById('pageTitle').textContent = article.title + ' — The Unique Media';
+    document.getElementById('pageDesc').setAttribute('content', article.excerpt);
+    document.getElementById('articleTitle').textContent = article.title;
+    document.getElementById('articleBody').innerHTML = article.content;
+    document.getElementById('articleAuthor').textContent = article.author || 'The Unique Media';
+    document.getElementById('articleReadTime').textContent = '⏱ ' + (article.read_time || '7 daqiqa');
+    document.getElementById('breadcrumbCat').textContent = article.category.toUpperCase();
+
+    const catBadge = document.getElementById('articleCategoryBadge');
+    catBadge.textContent = article.category.toUpperCase();
+    catBadge.className = 'cat-badge ' + article.category.toLowerCase();
+
+    // Date formatting Exact Day Month Year
+    if (article.created_at) {
+      document.getElementById('articleDate').textContent = formatArticleDate(article.created_at);
+    }
+
+    // Cover image
+    const coverImg = document.getElementById('articleCoverImg');
+    if (article.image_url) {
+      coverImg.src = article.image_url;
+      document.getElementById('featuredImageWrap').style.display = 'flex';
+    } else {
+      document.getElementById('featuredImageWrap').style.display = 'none';
+    }
+
+    // Tags
+    const tagsWrap = document.getElementById('articleTagsWrap');
+    let tagsList = Array.isArray(article.tags) ? article.tags : [];
+    if (typeof article.tags === 'string') {
+      try { tagsList = JSON.parse(article.tags); } catch { tagsList = article.tags.split(','); }
+    }
+    if (tagsList.length > 0) {
+      tagsWrap.innerHTML = tagsList.map(t => `<a href="/maqolalar" class="tag-item">#${String(t).trim()}</a>`).join('');
+      tagsWrap.style.display = 'flex';
+    } else {
+      tagsWrap.style.display = 'none';
+    }
+
+    // Share TG
+    const tgBtn = document.getElementById('tgShareBtn');
+    tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`;
+
+    // Copy link
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Havola nusxalandi!");
+      });
+    });
+
+    // Related articles
+    if (relatedArticles && relatedArticles.length > 0) {
+      const grid = document.getElementById('relatedGrid');
+      grid.innerHTML = relatedArticles.map(r => `
+        <a href="/maqola?slug=${encodeURIComponent(r.slug)}" class="related-card">
+          ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}" loading="lazy">` : ''}
+          <div class="related-card-content">
+            <h4 class="related-card-title">${r.title}</h4>
+            <div class="related-card-meta">⏱ ${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()} · ${formatArticleDate(r.created_at)}</div>
+          </div>
+        </a>
+      `).join('');
+      document.getElementById('relatedSection').style.display = 'block';
+    }
+  }
+
   // Fetch article data
   async function loadArticle() {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug') || 'facebook-instagram-moderation-report-2026';
 
+    // 1. Check client-side dataset first
+    if (typeof ARTICLES_DATA !== 'undefined' && ARTICLES_DATA.length > 0) {
+      const found = ARTICLES_DATA.find(a => a.slug === slug);
+      if (found) {
+        const related = ARTICLES_DATA.filter(a => a.slug !== slug).slice(0, 3);
+        applyArticleData(found, related);
+        return;
+      }
+    }
+
+    // 2. Fallback to API
     try {
       const res = await fetch('/api/articles/' + encodeURIComponent(slug));
       if (!res.ok) throw new Error('Maqola topilmadi');
       const data = await res.json();
-      const article = data.article;
-
-      document.getElementById('pageTitle').textContent = article.title + ' — Unique Media Buying';
-      document.getElementById('pageDesc').setAttribute('content', article.excerpt);
-      document.getElementById('articleTitle').textContent = article.title;
-      document.getElementById('articleBody').innerHTML = article.content;
-      document.getElementById('articleAuthor').textContent = article.author || 'Unique Media Buying';
-      document.getElementById('articleReadTime').textContent = '⏱ ' + (article.read_time || '7 daqiqa');
-      document.getElementById('breadcrumbCat').textContent = article.category.toUpperCase();
-
-      const catBadge = document.getElementById('articleCategoryBadge');
-      catBadge.textContent = article.category.toUpperCase();
-      catBadge.className = 'cat-badge ' + article.category.toLowerCase();
-
-      // Date formatting Exact Day Month Year
-      if (article.created_at) {
-        document.getElementById('articleDate').textContent = formatArticleDate(article.created_at);
-      }
-
-      // Cover image
-      const coverImg = document.getElementById('articleCoverImg');
-      if (article.image_url) {
-        coverImg.src = article.image_url;
-      } else {
-        document.getElementById('featuredImageWrap').style.display = 'none';
-      }
-
-      // Tags
-      const tagsWrap = document.getElementById('articleTagsWrap');
-      if (Array.isArray(article.tags) && article.tags.length > 0) {
-        tagsWrap.innerHTML = article.tags.map(t => `<a href="/maqolalar" class="tag-item">#${t}</a>`).join('');
-      } else {
-        tagsWrap.style.display = 'none';
-      }
-
-      // Share TG
-      const tgBtn = document.getElementById('tgShareBtn');
-      tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`;
-
-      // Copy link
-      document.getElementById('copyLinkBtn').addEventListener('click', () => {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          alert("Havola nusxalandi!");
-        });
-      });
-
-      // Related articles
-      if (data.related && data.related.length > 0) {
-        const grid = document.getElementById('relatedGrid');
-        grid.innerHTML = data.related.map(r => `
-          <a href="/maqola?slug=${encodeURIComponent(r.slug)}" class="related-card">
-            ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}" loading="lazy">` : ''}
-            <div class="related-card-content">
-              <h4 class="related-card-title">${r.title}</h4>
-              <div class="related-card-meta">⏱ ${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()} · ${formatArticleDate(r.created_at)}</div>
-            </div>
-          </a>
-        `).join('');
-        document.getElementById('relatedSection').style.display = 'block';
-      }
-
+      applyArticleData(data.article, data.related);
     } catch (err) {
-      // Keep pre-rendered content on fallback
+      // Keep pre-rendered content
     }
   }
 
