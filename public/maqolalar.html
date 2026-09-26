@@ -61,7 +61,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
+    <a href="/#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
     
     <div class="header-right-group">
       <div class="lang-switch" id="langSwitch">
@@ -70,10 +70,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html#home">Bosh sahifa</a>
-        <a href="index.html#xizmatlar" data-i18n="nav.services">Xizmatlar</a>
-        <a href="maqolalar.html" class="active" style="color: var(--flow-600); font-weight:700;" data-i18n="nav.articles">Maqolalar</a>
-        <a href="index.html#aloqa" class="btn-primary btn-sm" data-i18n="nav.cta">Konsultatsiya olish</a>
+        <a href="/">Bosh sahifa</a>
+        <a href="/#xizmatlar" data-i18n="nav.services">Xizmatlar</a>
+        <a href="/maqolalar" class="active" style="color: var(--flow-600); font-weight:700;" data-i18n="nav.articles">Maqolalar</a>
+        <a href="/#aloqa" class="btn-primary btn-sm" data-i18n="nav.cta">Konsultatsiya olish</a>
       </nav>
 
       <button class="nav-toggle" id="navToggle" aria-label="Menyu">
@@ -122,7 +122,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Articles Grid -->
     <div class="cpa-articles-grid" id="articlesGrid">
-      <a href="maqola.html?slug=facebook-instagram-moderation-report-2026" class="cpa-article-card in" data-category="facebook">
+      <a href="/maqola?slug=facebook-instagram-moderation-report-2026" class="cpa-article-card in" data-category="facebook">
         <div class="cpa-card-thumb-wrap">
           <img src="https://cpa.rip/wp-content/uploads/2026/09/234512343-2.png" alt="Facebook va Instagram kontent moderatsiyasi hisoboti" loading="lazy">
           <span class="cpa-badge-overlay">FACEBOOK</span>
@@ -150,7 +150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 data-i18n="cta.title">Reklama byudjetingizni natijaga aylantirishga tayyormisiz?</h2>
       <p data-i18n="cta.text">Bepul konsultatsiyada joriy kampaniyalaringizni tahlil qilib beramiz va qayerda pul isrof bo'layotganini ko'rsatamiz.</p>
       <div class="row">
-        <a href="index.html#aloqa" class="btn-primary cta-white"><span data-i18n="hero.ctaPrimary">Konsultatsiya olish</span>
+        <a href="/#aloqa" class="btn-primary cta-white"><span data-i18n="hero.ctaPrimary">Konsultatsiya olish</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
         <a href="https://t.me/otabek_insights" target="_blank" rel="noopener" class="btn-secondary cta-outline" data-i18n="founder.telegramLink">Telegram orqali yozish</a>
@@ -165,7 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="footer-bottom">
       <p class="footer-copy" data-i18n="footer.rights">© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.</p>
       <div class="footer-bottom-links">
-        <a href="oferta.html" target="_blank" rel="noopener" data-i18n="footer.offer">Ommaviy oferta</a>
+        <a href="/oferta" target="_blank" rel="noopener" data-i18n="footer.offer">Ommaviy oferta</a>
         <span class="footer-dot">•</span>
         <span data-i18n="footer.city">Toshkent, O'zbekiston</span>
       </div>
@@ -221,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       articlesGrid.innerHTML = articles.map((a) => {
         const dateStr = a.created_at ? new Date(a.created_at).toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
         return `
-          <a href="maqola.html?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
+          <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
             <div class="cpa-card-thumb-wrap">
               <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
               <span class="cpa-badge-overlay">${a.category.toUpperCase()}</span>

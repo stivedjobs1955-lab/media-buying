@@ -20,6 +20,20 @@ app.use('/api/legal', require('./routes/legal'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/articles', require('./routes/articles'));
 
+// Clean URL routes (without .html)
+app.get('/maqolalar', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'maqolalar.html'));
+});
+app.get('/maqola', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'maqola.html'));
+});
+app.get('/maqola/:slug', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'maqola.html'));
+});
+app.get('/oferta', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'oferta.html'));
+});
+
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 

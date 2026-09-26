@@ -394,14 +394,14 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
+    <a href="/#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
     
     <div class="header-right-group">
       <nav class="nav-links">
-        <a href="index.html#home">Bosh sahifa</a>
-        <a href="maqolalar.html">Maqolalar</a>
-        <a href="index.html#xizmatlar">Xizmatlar</a>
-        <a href="index.html#aloqa" class="btn-primary btn-sm">Konsultatsiya olish</a>
+        <a href="/">Bosh sahifa</a>
+        <a href="/maqolalar">Maqolalar</a>
+        <a href="/#xizmatlar">Xizmatlar</a>
+        <a href="/#aloqa" class="btn-primary btn-sm">Konsultatsiya olish</a>
       </nav>
     </div>
   </div>
@@ -413,9 +413,9 @@
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb-nav">
-      <a href="index.html#home">Bosh sahifa</a>
+      <a href="/">Bosh sahifa</a>
       <span class="sep">/</span>
-      <a href="maqolalar.html">Maqolalar</a>
+      <a href="/maqolalar">Maqolalar</a>
       <span class="sep">/</span>
       <span id="breadcrumbCat">Facebook</span>
     </nav>
@@ -620,7 +620,7 @@
     <div class="article-cta-box">
       <h3>Reklama kampaniyalaringizni professional darajaga ko'taring</h3>
       <p>Meta, Google va Telegram reklamalarida budjetni to'g'ri taqsimlab, blokirovkalarsiz yuqori konversiyaga erishish uchun biz bilan bog'laning.</p>
-      <a href="index.html#aloqa" class="btn-primary" style="background:#fff; color:#1e3a8a; font-weight:700;">Bepul konsultatsiya olish</a>
+      <a href="/#aloqa" class="btn-primary" style="background:#fff; color:#1e3a8a; font-weight:700;">Bepul konsultatsiya olish</a>
     </div>
 
     <!-- Related Articles -->
@@ -638,6 +638,9 @@
   <div class="container">
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.</p>
+      <div class="footer-bottom-links">
+        <a href="/oferta" target="_blank" rel="noopener">Ommaviy oferta</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -691,7 +694,7 @@
       // Tags
       const tagsWrap = document.getElementById('articleTagsWrap');
       if (Array.isArray(article.tags) && article.tags.length > 0) {
-        tagsWrap.innerHTML = article.tags.map(t => `<a href="index.html#maqolalar" class="tag-item">#${t}</a>`).join('');
+        tagsWrap.innerHTML = article.tags.map(t => `<a href="/maqolalar" class="tag-item">#${t}</a>`).join('');
       } else {
         tagsWrap.style.display = 'none';
       }
@@ -711,7 +714,7 @@
       if (data.related && data.related.length > 0) {
         const grid = document.getElementById('relatedGrid');
         grid.innerHTML = data.related.map(r => `
-          <a href="maqola.html?slug=${encodeURIComponent(r.slug)}" class="related-card">
+          <a href="/maqola?slug=${encodeURIComponent(r.slug)}" class="related-card">
             ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}">` : ''}
             <div class="related-card-content">
               <h4 class="related-card-title">${r.title}</h4>
@@ -723,7 +726,7 @@
       }
 
     } catch (err) {
-      document.getElementById('articleBody').innerHTML = `<p style="color:#ef4444; font-weight:600;">Maqolani yuklashda xatolik yuz berdi: ${err.message}</p>`;
+      // Keep pre-rendered content on fallback
     }
   }
 
