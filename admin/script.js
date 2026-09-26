@@ -162,6 +162,7 @@ function loadAll() {
   loadLeads();
   loadDay(document.getElementById('dayFilterInput').value || todayStr());
   loadBookings();
+  loadArticles();
 }
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
@@ -517,4 +518,266 @@ function renderBookingsTable() {
       authFetch(`/api/bookings/${id}`, { method: 'DELETE' }).then(() => loadBookings());
     });
   });
+}
+
+/* ---------------- Articles Moderation ---------------- */
+let allArticlesList = [];
+let activeArticleFilter = 'all';
+let currentPreviewArticleId = null;
+
+const articleStatusTabs = document.getElementById('articleStatusTabs');
+const articlesTableBody = document.getElementById('articlesTableBody');
+const articlePreviewModal = document.getElementById('articlePreviewModal');
+const closeArticlePreviewBtn = document.getElementById('closeArticlePreviewBtn');
+const closeArticlePreviewBtnBottom = document.getElementById('closeArticlePreviewBtnBottom');
+const modalApproveBtn = document.getElementById('modalApproveBtn');
+const modalRejectBtn = document.getElementById('modalRejectBtn');
+
+if (articleStatusTabs) {
+  articleStatusTabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.status-tab');
+    if (!btn) return;
+    activeArticleFilter = btn.dataset.status;
+    Array.from(articleStatusTabs.children).forEach((c) => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderArticlesTable();
+  });
+}
+
+function loadArticles() {
+  authFetch('/api/articles/admin/all')
+    .then((r) => r.json())
+    .then((articles) => {
+      allArticlesList = Array.isArray(articles) ? articles : [];
+      updateArticleCountsAndTable();
+    })
+    .catch(() => {
+      // Fallback to localStorage user articles if offline/testing
+      let localUserArticles = [];
+      try {
+        localUserArticles = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+      } catch(e) {
+        localUserArticles = [];
+      }
+      allArticlesList = localUserArticles;
+      updateArticleCountsAndTable();
+    });
+}
+
+function updateArticleCountsAndTable() {
+  const pendingCount = allArticlesList.filter((a) => a.status === 'pending').length;
+  const publishedCount = allArticlesList.filter((a) => a.status === 'published' || !a.status).length;
+  const rejectedCount = allArticlesList.filter((a) => a.status === 'rejected').length;
+
+  const statPending = document.getElementById('statPendingArticles');
+  if (statPending) statPending.textContent = pendingCount;
+
+  const badgePending = document.getElementById('pendingArticlesBadge');
+  if (badgePending) badgePending.textContent = `${pendingCount} ta kutilmoqda`;
+
+  const elAll = document.getElementById('countArtAll');
+  if (elAll) elAll.textContent = allArticlesList.length;
+  const elPending = document.getElementById('countArtPending');
+  if (elPending) elPending.textContent = pendingCount;
+  const elPublished = document.getElementById('countArtPublished');
+  if (elPublished) elPublished.textContent = publishedCount;
+  const elRejected = document.getElementById('countArtRejected');
+  if (elRejected) elRejected.textContent = rejectedCount;
+
+  renderArticlesTable();
+}
+
+function renderArticlesTable() {
+  if (!articlesTableBody) return;
+
+  let filtered = allArticlesList;
+  if (activeArticleFilter === 'pending') {
+    filtered = allArticlesList.filter((a) => a.status === 'pending');
+  } else if (activeArticleFilter === 'published') {
+    filtered = allArticlesList.filter((a) => a.status === 'published' || !a.status);
+  } else if (activeArticleFilter === 'rejected') {
+    filtered = allArticlesList.filter((a) => a.status === 'rejected');
+  }
+
+  if (filtered.length === 0) {
+    articlesTableBody.innerHTML = '<tr class="empty-row"><td colspan="7" style="text-align:center; padding:30px; color:var(--ink-400);">Ushbu bo\'limda hozircha maqolalar yo\'q</td></tr>';
+    return;
+  }
+
+  articlesTableBody.innerHTML = filtered.map((a) => {
+    const status = a.status || 'published';
+    const statusLabel = status === 'pending' ? '⏳ Kutilmoqda' : (status === 'published' ? '✅ Tasdiqlangan' : '❌ Rad etilgan');
+    const statusClass = status === 'pending' ? 'pending' : (status === 'published' ? 'published' : 'rejected');
+    const dateStr = a.created_at ? new Date(a.created_at).toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
+    const catUpper = (a.category || 'FACEBOOK').toUpperCase();
+
+    return `
+      <tr data-id="${a.id}">
+        <td>
+          <img src="${a.image_url || '/images/logo-mark.png'}" alt="Thumb" class="article-thumb-img">
+        </td>
+        <td>
+          <div class="article-title-cell">${escapeHtml(a.title)}</div>
+          <small style="color:var(--ink-400); font-size:0.75rem;">Slug: ${escapeHtml(a.slug || '')}</small>
+        </td>
+        <td>
+          <span style="font-size:0.75rem; font-weight:700; color:var(--flow-700); background:var(--flow-50); padding:2px 8px; border-radius:4px;">${catUpper}</span>
+        </td>
+        <td>
+          <div class="article-author-meta">
+            <img src="${a.author_image || '/images/logo-mark.png'}" alt="Avatar">
+            <span>${escapeHtml(a.author || 'The Unique Media')}</span>
+          </div>
+        </td>
+        <td style="font-size:0.8rem; color:var(--ink-600);">${dateStr}</td>
+        <td>
+          <span class="status-badge ${statusClass}">${statusLabel}</span>
+        </td>
+        <td style="text-align:right; white-space:nowrap;">
+          <button type="button" class="btn-preview preview-art-btn" data-id="${a.id}" title="To'liq o'qish va ko'rish">👁 Ko'rish</button>
+          ${status === 'pending' || status === 'rejected' ? `<button type="button" class="btn-approve approve-art-btn" data-id="${a.id}" title="Tasdiqlash">✅ Tasdiqlash</button>` : ''}
+          ${status === 'pending' || status === 'published' ? `<button type="button" class="btn-reject reject-art-btn" data-id="${a.id}" title="Rad etish">❌ Rad etish</button>` : ''}
+          <button type="button" class="btn-danger delete-art-btn" data-id="${a.id}" style="padding:5px 8px; font-size:0.75rem;" title="O'chirish">🗑</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  // Action listeners
+  articlesTableBody.querySelectorAll('.preview-art-btn').forEach((btn) => {
+    btn.addEventListener('click', () => openArticlePreview(btn.dataset.id));
+  });
+
+  articlesTableBody.querySelectorAll('.approve-art-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setArticleStatus(btn.dataset.id, 'published'));
+  });
+
+  articlesTableBody.querySelectorAll('.reject-art-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setArticleStatus(btn.dataset.id, 'rejected'));
+  });
+
+  articlesTableBody.querySelectorAll('.delete-art-btn').forEach((btn) => {
+    btn.addEventListener('click', () => deleteArticle(btn.dataset.id));
+  });
+}
+
+function openArticlePreview(id) {
+  currentPreviewArticleId = id;
+  const localFound = allArticlesList.find((x) => String(x.id) === String(id));
+
+  authFetch(`/api/articles/admin/${id}`)
+    .then((r) => r.json())
+    .then((art) => renderPreviewModalData(art))
+    .catch(() => {
+      if (localFound) renderPreviewModalData(localFound);
+    });
+
+  if (localFound) renderPreviewModalData(localFound);
+  articlePreviewModal.classList.remove('hidden');
+}
+
+function renderPreviewModalData(art) {
+  document.getElementById('prevModalTitle').textContent = art.title || '';
+  document.getElementById('prevModalExcerpt').textContent = art.excerpt || '';
+  document.getElementById('prevModalAuthor').textContent = art.author || 'The Unique Media';
+  document.getElementById('prevModalAuthorImg').src = art.author_image || '/images/logo-mark.png';
+  document.getElementById('prevModalDate').textContent = art.created_at ? new Date(art.created_at).toLocaleDateString('uz-UZ') : '';
+  document.getElementById('prevModalReadTime').textContent = `⏱ ${art.read_time || '5 daqiqa'}`;
+  document.getElementById('prevModalCatBadge').textContent = (art.category || 'FACEBOOK').toUpperCase();
+  document.getElementById('prevModalBody').innerHTML = art.content || '<p>Matn mavjud emas</p>';
+
+  const coverWrap = document.getElementById('prevModalCoverWrap');
+  const coverImg = document.getElementById('prevModalCover');
+  if (art.image_url) {
+    coverImg.src = art.image_url;
+    coverWrap.style.display = 'block';
+  } else {
+    coverWrap.style.display = 'none';
+  }
+
+  const statusBadge = document.getElementById('prevModalStatusBadge');
+  const status = art.status || 'published';
+  statusBadge.className = `status-badge ${status}`;
+  statusBadge.textContent = status === 'pending' ? '⏳ KUTILMOQDA' : (status === 'published' ? '✅ TASDIQLANGAN' : '❌ RAD ETILGAN');
+}
+
+function closeArticlePreview() {
+  articlePreviewModal.classList.add('hidden');
+  currentPreviewArticleId = null;
+}
+
+if (closeArticlePreviewBtn) closeArticlePreviewBtn.addEventListener('click', closeArticlePreview);
+if (closeArticlePreviewBtnBottom) closeArticlePreviewBtnBottom.addEventListener('click', closeArticlePreview);
+
+if (modalApproveBtn) {
+  modalApproveBtn.addEventListener('click', () => {
+    if (currentPreviewArticleId) {
+      setArticleStatus(currentPreviewArticleId, 'published');
+      closeArticlePreview();
+    }
+  });
+}
+
+if (modalRejectBtn) {
+  modalRejectBtn.addEventListener('click', () => {
+    if (currentPreviewArticleId) {
+      setArticleStatus(currentPreviewArticleId, 'rejected');
+      closeArticlePreview();
+    }
+  });
+}
+
+function setArticleStatus(id, newStatus) {
+  authFetch(`/api/articles/${id}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: newStatus })
+  })
+    .then((r) => r.json())
+    .then(() => {
+      updateLocalArticleStatus(id, newStatus);
+    })
+    .catch(() => {
+      updateLocalArticleStatus(id, newStatus);
+    });
+}
+
+function updateLocalArticleStatus(id, newStatus) {
+  const item = allArticlesList.find((x) => String(x.id) === String(id));
+  if (item) item.status = newStatus;
+
+  try {
+    let local = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+    const lItem = local.find((x) => String(x.id) === String(id));
+    if (lItem) {
+      lItem.status = newStatus;
+      localStorage.setItem('unique_user_articles', JSON.stringify(local));
+    }
+  } catch(e) {}
+
+  updateArticleCountsAndTable();
+}
+
+function deleteArticle(id) {
+  if (!confirm("Haqiqatan ham ushbu maqolani o'chirmoqchimisiz?")) return;
+
+  authFetch(`/api/articles/${id}`, { method: 'DELETE' })
+    .then(() => {
+      removeLocalArticle(id);
+    })
+    .catch(() => {
+      removeLocalArticle(id);
+    });
+}
+
+function removeLocalArticle(id) {
+  allArticlesList = allArticlesList.filter((x) => String(x.id) !== String(id));
+
+  try {
+    let local = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+    local = local.filter((x) => String(x.id) !== String(id));
+    localStorage.setItem('unique_user_articles', JSON.stringify(local));
+  } catch(e) {}
+
+  updateArticleCountsAndTable();
 }

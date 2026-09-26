@@ -72,6 +72,20 @@ async function notifyNewLead(lead) {
   await sendTelegramMessage(text);
 }
 
+async function notifyNewArticle(article) {
+  const time = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
+
+  const text = `📝 <b>YANGI MAQOLA / KEYS MODERATSIYAGA YUBORILDI!</b>\n\n` +
+    `📌 <b>Sarlavha:</b> ${escapeHtml(article.title || '—')}\n` +
+    `👤 <b>Muallif:</b> ${escapeHtml(article.author || '—')}\n` +
+    `📁 <b>Kategoriya:</b> ${escapeHtml(article.category ? article.category.toUpperCase() : '—')}\n` +
+    `🕒 <b>O'qish vaqti:</b> ${escapeHtml(article.read_time || '5 daqiqa')}\n` +
+    `📅 <b>Vaqt:</b> ${time}\n\n` +
+    `⚡️ <i>Tasdiqlash yoki rad etish uchun admin panelga kiring.</i>`;
+
+  await sendTelegramMessage(text);
+}
+
 // Umumiy admin xabarnomasi — booking (konsultatsiya band qilish) uchun ishlatiladi
 async function notifyAdmin(text) {
   await sendTelegramMessage(text);
@@ -84,4 +98,4 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-module.exports = { sendTelegramMessage, notifyNewLead, notifyAdmin };
+module.exports = { sendTelegramMessage, notifyNewLead, notifyNewArticle, notifyAdmin };

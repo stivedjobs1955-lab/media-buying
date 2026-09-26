@@ -480,6 +480,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     articlesGrid.innerHTML = articles.map((a) => {
       const dateStr = formatArticleDate(a.created_at);
       const catLabel = (a.category === 'facebook' ? 'FACEBOOK' : (a.category === 'google' ? 'GOOGLE ADS' : (a.category === 'telegram' ? 'TELEGRAM ADS' : (a.category === 'linkedin' ? 'LINKEDIN ADS' : (a.category === 'x' ? 'X ADS' : a.category.toUpperCase())))));
+      const isPending = a.status === 'pending';
+      const statusBadge = isPending ? '<span style="background:#fef3c7; color:#b45309; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; display:inline-block; margin-bottom:6px;">⏳ Moderatsiyada</span>' : '';
+      
       return `
         <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
           <div class="cpa-card-thumb-wrap">
@@ -487,6 +490,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="cpa-badge-overlay">${catLabel}</span>
           </div>
           <div class="cpa-card-body">
+            ${statusBadge}
             <h3 class="cpa-card-title">${a.title}</h3>
             <p class="cpa-card-excerpt">${a.excerpt}</p>
             <div class="cpa-card-footer">
@@ -1036,6 +1040,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         image_url: cover,
         created_at: new Date().toISOString(),
         tags: tagsArray,
+        status: 'pending',
         content: content
       };
 
@@ -1052,7 +1057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // 2. Clear draft
       localStorage.removeItem('unique_article_draft');
 
-      // 3. Attempt API sync if backend exists
+      // 3. Attempt API sync to server for Admin panel moderation & Telegram notification
       try {
         await fetch('/api/articles', {
           method: 'POST',
@@ -1066,9 +1071,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       // 5. Close studio & notify user
       closeStudio();
-      alert("🎉 Tabriklaymiz! Maqolangiz muvaffaqiyatli nashr qilindi va katalogga joylashtirildi.");
+      alert("🎉 Maqolangiz muvaffaqiyatli qabul qilindi va moderator tasdiqiga yuborildi!\n\nAdministrator tekshirib tasdiqlaganidan so'ng sayt katalogida to'liq e'lon qilinadi.");
 
-      // 6. Direct redirect to the published article reader page
+      // 6. Direct redirect to the article preview page
       window.location.href = `/maqola?slug=${encodeURIComponent(slug)}`;
     });
   }

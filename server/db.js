@@ -63,9 +63,17 @@ db.exec(`
     author TEXT NOT NULL DEFAULT 'The Unique Media',
     read_time TEXT NOT NULL DEFAULT '7 daqiqa',
     views INTEGER NOT NULL DEFAULT 0,
+    status TEXT NOT NULL DEFAULT 'published',
     created_at TEXT NOT NULL
   );
 `);
+
+// Migration for existing databases without status column
+try {
+  db.exec("ALTER TABLE articles ADD COLUMN status TEXT NOT NULL DEFAULT 'published'");
+} catch (e) {
+  // Column already exists
+}
 
 function hashPassword(password, salt) {
   return crypto.scryptSync(password, salt, 64).toString('hex');

@@ -715,6 +715,17 @@
     catBadge.textContent = article.category.toUpperCase();
     catBadge.className = 'cat-badge ' + article.category.toLowerCase();
 
+    // Check if article is pending moderation
+    const existingNotice = document.getElementById('pendingModerationNotice');
+    if (existingNotice) existingNotice.remove();
+    if (article.status === 'pending') {
+      const notice = document.createElement('div');
+      notice.id = 'pendingModerationNotice';
+      notice.style.cssText = 'background:#fef3c7; border:1px solid #fde68a; color:#b45309; padding:12px 18px; border-radius:8px; margin-bottom:20px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:8px;';
+      notice.innerHTML = '<span>⏳</span> <span>Ushbu maqola ayni paytda moderator tekshiruvida. Administrator tasdiqlaganidan so\'ng ommaga chiqariladi.</span>';
+      document.querySelector('.article-header').prepend(notice);
+    }
+
     // Date formatting Exact Day Month Year
     if (article.created_at) {
       document.getElementById('articleDate').textContent = formatArticleDate(article.created_at);

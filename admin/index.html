@@ -72,6 +72,47 @@
     </div>
   </div>
 
+  <!-- Maqolani to'liq ko'rish va tasdiqlash modali -->
+  <div id="articlePreviewModal" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width:820px; width:95%; max-height:90vh; display:flex; flex-direction:column; overflow:hidden;">
+      <div class="modal-head" style="margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--ink-100);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span id="prevModalCatBadge" class="status-badge" style="background:#0284c7; color:#fff; font-weight:700;">FACEBOOK</span>
+          <span id="prevModalStatusBadge" class="status-badge pending">⏳ KUTILMOQDA</span>
+        </div>
+        <button class="modal-close" id="closeArticlePreviewBtn">&times;</button>
+      </div>
+      
+      <div class="modal-scroll-body" style="overflow-y:auto; padding-right:8px; flex:1;">
+        <h2 id="prevModalTitle" style="font-size:1.45rem; font-weight:800; line-height:1.3; margin:0 0 10px; color:var(--ink-900);"></h2>
+        <div style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:var(--ink-500); margin-bottom:16px;">
+          <img id="prevModalAuthorImg" src="/images/logo-mark.png" alt="Author" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+          <span id="prevModalAuthor" style="font-weight:600; color:var(--ink-800);"></span>
+          <span>•</span>
+          <span id="prevModalDate"></span>
+          <span>•</span>
+          <span id="prevModalReadTime">⏱ 5 daqiqa</span>
+        </div>
+
+        <div id="prevModalCoverWrap" style="width:100%; aspect-ratio:16/9; max-height:300px; border-radius:10px; overflow:hidden; background:#f1f5f9; margin-bottom:18px;">
+          <img id="prevModalCover" src="" style="width:100%; height:100%; object-fit:cover;" alt="Cover">
+        </div>
+
+        <div style="background:#f8fafc; border-left:3px solid var(--flow-600); padding:12px 16px; border-radius:6px; margin-bottom:20px; font-size:0.95rem; color:var(--ink-700); font-style:italic;" id="prevModalExcerpt"></div>
+
+        <div id="prevModalBody" class="article-content-render" style="font-size:0.95rem; line-height:1.7; color:var(--ink-800);"></div>
+      </div>
+
+      <div class="modal-actions" style="margin-top:16px; padding-top:14px; border-top:1px solid var(--ink-100); justify-content:space-between; align-items:center;">
+        <button type="button" class="btn-secondary" id="closeArticlePreviewBtnBottom">Yopish</button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-danger" id="modalRejectBtn" style="padding:8px 16px; font-weight:600;">❌ Rad etish</button>
+          <button type="button" class="btn-primary" id="modalApproveBtn" style="width:auto; background:#10b981; padding:8px 20px; font-weight:700;">✅ Tasdiqlash va Nashr qilish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="main">
     <div class="stat-grid">
       <div class="stat-card">
@@ -87,8 +128,45 @@
         <div class="value" id="statViews">0</div>
       </div>
       <div class="stat-card">
-        <div class="label">Konversiya (lid / tashrif)</div>
-        <div class="value flow" id="statConversion">0%</div>
+        <div class="label">⏳ Kutilayotgan maqolalar</div>
+        <div class="value" id="statPendingArticles" style="color:#d97706;">0</div>
+      </div>
+    </div>
+
+    <!-- Maqolalar Moderatsiyasi (Articles Moderation Section) -->
+    <div class="leads-section" style="margin-bottom:24px;" id="articlesSection">
+      <div class="leads-head">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <h3 style="display:flex; align-items:center; gap:8px;">
+            <span>📝 Maqolalar Moderatsiyasi</span>
+            <span class="count-badge" id="pendingArticlesBadge">0 kutilmoqda</span>
+          </h3>
+        </div>
+        <div class="status-tabs" id="articleStatusTabs">
+          <button class="status-tab active" data-status="all">Barchasi (<span id="countArtAll">0</span>)</button>
+          <button class="status-tab" data-status="pending">⏳ Kutilmoqda (<span id="countArtPending">0</span>)</button>
+          <button class="status-tab" data-status="published">✅ Tasdiqlangan (<span id="countArtPublished">0</span>)</button>
+          <button class="status-tab" data-status="rejected">❌ Rad etilgan (<span id="countArtRejected">0</span>)</button>
+        </div>
+      </div>
+      
+      <div class="table-wrap">
+        <table class="leads-table">
+          <thead>
+            <tr>
+              <th style="width:75px;">Muqova</th>
+              <th>Maqola sarlavhasi</th>
+              <th>Kategoriya</th>
+              <th>Muallif</th>
+              <th>Sana</th>
+              <th>Status</th>
+              <th style="text-align:right;">Amallar</th>
+            </tr>
+          </thead>
+          <tbody id="articlesTableBody">
+            <!-- Dynamic article rows -->
+          </tbody>
+        </table>
       </div>
     </div>
 
