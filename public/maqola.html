@@ -812,7 +812,21 @@
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug') || 'facebook-instagram-moderation-report-2026';
 
-    // 0. Load user-created articles from localStorage
+    // 1. Try to fetch the latest fresh data from the server API
+    try {
+      const res = await fetch('/api/articles/' + encodeURIComponent(slug));
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.article) {
+          applyArticleData(data.article, data.related);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('API fetch failed, checking local dataset:', err);
+    }
+
+    // 2. Fallback to localStorage & ARTICLES_DATA if offline
     let userArticles = [];
     try {
       userArticles = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
@@ -823,31 +837,16 @@
     const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
     const allArticles = [...userArticles, ...defaultArticles];
 
-    // 1. Check client-side dataset
-    const found = allArticles.find(a => a.slug === slug);
+    const found = allArticles.find((a) => a.slug === slug);
     if (found) {
-      const related = allArticles.filter(a => a.slug !== slug).slice(0, 3);
+      const related = allArticles.filter((a) => a.slug !== slug).slice(0, 3);
       applyArticleData(found, related);
       return;
-    }
-
-    // 2. Fallback to API
-    try {
-      const res = await fetch('/api/articles/' + encodeURIComponent(slug));
-      if (!res.ok) throw new Error('Maqola topilmadi');
-      const data = await res.json();
-      applyArticleData(data.article, data.related);
-    } catch (err) {
-      // Keep pre-rendered content
     }
   }
 
   window.addEventListener('uniqueLanguageChanged', () => {
-    if (cachedArticle) {
-      applyArticleData(cachedArticle, cachedRelated);
-    } else {
-      loadArticle();
-    }
+    loadArticle();
   });
 
   loadArticle();

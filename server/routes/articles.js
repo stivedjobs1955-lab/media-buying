@@ -73,13 +73,13 @@ router.patch('/:id/status', requireAuth, (req, res) => {
 
 // Public: List approved articles with category filter and search
 router.get('/', (req, res) => {
-  const { category, search, limit = 50, offset = 0 } = req.query;
+  const { category, search, limit = 100, offset = 0 } = req.query;
 
   let query = "SELECT id, slug, title, excerpt, category, tags, image_url, author, read_time, views, status, created_at FROM articles WHERE (status = 'published' OR status IS NULL)";
   const params = [];
 
   if (category && category !== 'all' && category !== 'barchasi') {
-    query += ' AND category = ?';
+    query += ' AND LOWER(category) = LOWER(?)';
     params.push(category.toLowerCase());
   }
 

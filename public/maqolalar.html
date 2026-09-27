@@ -449,7 +449,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }
 
-  // Get user articles from localStorage merged with client dataset
+  let serverArticles = null;
+
+  async function loadAllArticlesData() {
+    try {
+      const res = await fetch('/api/articles?limit=100');
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          serverArticles = data;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not fetch /api/articles:', e);
+    }
+  }
+
+  // Get user articles from localStorage merged with client dataset or server articles
   function getAllArticles() {
     let userArticles = [];
     try {
@@ -457,6 +473,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     } catch (e) {
       userArticles = [];
     }
+
+    if (serverArticles && serverArticles.length > 0) {
+      const serverSlugs = new Set(serverArticles.map((a) => a.slug));
+      const localOnly = userArticles.filter((a) => !serverSlugs.has(a.slug));
+      return [...localOnly, ...serverArticles];
+    }
+
     const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
     return [...userArticles, ...defaultArticles];
   }
@@ -550,8 +573,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   async function fetchAndRenderArticles() {
     if (!articlesGrid) return;
-    const filtered = filterLocalArticles();
-    renderArticlesList(filtered);
+    // Initial render from local cache if server articles not loaded yet
+    renderArticlesList(filterLocalArticles());
+    
+    // Fetch live articles from API
+    await loadAllArticlesData();
+    renderArticlesList(filterLocalArticles());
   }
 
   if (categoryTabs.length > 0) {
@@ -560,7 +587,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         categoryTabs.forEach((t) => t.classList.remove('active'));
         tab.classList.add('active');
         currentCategory = tab.getAttribute('data-cat') || 'all';
-        fetchAndRenderArticles();
+        renderArticlesList(filterLocalArticles());
       });
     });
   }
@@ -570,7 +597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       clearTimeout(searchDebounceTimer);
       searchDebounceTimer = setTimeout(() => {
         currentSearch = e.target.value;
-        fetchAndRenderArticles();
+        renderArticlesList(filterLocalArticles());
       }, 200);
     });
   }

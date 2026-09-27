@@ -106,17 +106,11 @@ function ensureSeedArticles() {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'published', ?)
   `);
 
-  const updateStmt = db.prepare(`
-    UPDATE articles SET title = ?, excerpt = ?, content = ?, category = ?, tags = ?, image_url = ?, author = ?, read_time = ?, created_at = ?
-    WHERE slug = ?
-  `);
-
   for (const art of SEED_ARTICLES) {
     const existing = db.prepare('SELECT id FROM articles WHERE slug = ?').get(art.slug);
-    const tagsStr = JSON.stringify(art.tags || []);
-    const contentStr = (art.content || '').trim();
-
     if (!existing) {
+      const tagsStr = JSON.stringify(art.tags || []);
+      const contentStr = (art.content || '').trim();
       insertStmt.run(
         art.slug,
         art.title,
@@ -129,19 +123,6 @@ function ensureSeedArticles() {
         art.read_time || '7 daqiqa',
         art.views || 0,
         art.created_at || new Date().toISOString()
-      );
-    } else {
-      updateStmt.run(
-        art.title,
-        art.excerpt,
-        contentStr,
-        art.category,
-        tagsStr,
-        art.image_url,
-        art.author || 'The Unique Media',
-        art.read_time || '7 daqiqa',
-        art.created_at || new Date().toISOString(),
-        art.slug
       );
     }
   }
