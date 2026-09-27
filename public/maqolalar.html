@@ -87,21 +87,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main class="articles-catalog-page">
   <div class="container">
 
-    <!-- Interactive Creator Banner (Replaces static hero) -->
-    <div class="article-creator-banner" id="openStudioBannerBtn" role="button" tabindex="0" title="Maqola yozish studiyasini ochish">
+    <!-- Interactive Creator Banner (Links to /yozish Telegraph editor) -->
+    <a href="/yozish" class="article-creator-banner" id="openStudioBannerBtn" title="Telegraph uslubida maqola yozish" style="text-decoration:none;">
       <div class="creator-banner-left">
-        <span class="creator-badge">🔥 HAMMUALLIFLIK / KEYS YUKLASH</span>
+        <span class="creator-badge">🔥 HAMMUALLIFLIK / TELEGRAPH</span>
         <h1 class="creator-banner-title">Siz ham o'z loyihangiz yoki media buying keysingiz haqida maqola yozib yuklang!</h1>
-        <p class="creator-banner-desc">O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni The Unique Media platformasida minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.</p>
+        <p class="creator-banner-desc">O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni Telegraph uslubidagi qulay muharrir orqali minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.</p>
       </div>
       <div class="creator-banner-right">
-        <button type="button" class="creator-btn" id="openStudioBtn">
+        <span class="creator-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           <span>Maqola yozish</span>
-        </button>
-        <span class="creator-badge-sub">✨ Qulay vizual muharrir</span>
+        </span>
+        <span class="creator-badge-sub">✨ Telegraph uslubida tezkor</span>
       </div>
-    </div>
+    </a>
 
     <!-- Article Creator Studio Modal -->
     <div class="studio-modal-overlay" id="articleStudioModal">
@@ -603,19 +603,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     studioModal.classList.remove('active');
     studioModal.style.display = 'none';
     document.body.style.overflow = '';
-  }
-
-  if (openStudioBannerBtn) {
-    openStudioBannerBtn.addEventListener('click', (e) => {
-      openStudio();
-    });
-  }
-
-  if (openStudioBtn) {
-    openStudioBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openStudio();
-    });
   }
 
   if (closeStudioBtn) {

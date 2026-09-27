@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MBT3HQH8');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqola yozish — Unique Telegraph</title>
+<meta name="description" content="The Unique Media platformasida o'z maqolangiz yoki media buying keysingizni Telegraph uslubida yozing va nashr qiling.">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --tl-bg: #ffffff;
+    --tl-text: #222222;
+    --tl-muted: #79828b;
+    --tl-border: #e2e8f0;
+    --tl-accent: #0284c7;
+    --tl-accent-hover: #0369a1;
+    --tl-green: #10b981;
+    --tl-font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --tl-font-serif: 'Lora', Georgia, serif;
+    --tl-font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--tl-bg);
+    color: var(--tl-text);
+    font-family: var(--tl-font-sans);
+    line-height: 1.75;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Telegraph Header */
+  .tl-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--tl-border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+  }
+
+  .tl-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tl-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+
+  .tl-brand-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+
+  .tl-brand-badge {
+    background: #0f172a;
+    color: #38bdf8;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .tl-back-link {
+    color: var(--tl-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+  }
+  .tl-back-link:hover { color: #0f172a; }
+
+  .tl-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tl-save-indicator {
+    font-size: 0.8rem;
+    color: var(--tl-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .tl-category-select {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--tl-border);
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #334155;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tl-category-select:focus { border-color: var(--tl-accent); }
+
+  .tl-btn-publish {
+    background: #0284c7;
+    color: #ffffff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+  }
+  .tl-btn-publish:hover {
+    background: var(--tl-accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  }
+
+  /* Main Container */
+  .tl-main-container {
+    max-width: 780px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 24px 120px;
+    flex: 1;
+    position: relative;
+  }
+
+  /* Cover Uploader Section */
+  .tl-cover-section {
+    margin-bottom: 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    transition: all 0.2s;
+  }
+
+  .tl-cover-section.has-image {
+    border: none;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    max-height: 440px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .tl-cover-prompt {
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .tl-cover-section:hover {
+    border-color: var(--tl-accent);
+    background: #f0f9ff;
+  }
+
+  .tl-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .tl-cover-actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: none;
+    gap: 8px;
+    z-index: 5;
+  }
+
+  .tl-cover-btn {
+    background: rgba(15, 23, 42, 0.75);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.15s;
+  }
+  .tl-cover-btn:hover { background: rgba(15, 23, 42, 0.95); }
+  .tl-cover-btn.danger:hover { background: #ef4444; }
+
+  /* Inputs (Title, Author, Meta) */
+  .tl-input-title {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 2.35rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #0f172a;
+    font-family: var(--tl-font-sans);
+    margin-bottom: 12px;
+    background: transparent;
+    resize: none;
+  }
+  .tl-input-title::placeholder {
+    color: #94a3b8;
+    font-weight: 700;
+  }
+
+  .tl-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    color: var(--tl-muted);
+    font-size: 0.95rem;
+  }
+
+  .tl-input-author {
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+    background: transparent;
+    width: 180px;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed #cbd5e1;
+    transition: border-color 0.15s;
+  }
+  .tl-input-author:focus {
+    border-bottom-color: var(--tl-accent);
+    color: #0f172a;
+  }
+
+  .tl-input-link {
+    border: none;
+    outline: none;
+    font-size: 0.88rem;
+    color: var(--tl-accent);
+    background: transparent;
+    width: 220px;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed #cbd5e1;
+    transition: border-color 0.15s;
+  }
+  .tl-input-link:focus {
+    border-bottom-color: var(--tl-accent);
+  }
+
+  .tl-date-display {
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  /* Telegraph Content Canvas */
+  .tl-editor {
+    outline: none;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: #1e293b;
+    min-height: 350px;
+    position: relative;
+    word-break: break-word;
+  }
+
+  .tl-editor:empty::before {
+    content: attr(data-placeholder);
+    color: #94a3b8;
+    pointer-events: none;
+    display: block;
+  }
+
+  .tl-editor p {
+    margin-bottom: 1.4rem;
+  }
+
+  .tl-editor h2 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .tl-editor h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .tl-editor ul, .tl-editor ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.8rem;
+  }
+  .tl-editor li { margin-bottom: 0.5rem; }
+
+  .tl-editor blockquote {
+    border-left: 3px solid #0f172a;
+    padding: 10px 0 10px 20px;
+    margin: 24px 0;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #334155;
+    background: transparent;
+  }
+
+  .tl-editor hr {
+    border: none;
+    text-align: center;
+    margin: 36px 0;
+  }
+  .tl-editor hr::after {
+    content: "• • •";
+    letter-spacing: 12px;
+    color: #94a3b8;
+    font-size: 1.2rem;
+  }
+
+  .tl-editor img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 24px 0;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  /* Telegraph Tables */
+  .table-responsive {
+    overflow-x: auto;
+    margin: 24px 0;
+    border: 1px solid var(--tl-border);
+    border-radius: 8px;
+  }
+  .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .article-table th {
+    background: #f8fafc;
+    padding: 12px 16px;
+    font-weight: 700;
+    border-bottom: 2px solid #cbd5e1;
+    text-align: left;
+  }
+  .article-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--tl-border);
+  }
+
+  /* Callouts */
+  .article-callout {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 24px 0;
+    border-left: 4px solid;
+    background: #f8fafc;
+  }
+  .article-callout.note { border-color: #0284c7; background: #f0f9ff; }
+  .article-callout.alert { border-color: #ef4444; background: #fef2f2; }
+  .article-callout.tip { border-color: #10b981; background: #f0fdf4; }
+  .article-callout strong { display: block; margin-bottom: 6px; }
+
+  /* Floating Selection Bubble Toolbar (Telegraph style) */
+  .tl-floating-toolbar {
+    position: absolute;
+    z-index: 200;
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 4px 6px;
+    display: none;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: tlBubbleIn 0.15s ease-out;
+  }
+  .tl-floating-toolbar::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: #0f172a transparent;
+    display: block;
+    width: 0;
+  }
+
+  @keyframes tlBubbleIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tl-tool-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .tl-tool-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #38bdf8;
+  }
+
+  /* Telegraph Bottom Floating Quick-Insert Dock */
+  .tl-bottom-dock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    z-index: 90;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tl-dock-btn {
+    background: transparent;
+    border: none;
+    color: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+  }
+  .tl-dock-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #38bdf8;
+  }
+
+  /* Success Modal */
+  .tl-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .tl-modal-overlay.open { display: flex; }
+
+  .tl-modal-card {
+    background: #fff;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: tlBubbleIn 0.2s ease;
+  }
+
+  @media (max-width: 680px) {
+    .tl-header { padding: 10px 16px; }
+    .tl-main-container { padding: 24px 16px 100px; }
+    .tl-input-title { font-size: 1.8rem; }
+    .tl-editor { font-size: 1.05rem; }
+    .tl-bottom-dock { width: 92%; overflow-x: auto; justify-content: space-around; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="tl-header">
+  <div class="tl-header-left">
+    <a href="/maqolalar" class="tl-brand">
+      <img src="/images/logo-mark.png" alt="Logo" class="tl-brand-logo">
+      <span>Unique</span>
+      <span class="tl-brand-badge">TELEGRAPH</span>
+    </a>
+    <a href="/maqolalar" class="tl-back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <span>Maqolalarga qaytish</span>
+    </a>
+  </div>
+
+  <div class="tl-header-right">
+    <span class="tl-save-indicator" id="saveIndicator">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span>Saqlanmoqda...</span>
+    </span>
+
+    <select class="tl-category-select" id="articleCategory">
+      <option value="facebook">📘 Facebook & Meta</option>
+      <option value="google">🔍 Google Ads</option>
+      <option value="telegram">✈️ Telegram Ads</option>
+      <option value="linkedin">💼 LinkedIn Ads</option>
+      <option value="x">🐦 X (Twitter) Ads</option>
+      <option value="cases">📊 Keyslar & Tahlillar</option>
+    </select>
+
+    <button type="button" class="tl-btn-publish" id="publishBtn">
+      <span>Nashr qilish</span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Main Writing Canvas -->
+<main class="tl-main-container">
+
+  <!-- Cover Image Section (Telegraph style) -->
+  <div class="tl-cover-section" id="coverSection">
+    <input type="file" id="coverFileInput" accept="image/*" style="display:none;">
+    <div class="tl-cover-prompt" id="coverPrompt">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="1.8" style="margin-bottom:6px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <p style="font-weight:600; font-size:0.92rem; color:#334155; margin-bottom:2px;">Muqova rasm qo'shish (Cover image)</p>
+      <small style="color:#94a3b8;">16:9 format tavsiya etiladi (bosib tanlang yoki URL kiriting)</small>
+    </div>
+    <img id="coverImgPreview" class="tl-cover-img" alt="Cover preview">
+    <div class="tl-cover-actions" id="coverActions">
+      <button type="button" class="tl-cover-btn" id="btnChangeCover">O'zgartirish</button>
+      <button type="button" class="tl-cover-btn danger" id="btnRemoveCover">O'chirish</button>
+    </div>
+  </div>
+
+  <!-- Title Input -->
+  <input type="text" class="tl-input-title" id="articleTitle" placeholder="Sarlavha..." autofocus spellcheck="false">
+
+  <!-- Author & Meta Row -->
+  <div class="tl-meta-row">
+    <span>Muallif:</span>
+    <input type="text" class="tl-input-author" id="articleAuthor" placeholder="Ismingiz..." value="The Unique Media">
+    <input type="text" class="tl-input-link" id="articleAuthorLink" placeholder="@telegram yoki profil havolasi...">
+    <span class="tl-date-display" id="dateDisplay">Bugun</span>
+  </div>
+
+  <!-- ContentEditable Telegraph Editor -->
+  <div id="tlEditor" class="tl-editor" contenteditable="true" spellcheck="false" data-placeholder="Maqolangizni yoki media buying keysingizni yozing...">
+    <p>Ushbu maqolada loyihamiz bo'yicha erishilgan natijalar, qo'llanilgan strategiyalar va amaliy media buying xulosalari haqida so'z boradi...</p>
+    <h2>1. Boshlang'ich holat va maqsad</h2>
+    <p>Loyiha turi, asosiy maqsadli auditoriya va boshlang'ich parametrlar...</p>
+    <h2>2. Sinovdan o'tkazilgan kreativlar va takliflar</h2>
+    <p>Qaysi formatlar va yondashuvlar eng yuqori natijani bergani haqida batafsil tahlil...</p>
+  </div>
+
+</main>
+
+<!-- Floating Bubble Selection Toolbar (Telegraph Pop-up) -->
+<div class="tl-floating-toolbar" id="floatingToolbar">
+  <button type="button" class="tl-tool-btn" data-cmd="bold" title="Qalin"><b>B</b></button>
+  <button type="button" class="tl-tool-btn" data-cmd="italic" title="Yotiq"><i>i</i></button>
+  <button type="button" class="tl-tool-btn" data-cmd="underline" title="Tagiga chizilgan"><u>U</u></button>
+  <button type="button" class="tl-tool-btn" data-cmd="strikeThrough" title="Ustiga chizilgan"><s>S</s></button>
+  <button type="button" class="tl-tool-btn" data-cmd="formatBlock" data-val="h2" title="Katta sarlavha (H2)">H2</button>
+  <button type="button" class="tl-tool-btn" data-cmd="formatBlock" data-val="h3" title="Kichik sarlavha (H3)">H3</button>
+  <button type="button" class="tl-tool-btn" data-cmd="formatBlock" data-val="blockquote" title="Iqtibos">“</button>
+  <button type="button" class="tl-tool-btn" id="btnBubbleLink" title="Havola">🔗</button>
+</div>
+
+<!-- Bottom Quick-Insert Dock (Telegraph Quick Tools) -->
+<div class="tl-bottom-dock">
+  <button type="button" class="tl-dock-btn" id="dockBtnImage">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span>Rasm</span>
+  </button>
+  <input type="file" id="inlineImageInput" accept="image/*" style="display:none;">
+
+  <button type="button" class="tl-dock-btn" id="dockBtnTable">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+    <span>Jadval</span>
+  </button>
+
+  <button type="button" class="tl-dock-btn" id="dockBtnCallout">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span>Eslatma</span>
+  </button>
+
+  <button type="button" class="tl-dock-btn" id="dockBtnDivider">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span>Ajratuvchi</span>
+  </button>
+</div>
+
+<!-- Success Modal -->
+<div class="tl-modal-overlay" id="successModal">
+  <div class="tl-modal-card">
+    <div style="width:64px; height:64px; border-radius:50%; background:#dcfce7; color:#16a34a; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:2rem;">
+      ✓
+    </div>
+    <h3 style="font-size:1.35rem; font-weight:800; color:#0f172a; margin-bottom:10px;">Maqolangiz qabul qilindi!</h3>
+    <p style="font-size:0.92rem; color:#64748b; line-height:1.6; margin-bottom:24px;">Maqolangiz moderator tekshiruviga yuborildi. Administrator tomonidan tasdiqlanganidan so'ng sayt katalogida to'liq e'lon qilinadi.</p>
+    
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <a href="#" id="modalViewArticleBtn" class="tl-btn-publish" style="justify-content:center; padding:12px 20px;">
+        👁 Maqolani ko'rish
+      </a>
+      <button type="button" id="modalCopyLinkBtn" class="tl-dock-btn" style="color:#334155; background:#f1f5f9; justify-content:center; padding:10px 20px;">
+        📋 Havolani nusxalash
+      </button>
+      <a href="/maqolalar" style="color:#64748b; font-size:0.85rem; text-decoration:none; margin-top:6px;">
+        Katalogga qaytish
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const DRAFT_KEY = 'unique_telegraph_draft';
+  const USER_ARTICLES_KEY = 'unique_user_articles';
+
+  // Elements
+  const articleTitle = document.getElementById('articleTitle');
+  const articleAuthor = document.getElementById('articleAuthor');
+  const articleAuthorLink = document.getElementById('articleAuthorLink');
+  const articleCategory = document.getElementById('articleCategory');
+  const tlEditor = document.getElementById('tlEditor');
+  const saveIndicator = document.getElementById('saveIndicator');
+  const publishBtn = document.getElementById('publishBtn');
+
+  // Cover Elements
+  const coverSection = document.getElementById('coverSection');
+  const coverPrompt = document.getElementById('coverPrompt');
+  const coverFileInput = document.getElementById('coverFileInput');
+  const coverImgPreview = document.getElementById('coverImgPreview');
+  const coverActions = document.getElementById('coverActions');
+  const btnChangeCover = document.getElementById('btnChangeCover');
+  const btnRemoveCover = document.getElementById('btnRemoveCover');
+
+  // Floating Toolbar Elements
+  const floatingToolbar = document.getElementById('floatingToolbar');
+
+  // Dock Elements
+  const dockBtnImage = document.getElementById('dockBtnImage');
+  const inlineImageInput = document.getElementById('inlineImageInput');
+  const dockBtnTable = document.getElementById('dockBtnTable');
+  const dockBtnCallout = document.getElementById('dockBtnCallout');
+  const dockBtnDivider = document.getElementById('dockBtnDivider');
+
+  // Success Modal Elements
+  const successModal = document.getElementById('successModal');
+  const modalViewArticleBtn = document.getElementById('modalViewArticleBtn');
+  const modalCopyLinkBtn = document.getElementById('modalCopyLinkBtn');
+
+  let currentCoverUrl = '';
+  let publishedSlug = '';
+
+  // 1. Cover Image Handling
+  function setCover(url) {
+    currentCoverUrl = url;
+    if (url) {
+      coverImgPreview.src = url;
+      coverImgPreview.style.display = 'block';
+      coverSection.classList.add('has-image');
+      coverPrompt.style.display = 'none';
+      coverActions.style.display = 'flex';
+    } else {
+      coverImgPreview.src = '';
+      coverImgPreview.style.display = 'none';
+      coverSection.classList.remove('has-image');
+      coverPrompt.style.display = 'block';
+      coverActions.style.display = 'none';
+      coverFileInput.value = '';
+    }
+    triggerAutoSave();
+  }
+
+  coverPrompt.addEventListener('click', () => {
+    const choice = confirm("Rasmni kompyuterdan tanlaysizmi?\n(OK = Kompyuterdan tanlash, Bekor qilish = URL kiritish)");
+    if (choice) {
+      coverFileInput.click();
+    } else {
+      const url = prompt("Cover rasm havolasini (URL) kiriting:", "https://images.unsplash.com/");
+      if (url && url.startsWith('http')) setCover(url);
+    }
+  });
+
+  coverFileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (ev) => setCover(ev.target.result);
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  });
+
+  btnChangeCover.addEventListener('click', (e) => {
+    e.stopPropagation();
+    coverFileInput.click();
+  });
+
+  btnRemoveCover.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setCover('');
+  });
+
+  // 2. Floating Selection Toolbar (Telegraph Selection Pop-up)
+  document.addEventListener('selectionchange', () => {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !tlEditor.contains(sel.anchorNode)) {
+      floatingToolbar.style.display = 'none';
+      return;
+    }
+
+    const range = sel.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    if (rect.width === 0) {
+      floatingToolbar.style.display = 'none';
+      return;
+    }
+
+    floatingToolbar.style.display = 'flex';
+    floatingToolbar.style.top = `${window.scrollY + rect.top - 48}px`;
+    floatingToolbar.style.left = `${window.scrollX + rect.left + rect.width / 2 - floatingToolbar.offsetWidth / 2}px`;
+  });
+
+  document.querySelectorAll('#floatingToolbar .tl-tool-btn[data-cmd]').forEach((btn) => {
+    btn.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const cmd = btn.getAttribute('data-cmd');
+      const val = btn.getAttribute('data-val') || null;
+      document.execCommand(cmd, false, val);
+      triggerAutoSave();
+    });
+  });
+
+  document.getElementById('btnBubbleLink').addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    const url = prompt("Havola manzilini (URL) kiriting:", "https://");
+    if (url && url !== "https://") {
+      document.execCommand('createLink', false, url);
+      triggerAutoSave();
+    }
+  });
+
+  // 3. Bottom Dock Tools
+  dockBtnImage.addEventListener('click', () => {
+    const choice = confirm("Rasmni kompyuterdan tanlaysizmi?\n(OK = Fayl tanlash, Bekor qilish = URL kiritish)");
+    if (choice) {
+      inlineImageInput.click();
+    } else {
+      const url = prompt("Rasm havolasini (URL) kiriting:", "https://");
+      if (url && url !== "https://") {
+        insertHtmlAtCursor(`<p><img src="${url}" alt="Rasm" style="max-width:100%; border-radius:8px; margin:16px 0; aspect-ratio:16/9; object-fit:cover;"></p><p><br></p>`);
+      }
+    }
+  });
+
+  inlineImageInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        insertHtmlAtCursor(`<p><img src="${ev.target.result}" alt="Rasm" style="max-width:100%; border-radius:8px; margin:16px 0;"></p><p><br></p>`);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  });
+
+  dockBtnTable.addEventListener('click', () => {
+    const tableHtml = `
+      <div class="table-responsive">
+        <table class="article-table">
+          <thead>
+            <tr>
+              <th>Metrika</th>
+              <th>Oldingi ko'rsatkich</th>
+              <th>Yangi ko'rsatkich</th>
+              <th>O'sish</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Konversiya (CR)</strong></td>
+              <td>1.5%</td>
+              <td>4.2%</td>
+              <td><span style="color:#10b981; font-weight:700;">+180%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Lid narxi (CPA)</strong></td>
+              <td>$14.20</td>
+              <td>$5.60</td>
+              <td><span style="color:#10b981; font-weight:700;">-60.5%</span></td>
+            </tr>
+            <tr>
+              <td><strong>ROAS</strong></td>
+              <td>1.8x</td>
+              <td>4.6x</td>
+              <td><span style="color:#10b981; font-weight:700;">+155%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><br></p>
+    `;
+    insertHtmlAtCursor(tableHtml);
+  });
+
+  dockBtnCallout.addEventListener('click', () => {
+    const type = prompt("Eslatma turini tanlang:\n1: 💡 Maslahat\n2: ⚠️ Ogohlantirish\n3: 📌 Eslatma", "1");
+    let cls = "note", title = "💡 Amaliy Maslahat:";
+    if (type === "2") { cls = "alert"; title = "⚠️ Muhim Ogohlantirish:"; }
+    else if (type === "3") { cls = "tip"; title = "📌 Eslatma:"; }
+
+    const calloutHtml = `
+      <div class="article-callout ${cls}">
+        <strong>${title}</strong>
+        <p>Ushbu strategiyani qo'llashda budjetni bosqichma-bosqich oshirib borish maqsadga muvofiq.</p>
+      </div>
+      <p><br></p>
+    `;
+    insertHtmlAtCursor(calloutHtml);
+  });
+
+  dockBtnDivider.addEventListener('click', () => {
+    insertHtmlAtCursor('<hr><p><br></p>');
+  });
+
+  function insertHtmlAtCursor(html) {
+    tlEditor.focus();
+    const sel = window.getSelection();
+    if (sel.getRangeAt && sel.rangeCount) {
+      let range = sel.getRangeAt(0);
+      range.deleteContents();
+      const el = document.createElement('div');
+      el.innerHTML = html;
+      const frag = document.createDocumentFragment();
+      let node, lastNode;
+      while ((node = el.firstChild)) {
+        lastNode = frag.appendChild(node);
+      }
+      range.insertNode(frag);
+      if (lastNode) {
+        range = range.cloneRange();
+        range.setStartAfter(lastNode);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    } else {
+      tlEditor.innerHTML += html;
+    }
+    triggerAutoSave();
+  }
+
+  // 4. Draft Auto-Saving (Telegraph Persistence)
+  let autoSaveTimer = null;
+  function triggerAutoSave() {
+    saveIndicator.innerHTML = `<span>⏳ Saqlanmoqda...</span>`;
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(() => {
+      const draft = {
+        title: articleTitle.value,
+        author: articleAuthor.value,
+        authorLink: articleAuthorLink.value,
+        category: articleCategory.value,
+        coverUrl: currentCoverUrl,
+        content: tlEditor.innerHTML,
+        savedAt: new Date().toISOString()
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      saveIndicator.innerHTML = `<span>✓ Saqlandi</span>`;
+    }, 600);
+  }
+
+  articleTitle.addEventListener('input', triggerAutoSave);
+  articleAuthor.addEventListener('input', triggerAutoSave);
+  articleAuthorLink.addEventListener('input', triggerAutoSave);
+  articleCategory.addEventListener('change', triggerAutoSave);
+  tlEditor.addEventListener('input', triggerAutoSave);
+
+  function restoreDraft() {
+    try {
+      const saved = localStorage.getItem(DRAFT_KEY);
+      if (saved) {
+        const d = JSON.parse(saved);
+        if (d.title) articleTitle.value = d.title;
+        if (d.author) articleAuthor.value = d.author;
+        if (d.authorLink) articleAuthorLink.value = d.authorLink;
+        if (d.category) articleCategory.value = d.category;
+        if (d.coverUrl) setCover(d.coverUrl);
+        if (d.content && d.content.trim()) tlEditor.innerHTML = d.content;
+      }
+    } catch(e) {}
+    saveIndicator.innerHTML = `<span>✓ Saqlandi</span>`;
+  }
+  restoreDraft();
+
+  // Helper for generating slug
+  function generateSlug(text) {
+    const from = "àáäâèéëêìíïîòóöôùúüûñçдёжфйцчшщыюяабвгдезийклмнопрстуъьэ";
+    const to   = "aaaaeeeeiiiioooouuuuncdeyzhfytshtshchshshyuyuaabvgdezijklmnoprstu--e";
+    let str = text.toLowerCase().trim();
+    for (let i = 0; i < from.length; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+    str = str.replace(/[^a-z0-9\s-]/g, '')
+             .replace(/[\s-]+/g, '-')
+             .replace(/^-+|-+$/g, '');
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    return (str || 'maqola') + '-' + randomSuffix;
+  }
+
+  // 5. Publishing Telegraph Story
+  publishBtn.addEventListener('click', async () => {
+    const title = articleTitle.value.trim();
+    const author = articleAuthor.value.trim() || 'The Unique Media';
+    const authorLink = articleAuthorLink.value.trim();
+    const category = articleCategory.value;
+    const content = tlEditor.innerHTML.trim();
+    const cover = currentCoverUrl || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=675&q=85';
+
+    if (!title) {
+      alert("Iltimos, maqola sarlavhasini kiriting!");
+      articleTitle.focus();
+      return;
+    }
+
+    // Extract first 1-2 sentences as excerpt
+    const plainText = tlEditor.innerText.trim();
+    if (!plainText || plainText.length < 30) {
+      alert("Iltimos, maqola matnini to'liq yozing!");
+      tlEditor.focus();
+      return;
+    }
+
+    const excerpt = plainText.split('\n')[0].slice(0, 200) + '...';
+    const slug = generateSlug(title);
+    publishedSlug = slug;
+
+    const newArticle = {
+      id: 'user_' + Date.now(),
+      slug: slug,
+      title: title,
+      excerpt: excerpt,
+      category: category,
+      read_time: `${Math.max(3, Math.round(plainText.split(/\s+/).length / 150))} daqiqa`,
+      author: author,
+      author_image: 'images/logo-mark.png',
+      image_url: cover,
+      created_at: new Date().toISOString(),
+      tags: [category.toUpperCase(), 'Telegraph', 'MediaBuying'],
+      status: 'pending',
+      content: content
+    };
+
+    // 1. Save locally
+    let userArticles = [];
+    try {
+      userArticles = JSON.parse(localStorage.getItem(USER_ARTICLES_KEY) || '[]');
+    } catch(e) { userArticles = []; }
+    userArticles.unshift(newArticle);
+    localStorage.setItem(USER_ARTICLES_KEY, JSON.stringify(userArticles));
+
+    // 2. Clear draft
+    localStorage.removeItem(DRAFT_KEY);
+
+    // 3. Post to API for Admin moderation & Telegram alert
+    try {
+      await fetch('/api/articles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newArticle)
+      });
+    } catch(e) {}
+
+    // 4. Show success modal
+    const articleUrl = `/maqola?slug=${encodeURIComponent(slug)}`;
+    modalViewArticleBtn.href = articleUrl;
+    successModal.classList.add('open');
+  });
+
+  modalCopyLinkBtn.addEventListener('click', () => {
+    const fullUrl = `${window.location.origin}/maqola?slug=${encodeURIComponent(publishedSlug)}`;
+    navigator.clipboard.writeText(fullUrl).then(() => {
+      modalCopyLinkBtn.textContent = '✓ Havola nusxalandi!';
+      setTimeout(() => { modalCopyLinkBtn.textContent = '📋 Havolani nusxalash'; }, 3000);
+    });
+  });
+</script>
+
+</body>
+</html>

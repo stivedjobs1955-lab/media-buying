@@ -33,6 +33,12 @@ app.get('/maqola/:slug', (req, res) => {
 app.get('/oferta', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'oferta.html'));
 });
+app.get('/yozish', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'yozish.html'));
+});
+app.get('/telegraph', (req, res) => {
+  res.redirect('/yozish');
+});
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
