@@ -39,6 +39,9 @@ app.get('/yozish', (req, res) => {
 app.get('/telegraph', (req, res) => {
   res.redirect('/yozish');
 });
+app.get('/blueprint', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'blueprint.html'));
+});
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
