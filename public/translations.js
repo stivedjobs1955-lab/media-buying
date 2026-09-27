@@ -7,16 +7,35 @@ const TRANSLATIONS = {
     'nav.process': "Jarayon",
     'nav.founder': "Asoschi",
     'nav.cta': "Konsultatsiya olish",
+    'nav.home': "Bosh sahifa",
 
     'articles.eyebrow': "BILIM VA TAHLILLAR",
     'articles.title': "Media Buying va Target Bo'yicha Maqolalar",
     'articles.subtitle': "Meta, Google Ads, Telegram va arbitraj bo'yicha eng so'nggi hisobotlar, qo'llanmalar va eksklyuziv keyslar.",
     'articles.filterAll': "Barchasi",
     'articles.searchPlaceholder': "Mavzuni qidirish (masalan: moderatsiya, Meta)...",
-    'articles.readTime': "o'qish",
+    'articles.readTime': "daqiqa",
     'articles.views': "ko'rildi",
     'articles.readMore': "Batafsil o'qish",
     'articles.notFound': "Maqolalar topilmadi. Boshqa so'z bilan qidirib ko'ring.",
+    'articles.bannerBadge': "🔥 HAMMUALLIFLIK / TELEGRAPH",
+    'articles.bannerTitle': "Siz ham o'z loyihangiz yoki media buying keysingiz haqida maqola yozib yuklang!",
+    'articles.bannerDesc': "O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni Telegraph uslubidagi qulay muharrir orqali minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.",
+    'articles.writeBtn': "Maqola yozish",
+    'articles.bannerSub': "✨ Telegraph uslubida tezkor",
+    'articles.catAll': "Barchasi",
+    'articles.catFacebook': "📘 Facebook & Meta",
+    'articles.catGoogle': "🔍 Google Ads",
+    'articles.catTelegram': "✈️ Telegram Ads",
+    'articles.catLinkedin': "💼 LinkedIn Ads",
+    'articles.catX': "🐦 X (Twitter) Ads",
+    'articles.catCases': "📊 Keyslar & Tahlil",
+    'articles.relatedTitle': "O‘xshash maqolalar va tahlillar",
+    'articles.shareTelegram': "Telegram'da ulashish",
+    'articles.copyLink': "Havolani nusxalash",
+    'articles.copied': "Havola nusxalandi!",
+    'articles.backToCatalog': "Barcha maqolalar",
+    'articles.pendingNotice': "⏳ Ushbu maqola ayni paytda moderator tekshiruvida. Administrator tasdiqlaganidan so'ng ommaga chiqariladi.",
 
     'hero.eyebrow': "MEDIA BUYING AGENTLIGI",
     'hero.headlineHl': "Har bir so'mni",
@@ -163,16 +182,35 @@ const TRANSLATIONS = {
     'nav.process': "Процесс",
     'nav.founder': "Основатель",
     'nav.cta': "Получить консультацию",
+    'nav.home': "Главная",
 
     'articles.eyebrow': "ЗНАНИЯ И АНАЛИТИКА",
     'articles.title': "Статьи по Media Buying и Таргету",
     'articles.subtitle': "Свежие отчеты, гайды и кейсы по Meta, Google Ads, Telegram и арбитражу трафика.",
     'articles.filterAll': "Все",
     'articles.searchPlaceholder': "Поиск по теме (например: модерация, Meta)...",
-    'articles.readTime': "чтения",
+    'articles.readTime': "мин",
     'articles.views': "просмотров",
     'articles.readMore': "Читать подробнее",
     'articles.notFound': "Статьи не найдены. Попробуйте другой запрос.",
+    'articles.bannerBadge': "🔥 СОАВТОРСТВО / TELEGRAPH",
+    'articles.bannerTitle': "Опубликуйте свою статью или кейс по медиабайингу!",
+    'articles.bannerDesc': "Делитесь опытом, практическими связками и кейсами в удобном редакторе Telegraph. Публикуйте бесплатно и развивайте личный бренд среди тысяч байеров.",
+    'articles.writeBtn': "Написать статью",
+    'articles.bannerSub': "✨ Быстро в стиле Telegraph",
+    'articles.catAll': "Все",
+    'articles.catFacebook': "📘 Facebook & Meta",
+    'articles.catGoogle': "🔍 Google Ads",
+    'articles.catTelegram': "✈️ Telegram Ads",
+    'articles.catLinkedin': "💼 LinkedIn Ads",
+    'articles.catX': "🐦 X (Twitter) Ads",
+    'articles.catCases': "📊 Кейсы и Аналитика",
+    'articles.relatedTitle': "Похожие статьи и кейсы",
+    'articles.shareTelegram': "Поделиться в Telegram",
+    'articles.copyLink': "Скопировать ссылку",
+    'articles.copied': "Ссылка скопирована!",
+    'articles.backToCatalog': "Все статьи",
+    'articles.pendingNotice': "⏳ Эта статья находится на проверке модератора. Она будет опубликована после одобрения администратором.",
 
     'hero.eyebrow': "АГЕНТСТВО МЕДИАБАЙИНГА",
     'hero.headlineHl': "Превращаем каждый сум",
@@ -319,16 +357,35 @@ const TRANSLATIONS = {
     'nav.process': "Process",
     'nav.founder': "Founder",
     'nav.cta': "Get a consultation",
+    'nav.home': "Home",
 
     'articles.eyebrow': "KNOWLEDGE & INSIGHTS",
     'articles.title': "Media Buying & Performance Articles",
     'articles.subtitle': "Latest reports, actionable guides, and exclusive case studies on Meta, Google Ads, Telegram, and traffic arbitrage.",
     'articles.filterAll': "All",
     'articles.searchPlaceholder': "Search by topic (e.g. moderation, Meta)...",
-    'articles.readTime': "read",
+    'articles.readTime': "min read",
     'articles.views': "views",
     'articles.readMore': "Read article",
     'articles.notFound': "No articles found. Try another query.",
+    'articles.bannerBadge': "🔥 CO-AUTHORSHIP / TELEGRAPH",
+    'articles.bannerTitle': "Write and publish your own media buying case study or article!",
+    'articles.bannerDesc': "Share your practical strategies, experience, and cases via our distraction-free Telegraph editor. Publish for free and elevate your personal brand.",
+    'articles.writeBtn': "Write article",
+    'articles.bannerSub': "✨ Fast Telegraph-style editor",
+    'articles.catAll': "All",
+    'articles.catFacebook': "📘 Facebook & Meta",
+    'articles.catGoogle': "🔍 Google Ads",
+    'articles.catTelegram': "✈️ Telegram Ads",
+    'articles.catLinkedin': "💼 LinkedIn Ads",
+    'articles.catX': "🐦 X (Twitter) Ads",
+    'articles.catCases': "📊 Case Studies & Analytics",
+    'articles.relatedTitle': "Related articles & insights",
+    'articles.shareTelegram': "Share on Telegram",
+    'articles.copyLink': "Copy link",
+    'articles.copied': "Link copied!",
+    'articles.backToCatalog': "All articles",
+    'articles.pendingNotice': "⏳ This article is currently pending moderation. It will be published once approved by the administrator.",
 
     'hero.eyebrow': "MEDIA BUYING AGENCY",
     'hero.headlineHl': "Turning every sum",
@@ -468,18 +525,16 @@ const TRANSLATIONS = {
 const LANG_OPTIONS = [
   { code: 'uz', label: 'UZ', flag: '🇺🇿', name: "O'zbekcha" },
   { code: 'ru', label: 'RU', flag: '🇷🇺', name: 'Русский' },
-  { code: 'en', label: 'ENG', flag: '🇬🇧', name: 'English' },
+  { code: 'en', label: 'EN', flag: '🇬🇧', name: 'English' },
 ];
 
 function renderLanguageSwitcher(currentLang) {
   const switchWrap = document.getElementById('langSwitch');
   if (!switchWrap) return;
 
-  // Foydalanuvchi joriy tilda bo'lsa, QOLGAN IKKITA tilni ko'rsatamiz
-  const otherLangs = LANG_OPTIONS.filter((l) => l.code !== currentLang);
-
-  switchWrap.innerHTML = otherLangs.map((l) => `
-    <button data-lang="${l.code}" class="lang-btn" title="${l.name}">
+  // Render all language buttons, marking current active
+  switchWrap.innerHTML = LANG_OPTIONS.map((l) => `
+    <button data-lang="${l.code}" class="lang-btn ${l.code === currentLang ? 'active' : ''}" title="${l.name}">
       <span class="flag">${l.flag}</span> ${l.label}
     </button>
   `).join('');
@@ -496,20 +551,27 @@ function applyLanguage(lang) {
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
-    const text = TRANSLATIONS[lang][key];
-    if (text !== undefined) el.textContent = text;
+    const text = TRANSLATIONS[lang] ? TRANSLATIONS[lang][key] : null;
+    if (text !== undefined && text !== null) el.textContent = text;
   });
   document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
     const key = el.getAttribute('data-i18n-ph');
-    const text = TRANSLATIONS[lang][key];
-    if (text !== undefined) el.setAttribute('placeholder', text);
+    const text = TRANSLATIONS[lang] ? TRANSLATIONS[lang][key] : null;
+    if (text !== undefined && text !== null) el.setAttribute('placeholder', text);
   });
 
   renderLanguageSwitcher(lang);
   if (typeof updateCalculator === 'function') updateCalculator();
+
+  // Notify active listeners (e.g. articles catalog, reader page)
+  window.dispatchEvent(new CustomEvent('uniqueLanguageChanged', { detail: { lang } }));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('unique_lang') || 'uz';
   applyLanguage(saved);
 });
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { TRANSLATIONS, LANG_OPTIONS, applyLanguage };
+}

@@ -90,16 +90,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Interactive Creator Banner (Links to /yozish Telegraph editor) -->
     <a href="/yozish" class="article-creator-banner" id="openStudioBannerBtn" title="Telegraph uslubida maqola yozish" style="text-decoration:none;">
       <div class="creator-banner-left">
-        <span class="creator-badge">🔥 HAMMUALLIFLIK / TELEGRAPH</span>
-        <h1 class="creator-banner-title">Siz ham o'z loyihangiz yoki media buying keysingiz haqida maqola yozib yuklang!</h1>
-        <p class="creator-banner-desc">O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni Telegraph uslubidagi qulay muharrir orqali minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.</p>
+        <span class="creator-badge" data-i18n="articles.bannerBadge">🔥 HAMMUALLIFLIK / TELEGRAPH</span>
+        <h1 class="creator-banner-title" data-i18n="articles.bannerTitle">Siz ham o'z loyihangiz yoki media buying keysingiz haqida maqola yozib yuklang!</h1>
+        <p class="creator-banner-desc" data-i18n="articles.bannerDesc">O'z tajribangiz, keyslaringiz va amaliy strategiyalaringizni Telegraph uslubidagi qulay muharrir orqali minglab media buyerlar bilan ulashing. Bepul nashr qiling va o'z brendingizni taniting.</p>
       </div>
       <div class="creator-banner-right">
         <span class="creator-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          <span>Maqola yozish</span>
+          <span data-i18n="articles.writeBtn">Maqola yozish</span>
         </span>
-        <span class="creator-badge-sub">✨ Telegraph uslubida tezkor</span>
+        <span class="creator-badge-sub" data-i18n="articles.bannerSub">✨ Telegraph uslubida tezkor</span>
       </div>
     </a>
 
@@ -428,12 +428,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="translations.js"></script>
 <script src="articles-data.js"></script>
 <script>
-  function formatArticleDate(dateStr) {
+  function formatArticleDate(dateStr, lang) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
-    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
-    return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    const l = lang || localStorage.getItem('unique_lang') || 'uz';
+    const monthsUz = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+    const monthsRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+    const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const m = (l === 'ru') ? monthsRu : (l === 'en' ? monthsEn : monthsUz);
+    return `${d.getUTCDate()} ${m[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
   }
 
   // Mobile nav toggle
@@ -466,10 +470,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   let currentSearch = '';
   let searchDebounceTimer = null;
 
+  function getArticleField(a, field, lang) {
+    const l = lang || localStorage.getItem('unique_lang') || 'uz';
+    if (l === 'ru' && a[field + '_ru']) return a[field + '_ru'];
+    if (l === 'en' && a[field + '_en']) return a[field + '_en'];
+    return a[field] || '';
+  }
+
   function renderArticlesList(articles) {
     if (!articlesGrid) return;
+    const currentLang = localStorage.getItem('unique_lang') || 'uz';
     if (!articles || articles.length === 0) {
-      const currentLang = localStorage.getItem('unique_lang') || 'uz';
       const notFoundText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.notFound'])
         ? TRANSLATIONS[currentLang]['articles.notFound']
         : 'Maqolalar topilmadi.';
@@ -478,28 +489,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     articlesGrid.innerHTML = articles.map((a) => {
-      const dateStr = formatArticleDate(a.created_at);
+      const title = getArticleField(a, 'title', currentLang);
+      const excerpt = getArticleField(a, 'excerpt', currentLang);
+      const readTime = getArticleField(a, 'read_time', currentLang) || (currentLang === 'ru' ? '6 мин' : (currentLang === 'en' ? '6 min read' : '6 daqiqa'));
+      const dateStr = formatArticleDate(a.created_at, currentLang);
       const catLabel = (a.category === 'facebook' ? 'FACEBOOK' : (a.category === 'google' ? 'GOOGLE ADS' : (a.category === 'telegram' ? 'TELEGRAM ADS' : (a.category === 'linkedin' ? 'LINKEDIN ADS' : (a.category === 'x' ? 'X ADS' : a.category.toUpperCase())))));
       const isPending = a.status === 'pending';
-      const statusBadge = isPending ? '<span style="background:#fef3c7; color:#b45309; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; display:inline-block; margin-bottom:6px;">⏳ Moderatsiyada</span>' : '';
+      const statusText = currentLang === 'ru' ? '⏳ На модерации' : (currentLang === 'en' ? '⏳ Pending Moderation' : '⏳ Moderatsiyada');
+      const statusBadge = isPending ? `<span style="background:#fef3c7; color:#b45309; font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:4px; display:inline-block; margin-bottom:6px;">${statusText}</span>` : '';
       
       return `
         <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card in" data-category="${a.category}">
           <div class="cpa-card-thumb-wrap">
-            <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
+            <img src="${a.image_url || 'images/logo-mark.png'}" alt="${title}" loading="lazy">
             <span class="cpa-badge-overlay">${catLabel}</span>
           </div>
           <div class="cpa-card-body">
             ${statusBadge}
-            <h3 class="cpa-card-title">${a.title}</h3>
-            <p class="cpa-card-excerpt">${a.excerpt}</p>
+            <h3 class="cpa-card-title">${title}</h3>
+            <p class="cpa-card-excerpt">${excerpt}</p>
             <div class="cpa-card-footer">
               <div class="cpa-author-info">
                 <img src="${a.author_image || 'images/logo-mark.png'}" alt="Author" class="cpa-author-avatar">
                 <span>${a.author || 'The Unique Media'}</span>
               </div>
               <div class="cpa-meta-right">
-                <span>⏱ ${a.read_time || '6 daqiqa'}</span>
+                <span>⏱ ${readTime}</span>
                 <span>•</span>
                 <span>${dateStr}</span>
               </div>
@@ -512,13 +527,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   function filterLocalArticles() {
     const all = getAllArticles();
+    const currentLang = localStorage.getItem('unique_lang') || 'uz';
     return all.filter((a) => {
       const matchCat = currentCategory === 'all' || (a.category && a.category.toLowerCase() === currentCategory.toLowerCase());
       const q = currentSearch.trim().toLowerCase();
-      const matchSearch = !q || (a.title && a.title.toLowerCase().includes(q)) || (a.excerpt && a.excerpt.toLowerCase().includes(q)) || (a.tags && JSON.stringify(a.tags).toLowerCase().includes(q));
+      if (!q) return matchCat;
+      const tUz = (a.title || '').toLowerCase();
+      const tRu = (a.title_ru || '').toLowerCase();
+      const tEn = (a.title_en || '').toLowerCase();
+      const eUz = (a.excerpt || '').toLowerCase();
+      const eRu = (a.excerpt_ru || '').toLowerCase();
+      const eEn = (a.excerpt_en || '').toLowerCase();
+      const tagsAll = JSON.stringify(a.tags || []).toLowerCase() + JSON.stringify(a.tags_ru || []).toLowerCase() + JSON.stringify(a.tags_en || []).toLowerCase();
+      const matchSearch = tUz.includes(q) || tRu.includes(q) || tEn.includes(q) || eUz.includes(q) || eRu.includes(q) || eEn.includes(q) || tagsAll.includes(q);
       return matchCat && matchSearch;
     });
   }
+
+  window.addEventListener('uniqueLanguageChanged', () => {
+    fetchAndRenderArticles();
+  });
 
   async function fetchAndRenderArticles() {
     if (!articlesGrid) return;

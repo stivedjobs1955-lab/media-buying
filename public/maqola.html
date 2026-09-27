@@ -403,11 +403,17 @@
     <a href="/#home" class="brand"><img src="images/logo-mark.png" alt="Unique Logo" class="brand-logo-img"> <span>Unique</span></a>
     
     <div class="header-right-group">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="uz" class="lang-btn" title="O'zbekcha"><span class="flag">🇺🇿</span> UZ</button>
+        <button data-lang="ru" class="lang-btn" title="Русский"><span class="flag">🇷🇺</span> RU</button>
+        <button data-lang="en" class="lang-btn" title="English"><span class="flag">🇬🇧</span> EN</button>
+      </div>
+
       <nav class="nav-links">
-        <a href="/">Bosh sahifa</a>
-        <a href="/maqolalar">Maqolalar</a>
-        <a href="/#xizmatlar">Xizmatlar</a>
-        <a href="/#aloqa" class="btn-primary btn-sm">Konsultatsiya olish</a>
+        <a href="/" data-i18n="nav.home">Bosh sahifa</a>
+        <a href="/maqolalar" class="active" style="color: var(--flow-600); font-weight:700;" data-i18n="nav.articles">Maqolalar</a>
+        <a href="/#xizmatlar" data-i18n="nav.services">Xizmatlar</a>
+        <a href="/#aloqa" class="btn-primary btn-sm" data-i18n="nav.cta">Konsultatsiya olish</a>
       </nav>
     </div>
   </div>
@@ -419,9 +425,9 @@
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb-nav">
-      <a href="/">Bosh sahifa</a>
+      <a href="/" data-i18n="nav.home">Bosh sahifa</a>
       <span class="sep">/</span>
-      <a href="/maqolalar">Maqolalar</a>
+      <a href="/maqolalar" data-i18n="nav.articles">Maqolalar</a>
       <span class="sep">/</span>
       <span id="breadcrumbCat">Facebook</span>
     </nav>
@@ -430,27 +436,27 @@
     <header class="article-header">
       <div class="article-badge-row">
         <span class="cat-badge facebook" id="articleCategoryBadge">Facebook</span>
-        <span class="article-date-time" id="articleReadTime">⏱ 7 daqiqa o‘qish</span>
+        <span class="article-date-time" id="articleReadTime">⏱ 7 daqiqa</span>
       </div>
-      <h1 class="article-title" id="articleTitle">2026-yilning birinchi yarmi bo‘yicha Facebook va Instagram kontent moderatsiyasi hisoboti</h1>
+      <h1 class="article-title" id="articleTitle">Maqola</h1>
 
       <div class="article-meta-bar">
         <div class="author-info-box">
           <img src="images/logo-mark.png" alt="Unique" class="author-img">
           <div class="author-details">
             <span class="author-name" id="articleAuthor">Unique Media Buying</span>
-            <span class="article-date-time" id="articleDate">Sentabr 2026</span>
+            <span class="article-date-time" id="articleDate">2026</span>
           </div>
         </div>
 
         <div class="article-actions">
-          <a href="https://t.me/share/url?url=https://unique.uz/maqola.html&text=Facebook+va+Instagram+moderatsiya+hisoboti" id="tgShareBtn" target="_blank" rel="noopener" class="share-btn tg">
+          <a href="https://t.me/share/url?url=https://unique.uz&text=Unique" id="tgShareBtn" target="_blank" rel="noopener" class="share-btn tg">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Ulashish
+            <span data-i18n="articles.shareTelegram">Telegram'da ulashish</span>
           </a>
           <button type="button" class="share-btn" id="copyLinkBtn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Nusxa olish
+            <span data-i18n="articles.copyLink">Havolani nusxalash</span>
           </button>
         </div>
       </div>
@@ -624,42 +630,15 @@
 
     <!-- Bottom CTA -->
     <div class="article-cta-box">
-      <h3>Reklama kampaniyalaringizni professional darajaga ko'taring</h3>
-      <p>Meta, Google va Telegram reklamalarida budjetni to'g'ri taqsimlab, blokirovkalarsiz yuqori konversiyaga erishish uchun biz bilan bog'laning.</p>
-      <a href="/#aloqa" class="btn-primary" style="background:#fff; color:#1e3a8a; font-weight:700;">Bepul konsultatsiya olish</a>
+      <h3 data-i18n="cta.title">Reklama kampaniyalaringizni professional darajaga ko'taring</h3>
+      <p data-i18n="cta.text">Meta, Google va Telegram reklamalarida budjetni to'g'ri taqsimlab, blokirovkalarsiz yuqori konversiyaga erishish uchun biz bilan bog'laning.</p>
+      <a href="/#aloqa" class="btn-primary" style="background:#fff; color:#1e3a8a; font-weight:700;" data-i18n="nav.cta">Bepul konsultatsiya olish</a>
     </div>
 
     <!-- Related Articles -->
     <div class="related-section" id="relatedSection">
-      <h3 class="related-title">O‘xshash maqolalar va tahlillar</h3>
-      <div class="related-grid" id="relatedGrid">
-        <!-- Related 1 -->
-        <a href="/maqola?slug=google-ads-pmax-roas-optimization-guide-2026" class="related-card">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Google Ads Performance Max" loading="lazy">
-          <div class="related-card-content">
-            <h4 class="related-card-title">Google Ads Performance Max kampaniyalarida ROAS'ni 3.8x ga ko‘tarish bo‘yicha qo‘llanma</h4>
-            <div class="related-card-meta">⏱ 6 daqiqa · GOOGLE ADS · Sentabr 2026</div>
-          </div>
-        </a>
-
-        <!-- Related 2 -->
-        <a href="/maqola?slug=telegram-ads-conversion-scaling-strategies" class="related-card">
-          <img src="https://images.unsplash.com/photo-1614680376593-902f749f7ffc?auto=format&fit=crop&w=800&q=80" alt="Telegram Ads Targeting" loading="lazy">
-          <div class="related-card-content">
-            <h4 class="related-card-title">Telegram Ads rasmiy platformasida konversiyani 2 barobarga oshirish sirlari</h4>
-            <div class="related-card-meta">⏱ 5 daqiqa · TELEGRAM ADS · Sentabr 2026</div>
-          </div>
-        </a>
-
-        <!-- Related 3 -->
-        <a href="/maqola?slug=facebook-ads-ban-prevention-antidetect-guide" class="related-card">
-          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Facebook Anti-Detect Guide" loading="lazy">
-          <div class="related-card-content">
-            <h4 class="related-card-title">Facebook va Instagram'da cheklovlarsiz ishlash: 2026-yilgi trust va anti-detect strategiyasi</h4>
-            <div class="related-card-meta">⏱ 8 daqiqa · FACEBOOK · Avgust 2026</div>
-          </div>
-        </a>
-      </div>
+      <h3 class="related-title" data-i18n="articles.relatedTitle">O‘xshash maqolalar va tahlillar</h3>
+      <div class="related-grid" id="relatedGrid"></div>
     </div>
 
   </div>
@@ -668,9 +647,11 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.</p>
+      <p class="footer-copy" data-i18n="footer.rights">© 2026 Unique Media Buying Agency. Barcha huquqlar himoyalangan.</p>
       <div class="footer-bottom-links">
-        <a href="/oferta" target="_blank" rel="noopener">Ommaviy oferta</a>
+        <a href="/oferta" target="_blank" rel="noopener" data-i18n="footer.offer">Ommaviy oferta</a>
+        <span class="footer-dot">•</span>
+        <span data-i18n="footer.city">Toshkent, O'zbekiston</span>
       </div>
     </div>
   </div>
@@ -679,12 +660,26 @@
 <script src="translations.js"></script>
 <script src="articles-data.js"></script>
 <script>
-  function formatArticleDate(dateStr) {
+  let cachedArticle = null;
+  let cachedRelated = [];
+
+  function formatArticleDate(dateStr, lang) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
-    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
-    return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    const l = lang || localStorage.getItem('unique_lang') || 'uz';
+    const monthsUz = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+    const monthsRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+    const monthsEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const m = (l === 'ru') ? monthsRu : (l === 'en' ? monthsEn : monthsUz);
+    return `${d.getUTCDate()} ${m[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  }
+
+  function getArticleField(a, field, lang) {
+    const l = lang || localStorage.getItem('unique_lang') || 'uz';
+    if (l === 'ru' && a[field + '_ru']) return a[field + '_ru'];
+    if (l === 'en' && a[field + '_en']) return a[field + '_en'];
+    return a[field] || '';
   }
 
   // Reading progress bar
@@ -697,14 +692,23 @@
 
   function applyArticleData(article, relatedArticles) {
     if (!article) return;
+    cachedArticle = article;
+    if (relatedArticles) cachedRelated = relatedArticles;
 
-    document.getElementById('pageTitle').textContent = article.title + ' — The Unique Media';
-    document.getElementById('pageDesc').setAttribute('content', article.excerpt);
-    document.getElementById('articleTitle').textContent = article.title;
-    document.getElementById('articleBody').innerHTML = article.content;
+    const currentLang = localStorage.getItem('unique_lang') || 'uz';
+    const title = getArticleField(article, 'title', currentLang);
+    const excerpt = getArticleField(article, 'excerpt', currentLang);
+    const content = getArticleField(article, 'content', currentLang);
+    const readTime = getArticleField(article, 'read_time', currentLang) || (currentLang === 'ru' ? '7 мин' : (currentLang === 'en' ? '7 min read' : '7 daqiqa'));
+    const catUpper = (article.category === 'facebook' ? 'FACEBOOK & META' : (article.category === 'google' ? 'GOOGLE ADS' : (article.category === 'telegram' ? 'TELEGRAM ADS' : (article.category === 'linkedin' ? 'LINKEDIN ADS' : (article.category === 'x' ? 'X ADS' : article.category.toUpperCase())))));
+
+    document.getElementById('pageTitle').textContent = title + ' — Unique Media Buying';
+    document.getElementById('pageDesc').setAttribute('content', excerpt);
+    document.getElementById('articleTitle').textContent = title;
+    document.getElementById('articleBody').innerHTML = content;
     document.getElementById('articleAuthor').textContent = article.author || 'The Unique Media';
-    document.getElementById('articleReadTime').textContent = '⏱ ' + (article.read_time || '7 daqiqa');
-    document.getElementById('breadcrumbCat').textContent = article.category.toUpperCase();
+    document.getElementById('articleReadTime').textContent = '⏱ ' + readTime;
+    document.getElementById('breadcrumbCat').textContent = catUpper;
 
     const authorImgEl = document.querySelector('.author-img');
     if (authorImgEl) {
@@ -712,29 +716,33 @@
     }
 
     const catBadge = document.getElementById('articleCategoryBadge');
-    catBadge.textContent = article.category.toUpperCase();
+    catBadge.textContent = catUpper;
     catBadge.className = 'cat-badge ' + article.category.toLowerCase();
 
     // Check if article is pending moderation
     const existingNotice = document.getElementById('pendingModerationNotice');
     if (existingNotice) existingNotice.remove();
     if (article.status === 'pending') {
+      const noticeText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.pendingNotice'])
+        ? TRANSLATIONS[currentLang]['articles.pendingNotice']
+        : '⏳ Ushbu maqola ayni paytda moderator tekshiruvida.';
       const notice = document.createElement('div');
       notice.id = 'pendingModerationNotice';
       notice.style.cssText = 'background:#fef3c7; border:1px solid #fde68a; color:#b45309; padding:12px 18px; border-radius:8px; margin-bottom:20px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:8px;';
-      notice.innerHTML = '<span>⏳</span> <span>Ushbu maqola ayni paytda moderator tekshiruvida. Administrator tasdiqlaganidan so\'ng ommaga chiqariladi.</span>';
+      notice.innerHTML = `<span>${noticeText}</span>`;
       document.querySelector('.article-header').prepend(notice);
     }
 
     // Date formatting Exact Day Month Year
     if (article.created_at) {
-      document.getElementById('articleDate').textContent = formatArticleDate(article.created_at);
+      document.getElementById('articleDate').textContent = formatArticleDate(article.created_at, currentLang);
     }
 
     // Cover image
     const coverImg = document.getElementById('articleCoverImg');
     if (article.image_url) {
       coverImg.src = article.image_url;
+      coverImg.alt = title;
       document.getElementById('featuredImageWrap').style.display = 'flex';
     } else {
       document.getElementById('featuredImageWrap').style.display = 'none';
@@ -742,9 +750,13 @@
 
     // Tags
     const tagsWrap = document.getElementById('articleTagsWrap');
-    let tagsList = Array.isArray(article.tags) ? article.tags : [];
-    if (typeof article.tags === 'string') {
-      try { tagsList = JSON.parse(article.tags); } catch { tagsList = article.tags.split(','); }
+    let tagsList = (currentLang === 'ru' && article.tags_ru) ? article.tags_ru : ((currentLang === 'en' && article.tags_en) ? article.tags_en : article.tags);
+    if (!Array.isArray(tagsList)) {
+      if (typeof tagsList === 'string') {
+        try { tagsList = JSON.parse(tagsList); } catch { tagsList = tagsList.split(','); }
+      } else {
+        tagsList = [];
+      }
     }
     if (tagsList.length > 0) {
       tagsWrap.innerHTML = tagsList.map(t => `<a href="/maqolalar" class="tag-item">#${String(t).trim()}</a>`).join('');
@@ -755,27 +767,42 @@
 
     // Share TG
     const tgBtn = document.getElementById('tgShareBtn');
-    tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`;
+    if (tgBtn) {
+      tgBtn.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(title)}`;
+    }
 
     // Copy link
-    document.getElementById('copyLinkBtn').addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        alert("Havola nusxalandi!");
+    const copyBtn = document.getElementById('copyLinkBtn');
+    if (copyBtn && !copyBtn.dataset.bound) {
+      copyBtn.dataset.bound = 'true';
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const copiedMsg = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.copied'])
+            ? TRANSLATIONS[currentLang]['articles.copied']
+            : "Havola nusxalandi!";
+          alert(copiedMsg);
+        });
       });
-    });
+    }
 
     // Related articles
-    if (relatedArticles && relatedArticles.length > 0) {
+    if (cachedRelated && cachedRelated.length > 0) {
       const grid = document.getElementById('relatedGrid');
-      grid.innerHTML = relatedArticles.map(r => `
-        <a href="/maqola?slug=${encodeURIComponent(r.slug)}" class="related-card">
-          ${r.image_url ? `<img src="${r.image_url}" alt="${r.title}" loading="lazy">` : ''}
-          <div class="related-card-content">
-            <h4 class="related-card-title">${r.title}</h4>
-            <div class="related-card-meta">⏱ ${r.read_time || '5 daqiqa'} · ${r.category.toUpperCase()} · ${formatArticleDate(r.created_at)}</div>
-          </div>
-        </a>
-      `).join('');
+      grid.innerHTML = cachedRelated.map(r => {
+        const rTitle = getArticleField(r, 'title', currentLang);
+        const rRead = getArticleField(r, 'read_time', currentLang) || (currentLang === 'ru' ? '5 мин' : (currentLang === 'en' ? '5 min' : '5 daqiqa'));
+        const rDate = formatArticleDate(r.created_at, currentLang);
+        const rCat = (r.category === 'facebook' ? 'FACEBOOK' : (r.category === 'google' ? 'GOOGLE ADS' : (r.category === 'telegram' ? 'TELEGRAM ADS' : (r.category === 'linkedin' ? 'LINKEDIN' : (r.category === 'x' ? 'X ADS' : r.category.toUpperCase())))));
+        return `
+          <a href="/maqola?slug=${encodeURIComponent(r.slug)}" class="related-card">
+            ${r.image_url ? `<img src="${r.image_url}" alt="${rTitle}" loading="lazy">` : ''}
+            <div class="related-card-content">
+              <h4 class="related-card-title">${rTitle}</h4>
+              <div class="related-card-meta">⏱ ${rRead} · ${rCat} · ${rDate}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
       document.getElementById('relatedSection').style.display = 'block';
     }
   }
@@ -814,6 +841,14 @@
       // Keep pre-rendered content
     }
   }
+
+  window.addEventListener('uniqueLanguageChanged', () => {
+    if (cachedArticle) {
+      applyArticleData(cachedArticle, cachedRelated);
+    } else {
+      loadArticle();
+    }
+  });
 
   loadArticle();
 </script>
