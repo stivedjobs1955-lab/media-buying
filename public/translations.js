@@ -2,6 +2,7 @@ const TRANSLATIONS = {
   uz: {
     'nav.services': "Xizmatlar",
     'nav.articles': "Maqolalar",
+    'nav.mentorship': "Mentorlik",
     'nav.analysis': "Tahlil va Target",
     'nav.clients': "Mijozlar",
     'nav.process': "Jarayon",
@@ -177,6 +178,7 @@ const TRANSLATIONS = {
   ru: {
     'nav.services': "Услуги",
     'nav.articles': "Статьи",
+    'nav.mentorship': "Менторство",
     'nav.analysis': "Аналитика и таргет",
     'nav.clients': "Клиенты",
     'nav.process': "Процесс",
@@ -352,6 +354,7 @@ const TRANSLATIONS = {
   en: {
     'nav.services': "Services",
     'nav.articles': "Articles",
+    'nav.mentorship': "Mentorship",
     'nav.analysis': "Analytics & Targeting",
     'nav.clients': "Clients",
     'nav.process': "Process",
