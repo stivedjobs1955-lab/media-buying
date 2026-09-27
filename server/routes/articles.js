@@ -194,6 +194,47 @@ router.post('/', (req, res) => {
   }
 });
 
+// Admin: Edit full article
+router.put('/:id', requireAuth, (req, res) => {
+  const { title, slug, excerpt, content, category, tags, image_url, author, read_time, status } = req.body || {};
+  if (!title || !excerpt || !content) {
+    return res.status(400).json({ error: 'Sarlavha, qisqacha tavsif va matn talab qilinadi' });
+  }
+
+  const tagsStr = Array.isArray(tags) ? JSON.stringify(tags) : JSON.stringify((tags || '').split(',').map(s => s.trim()).filter(Boolean));
+  const validStatus = ['published', 'rejected', 'pending'].includes(status) ? status : 'published';
+
+  try {
+    const existing = db.prepare('SELECT id, slug FROM articles WHERE id = ?').get(Number(req.params.id));
+    if (!existing) return res.status(404).json({ error: 'Maqola topilmadi' });
+
+    const finalSlug = slug ? slugify(slug) : existing.slug;
+
+    db.prepare(`
+      UPDATE articles 
+      SET title = ?, slug = ?, excerpt = ?, content = ?, category = ?, tags = ?, image_url = ?, author = ?, read_time = ?, status = ?
+      WHERE id = ?
+    `).run(
+      String(title).trim(),
+      finalSlug,
+      String(excerpt).trim(),
+      String(content).trim(),
+      String(category || 'facebook').toLowerCase().trim(),
+      tagsStr,
+      image_url || null,
+      String(author || 'The Unique Media').trim(),
+      String(read_time || '5 daqiqa').trim(),
+      validStatus,
+      Number(req.params.id)
+    );
+
+    res.json({ ok: true, id: req.params.id, message: 'Maqola muvaffaqiyatli tahrirlandi' });
+  } catch (err) {
+    console.error('[Article update error]', err);
+    res.status(500).json({ error: 'Maqolani yangilashda xatolik yuz berdi' });
+  }
+});
+
 // Admin: Delete article
 router.delete('/:id', requireAuth, (req, res) => {
   try {

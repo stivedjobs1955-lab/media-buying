@@ -520,10 +520,11 @@ function renderBookingsTable() {
   });
 }
 
-/* ---------------- Articles Moderation ---------------- */
+/* ---------------- Articles Management & Moderation ---------------- */
 let allArticlesList = [];
-let activeArticleFilter = 'all';
+let activeArticleFilter = 'pending';
 let currentPreviewArticleId = null;
+let currentEditArticleId = null;
 
 const articleStatusTabs = document.getElementById('articleStatusTabs');
 const articlesTableBody = document.getElementById('articlesTableBody');
@@ -532,6 +533,14 @@ const closeArticlePreviewBtn = document.getElementById('closeArticlePreviewBtn')
 const closeArticlePreviewBtnBottom = document.getElementById('closeArticlePreviewBtnBottom');
 const modalApproveBtn = document.getElementById('modalApproveBtn');
 const modalRejectBtn = document.getElementById('modalRejectBtn');
+const modalEditBtn = document.getElementById('modalEditBtn');
+
+// Edit Modal Elements
+const articleEditModal = document.getElementById('articleEditModal');
+const closeArticleEditBtn = document.getElementById('closeArticleEditBtn');
+const cancelArticleEditBtn = document.getElementById('cancelArticleEditBtn');
+const articleEditForm = document.getElementById('articleEditForm');
+const editArticleAlert = document.getElementById('editArticleAlert');
 
 if (articleStatusTabs) {
   articleStatusTabs.addEventListener('click', (e) => {
@@ -600,7 +609,10 @@ function renderArticlesTable() {
   }
 
   if (filtered.length === 0) {
-    articlesTableBody.innerHTML = '<tr class="empty-row"><td colspan="7" style="text-align:center; padding:30px; color:var(--ink-400);">Ushbu bo\'limda hozircha maqolalar yo\'q</td></tr>';
+    const emptyMsg = activeArticleFilter === 'pending'
+      ? '⏳ Hozirda tekshiruv uchun kutilayotgan yangi maqolalar yo\'q'
+      : (activeArticleFilter === 'published' ? '✅ Chop etilgan maqolalar yo\'q' : 'Ushbu bo\'limda hozircha maqolalar yo\'q');
+    articlesTableBody.innerHTML = `<tr class="empty-row"><td colspan="7" style="text-align:center; padding:32px; color:var(--ink-400);">${emptyMsg}</td></tr>`;
     return;
   }
 
@@ -634,7 +646,8 @@ function renderArticlesTable() {
           <span class="status-badge ${statusClass}">${statusLabel}</span>
         </td>
         <td style="text-align:right; white-space:nowrap;">
-          <button type="button" class="btn-preview preview-art-btn" data-id="${a.id}" title="To'liq o'qish va ko'rish">👁 Ko'rish</button>
+          <button type="button" class="btn-preview preview-art-btn" data-id="${a.id}" title="To'liq o'qish">👁 Ko'rish</button>
+          <button type="button" class="btn-edit edit-art-btn" data-id="${a.id}" title="Tahrirlash">✏️ Tahrirlash</button>
           ${status === 'pending' || status === 'rejected' ? `<button type="button" class="btn-approve approve-art-btn" data-id="${a.id}" title="Tasdiqlash">✅ Tasdiqlash</button>` : ''}
           ${status === 'pending' || status === 'published' ? `<button type="button" class="btn-reject reject-art-btn" data-id="${a.id}" title="Rad etish">❌ Rad etish</button>` : ''}
           <button type="button" class="btn-danger delete-art-btn" data-id="${a.id}" style="padding:5px 8px; font-size:0.75rem;" title="O'chirish">🗑</button>
@@ -646,6 +659,10 @@ function renderArticlesTable() {
   // Action listeners
   articlesTableBody.querySelectorAll('.preview-art-btn').forEach((btn) => {
     btn.addEventListener('click', () => openArticlePreview(btn.dataset.id));
+  });
+
+  articlesTableBody.querySelectorAll('.edit-art-btn').forEach((btn) => {
+    btn.addEventListener('click', () => openArticleEdit(btn.dataset.id));
   });
 
   articlesTableBody.querySelectorAll('.approve-art-btn').forEach((btn) => {
@@ -709,6 +726,16 @@ function closeArticlePreview() {
 if (closeArticlePreviewBtn) closeArticlePreviewBtn.addEventListener('click', closeArticlePreview);
 if (closeArticlePreviewBtnBottom) closeArticlePreviewBtnBottom.addEventListener('click', closeArticlePreview);
 
+if (modalEditBtn) {
+  modalEditBtn.addEventListener('click', () => {
+    if (currentPreviewArticleId) {
+      const id = currentPreviewArticleId;
+      closeArticlePreview();
+      openArticleEdit(id);
+    }
+  });
+}
+
 if (modalApproveBtn) {
   modalApproveBtn.addEventListener('click', () => {
     if (currentPreviewArticleId) {
@@ -724,6 +751,132 @@ if (modalRejectBtn) {
       setArticleStatus(currentPreviewArticleId, 'rejected');
       closeArticlePreview();
     }
+  });
+}
+
+/* ---------------- Article Edit System ---------------- */
+function openArticleEdit(id) {
+  currentEditArticleId = id;
+  editArticleAlert.className = 'hidden';
+  editArticleAlert.textContent = '';
+
+  const localFound = allArticlesList.find((x) => String(x.id) === String(id));
+
+  function populateEditForm(art) {
+    document.getElementById('editArticleId').value = art.id || id;
+    document.getElementById('editArticleTitle').value = art.title || '';
+    document.getElementById('editArticleSlug').value = art.slug || '';
+    document.getElementById('editArticleCategory').value = (art.category || 'facebook').toLowerCase();
+    document.getElementById('editArticleAuthor').value = art.author || 'The Unique Media';
+    document.getElementById('editArticleReadTime').value = art.read_time || '6 daqiqa';
+    document.getElementById('editArticleStatus').value = art.status || 'published';
+    
+    let tagsStr = '';
+    if (Array.isArray(art.tags)) {
+      tagsStr = art.tags.join(', ');
+    } else if (typeof art.tags === 'string') {
+      try { tagsStr = JSON.parse(art.tags).join(', '); } catch { tagsStr = art.tags; }
+    }
+    document.getElementById('editArticleTags').value = tagsStr;
+    document.getElementById('editArticleImage').value = art.image_url || '';
+    document.getElementById('editArticleExcerpt').value = art.excerpt || '';
+    document.getElementById('editArticleContent').value = art.content || '';
+  }
+
+  if (localFound) populateEditForm(localFound);
+
+  authFetch(`/api/articles/admin/${id}`)
+    .then((r) => r.json())
+    .then((art) => {
+      populateEditForm(art);
+    })
+    .catch(() => {});
+
+  articleEditModal.classList.remove('hidden');
+}
+
+function closeArticleEdit() {
+  articleEditModal.classList.add('hidden');
+  currentEditArticleId = null;
+}
+
+if (closeArticleEditBtn) closeArticleEditBtn.addEventListener('click', closeArticleEdit);
+if (cancelArticleEditBtn) cancelArticleEditBtn.addEventListener('click', closeArticleEdit);
+
+if (articleEditForm) {
+  articleEditForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    editArticleAlert.className = 'hidden';
+    editArticleAlert.textContent = '';
+
+    const id = document.getElementById('editArticleId').value || currentEditArticleId;
+    const title = document.getElementById('editArticleTitle').value.trim();
+    const slug = document.getElementById('editArticleSlug').value.trim();
+    const category = document.getElementById('editArticleCategory').value;
+    const author = document.getElementById('editArticleAuthor').value.trim() || 'The Unique Media';
+    const read_time = document.getElementById('editArticleReadTime').value.trim() || '5 daqiqa';
+    const status = document.getElementById('editArticleStatus').value;
+    const tagsInput = document.getElementById('editArticleTags').value;
+    const image_url = document.getElementById('editArticleImage').value.trim();
+    const excerpt = document.getElementById('editArticleExcerpt').value.trim();
+    const content = document.getElementById('editArticleContent').value.trim();
+
+    const tags = tagsInput.split(',').map((t) => t.trim()).filter(Boolean);
+
+    const payload = {
+      title,
+      slug,
+      category,
+      author,
+      read_time,
+      status,
+      tags,
+      image_url,
+      excerpt,
+      content
+    };
+
+    authFetch(`/api/articles/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then((r) => r.json().then((data) => ({ ok: r.ok, data })))
+      .then(({ ok, data }) => {
+        if (!ok) {
+          editArticleAlert.className = 'alert-error';
+          editArticleAlert.textContent = data.error || 'Tahrirlashda xatolik yuz berdi';
+          return;
+        }
+
+        // Update in memory list
+        const item = allArticlesList.find((x) => String(x.id) === String(id));
+        if (item) {
+          Object.assign(item, payload);
+        }
+
+        // Update in localStorage if present
+        try {
+          let local = JSON.parse(localStorage.getItem('unique_user_articles') || '[]');
+          const lItem = local.find((x) => String(x.id) === String(id));
+          if (lItem) {
+            Object.assign(lItem, payload);
+            localStorage.setItem('unique_user_articles', JSON.stringify(local));
+          }
+        } catch(e) {}
+
+        editArticleAlert.className = 'alert-success';
+        editArticleAlert.textContent = '✅ Maqola muvaffaqiyatli saqlandi!';
+
+        setTimeout(() => {
+          closeArticleEdit();
+          updateArticleCountsAndTable();
+        }, 800);
+      })
+      .catch((err) => {
+        editArticleAlert.className = 'alert-error';
+        editArticleAlert.textContent = err.message || 'Serverga ulanishda xatolik';
+      });
   });
 }
 

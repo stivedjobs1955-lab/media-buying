@@ -106,10 +106,99 @@
       <div class="modal-actions" style="margin-top:16px; padding-top:14px; border-top:1px solid var(--ink-100); justify-content:space-between; align-items:center;">
         <button type="button" class="btn-secondary" id="closeArticlePreviewBtnBottom">Yopish</button>
         <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-secondary" id="modalEditBtn" style="padding:8px 16px; font-weight:600;">✏️ Tahrirlash</button>
           <button type="button" class="btn-danger" id="modalRejectBtn" style="padding:8px 16px; font-weight:600;">❌ Rad etish</button>
           <button type="button" class="btn-primary" id="modalApproveBtn" style="width:auto; background:#10b981; padding:8px 20px; font-weight:700;">✅ Tasdiqlash va Nashr qilish</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Maqolani Tahrirlash (Edit) Modali -->
+  <div id="articleEditModal" class="modal-overlay hidden">
+    <div class="modal-card" style="max-width:880px; width:95%; max-height:92vh; display:flex; flex-direction:column; overflow:hidden; padding:24px;">
+      <div class="modal-head" style="margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--ink-100);">
+        <h3 style="display:flex; align-items:center; gap:8px;">
+          <span>✏️ Maqolani Tahrirlash</span>
+        </h3>
+        <button class="modal-close" id="closeArticleEditBtn">&times;</button>
+      </div>
+
+      <div id="editArticleAlert" class="hidden" style="margin-bottom:12px;"></div>
+
+      <form id="articleEditForm" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+        <input type="hidden" id="editArticleId">
+        
+        <div class="modal-scroll-body" style="overflow-y:auto; padding-right:8px; flex:1;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+            <div class="field" style="margin-bottom:0; grid-column:span 2;">
+              <label for="editArticleTitle">Maqola sarlavhasi *</label>
+              <input type="text" id="editArticleTitle" required placeholder="Sarlavha">
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleSlug">Slug (Havola) *</label>
+              <input type="text" id="editArticleSlug" required placeholder="masalan: meta-ads-guide-2026">
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleCategory">Kategoriya</label>
+              <select id="editArticleCategory">
+                <option value="facebook">📘 Facebook & Meta</option>
+                <option value="google">🔍 Google Ads</option>
+                <option value="telegram">✈️ Telegram Ads</option>
+                <option value="linkedin">💼 LinkedIn Ads</option>
+                <option value="x">🐦 X (Twitter) Ads</option>
+                <option value="cases">📊 Keyslar & Tahlil</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleAuthor">Muallif nomi</label>
+              <input type="text" id="editArticleAuthor" placeholder="The Unique Media">
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleReadTime">O'qish vaqti</label>
+              <input type="text" id="editArticleReadTime" placeholder="masalan: 6 daqiqa">
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleStatus">Status (Holati)</label>
+              <select id="editArticleStatus">
+                <option value="published">✅ Tasdiqlangan (Published)</option>
+                <option value="pending">⏳ Tekshiruvda (Pending)</option>
+                <option value="rejected">❌ Rad etilgan (Rejected)</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="editArticleTags">Teglar (Vergul bilan)</label>
+              <input type="text" id="editArticleTags" placeholder="Meta, Target, ROI">
+            </div>
+
+            <div class="field" style="margin-bottom:0; grid-column:span 2;">
+              <label for="editArticleImage">Muqova rasmi (Image URL / Cover)</label>
+              <input type="text" id="editArticleImage" placeholder="https://images.unsplash.com/...">
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:14px;">
+            <label for="editArticleExcerpt">Qisqacha tavsif (Excerpt) *</label>
+            <textarea id="editArticleExcerpt" rows="2" required style="width:100%; border:1px solid var(--ink-100); border-radius:0.7rem; padding:10px; font-size:0.9rem;" placeholder="Maqolaning asosiy mohiyati..."></textarea>
+          </div>
+
+          <div class="field" style="margin-bottom:6px;">
+            <label for="editArticleContent">Maqola to'liq matni (HTML qo'llab-quvvatlanadi) *</label>
+            <textarea id="editArticleContent" rows="10" required style="width:100%; border:1px solid var(--ink-100); border-radius:0.7rem; padding:12px; font-size:0.9rem; font-family:monospace; line-height:1.5;" placeholder="<p>Maqola matni...</p>"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--ink-100); justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn-secondary" id="cancelArticleEditBtn">Bekor qilish</button>
+          <button type="submit" class="btn-primary" id="saveArticleEditBtn" style="width:auto; background:var(--flow-600); padding:10px 24px; font-weight:700;">💾 O'zgarishlarni saqlash</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -128,25 +217,25 @@
         <div class="value" id="statViews">0</div>
       </div>
       <div class="stat-card">
-        <div class="label">⏳ Kutilayotgan maqolalar</div>
+        <div class="label">⏳ Tekshiruvdagi maqolalar</div>
         <div class="value" id="statPendingArticles" style="color:#d97706;">0</div>
       </div>
     </div>
 
-    <!-- Maqolalar Moderatsiyasi (Articles Moderation Section) -->
+    <!-- Maqolalar Boshqaruvi (Articles Section) -->
     <div class="leads-section" style="margin-bottom:24px;" id="articlesSection">
       <div class="leads-head">
         <div style="display:flex; align-items:center; gap:10px;">
           <h3 style="display:flex; align-items:center; gap:8px;">
-            <span>📝 Maqolalar Moderatsiyasi</span>
+            <span>📝 Maqolalar boshqaruvi</span>
             <span class="count-badge" id="pendingArticlesBadge">0 kutilmoqda</span>
           </h3>
         </div>
         <div class="status-tabs" id="articleStatusTabs">
-          <button class="status-tab active" data-status="all">Barchasi (<span id="countArtAll">0</span>)</button>
-          <button class="status-tab" data-status="pending">⏳ Kutilmoqda (<span id="countArtPending">0</span>)</button>
-          <button class="status-tab" data-status="published">✅ Tasdiqlangan (<span id="countArtPublished">0</span>)</button>
-          <button class="status-tab" data-status="rejected">❌ Rad etilgan (<span id="countArtRejected">0</span>)</button>
+          <button class="status-tab active" data-status="pending">⏳ Tekshiruvda (<span id="countArtPending">0</span>)</button>
+          <button class="status-tab" data-status="published">✅ Chop etilganlar (<span id="countArtPublished">0</span>)</button>
+          <button class="status-tab" data-status="rejected">❌ Rad etilganlar (<span id="countArtRejected">0</span>)</button>
+          <button class="status-tab" data-status="all">📁 Barchasi (<span id="countArtAll">0</span>)</button>
         </div>
       </div>
       

@@ -264,8 +264,10 @@ input, select, textarea { font-family: inherit; }
 .btn-approve:hover { background: #059669; }
 .btn-reject { background: #f43f5e; color: #fff; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background .15s; }
 .btn-reject:hover { background: #e11d48; }
-.btn-preview { background: var(--ink-100); color: var(--ink-800); border: 1px solid var(--ink-200); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
+.btn-preview { background: var(--ink-100); color: var(--ink-800); border: 1px solid var(--ink-200); padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background .15s; }
 .btn-preview:hover { background: var(--ink-200); }
+.btn-edit { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+.btn-edit:hover { background: #0284c7; color: #fff; border-color: #0284c7; }
 
 .article-content-render h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.6rem; color: var(--ink-900); }
 .article-content-render h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; color: var(--ink-800); }
