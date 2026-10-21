@@ -4,6 +4,37 @@ const { requireAuth } = require('../token');
 const { notifyNewArticle } = require('../telegram');
 
 const router = express.Router();
+const path = require('node:path');
+let SEED_BY_SLUG = new Map();
+try {
+  const { ARTICLES_DATA } = require(path.join(__dirname, '..', '..', 'public', 'articles-data.js'));
+  if (Array.isArray(ARTICLES_DATA)) {
+    SEED_BY_SLUG = new Map(ARTICLES_DATA.map((a) => [a.slug, a]));
+  }
+} catch (e) {}
+
+function enrichMultilingual(row, includeContent = false) {
+  if (!row) return row;
+  const seed = SEED_BY_SLUG.get(row.slug);
+  if (!seed) return row;
+  const out = {
+    ...row,
+    title_ru: row.title_ru || seed.title_ru,
+    title_en: row.title_en || seed.title_en,
+    excerpt_ru: row.excerpt_ru || seed.excerpt_ru,
+    excerpt_en: row.excerpt_en || seed.excerpt_en,
+    read_time_ru: row.read_time_ru || seed.read_time_ru,
+    read_time_en: row.read_time_en || seed.read_time_en,
+    tags_ru: row.tags_ru || seed.tags_ru,
+    tags_en: row.tags_en || seed.tags_en,
+  };
+  if (includeContent) {
+    out.content_ru = row.content_ru || seed.content_ru;
+    out.content_en = row.content_en || seed.content_en;
+  }
+  return out;
+}
+
 
 // Helper to sanitize slug
 function slugify(text) {
@@ -32,7 +63,7 @@ router.get('/admin/all', requireAuth, (req, res) => {
     const parsed = rows.map((r) => {
       let tags = [];
       try { tags = JSON.parse(r.tags); } catch { tags = r.tags ? r.tags.split(',') : []; }
-      return { ...r, tags };
+      return enrichMultilingual({ ...r, tags }, false);
     });
     res.json(parsed);
   } catch (err) {
@@ -97,7 +128,7 @@ router.get('/', (req, res) => {
     const parsed = rows.map((r) => {
       let tags = [];
       try { tags = JSON.parse(r.tags); } catch { tags = r.tags ? r.tags.split(',') : []; }
-      return { ...r, tags };
+      return enrichMultilingual({ ...r, tags }, false);
     });
     res.json(parsed);
   } catch (err) {
@@ -126,11 +157,12 @@ router.get('/:slug', (req, res) => {
     }
 
     // Get related articles (same category or recent)
-    const related = db.prepare(
+
+const related = db.prepare(
       "SELECT id, slug, title, excerpt, category, image_url, read_time, created_at FROM articles WHERE id != ? AND (status = 'published' OR status IS NULL) ORDER BY created_at DESC LIMIT 3"
     ).all(article.id);
 
-    res.json({ article, related });
+    res.json({ article: enrichMultilingual(article, true), related: related.map(r => enrichMultilingual(r, false)) });
   } catch (err) {
     console.error('[Article get error]', err);
     res.status(500).json({ error: 'Serverda xatolik yuz berdi' });
@@ -147,7 +179,7 @@ router.post('/', (req, res) => {
   const slug = slugify(req.body.slug || title) + '-' + Date.now().toString().slice(-4);
   const tagsStr = Array.isArray(tags) ? JSON.stringify(tags) : JSON.stringify((tags || '').split(',').map(s => s.trim()).filter(Boolean));
   const createdAt = new Date().toISOString();
-  
+
   // Public submissions default to 'pending' for admin moderation
   const status = req.body.status === 'published' && req.headers.authorization ? 'published' : 'pending';
 
@@ -242,8 +274,10 @@ router.delete('/:id', requireAuth, (req, res) => {
     if (info.changes === 0) return res.status(404).json({ error: 'Maqola topilmadi' });
     res.json({ ok: true });
   } catch (err) {
-    res.status(500).json({ error: 'Maqolani o\'chirishda xatolik' });
+
+res.status(500).json({ error: 'Maqolani o\'chirishda xatolik' });
   }
 });
 
 module.exports = router;
+

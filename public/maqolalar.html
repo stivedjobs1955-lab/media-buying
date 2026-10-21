@@ -67,6 +67,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="lang-switch" id="langSwitch">
         <button data-lang="uz" class="lang-btn" title="O'zbekcha"><span class="flag">🇺🇿</span> UZ</button>
         <button data-lang="ru" class="lang-btn" title="Русский"><span class="flag">🇷🇺</span> RU</button>
+        <button data-lang="en" class="lang-btn" title="English"><span class="flag">🇬🇧</span> EN</button>
       </div>
 
       <nav class="nav-links" id="navLinks">
@@ -475,10 +476,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       userArticles = [];
     }
 
+    const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
+    const defaultBySlug = new Map(defaultArticles.map((a) => [a.slug, a]));
+
     if (serverArticles && serverArticles.length > 0) {
-      const serverSlugs = new Set(serverArticles.map((a) => a.slug));
+      const enrichedServer = serverArticles.map((sa) => {
+        const localMatch = defaultBySlug.get(sa.slug);
+        return localMatch ? { ...localMatch, ...sa, title_ru: sa.title_ru || localMatch.title_ru, title_en: sa.title_en || localMatch.title_en, excerpt_ru: sa.excerpt_ru || localMatch.excerpt_ru, excerpt_en: sa.excerpt_en || localMatch.excerpt_en, read_time_ru: sa.read_time_ru || localMatch.read_time_ru, read_time_en: sa.read_time_en || localMatch.read_time_en, tags_ru: sa.tags_ru || localMatch.tags_ru, tags_en: sa.tags_en || localMatch.tags_en } : sa;
+      });
+      const serverSlugs = new Set(enrichedServer.map((a) => a.slug));
       const localOnly = userArticles.filter((a) => !serverSlugs.has(a.slug));
-      return [...localOnly, ...serverArticles];
+      const missingDefaults = defaultArticles.filter((a) => !serverSlugs.has(a.slug));
+      return [...localOnly, ...missingDefaults, ...enrichedServer].sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
     }
 
     const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
@@ -1127,3 +1136,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 </body>
 </html>
+
+

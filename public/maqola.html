@@ -819,7 +819,15 @@
       if (res.ok) {
         const data = await res.json();
         if (data && data.article) {
-          applyArticleData(data.article, data.related);
+          const defaultArticles = (typeof ARTICLES_DATA !== 'undefined') ? ARTICLES_DATA : [];
+          const defaultBySlug = new Map(defaultArticles.map((a) => [a.slug, a]));
+          const localMatch = defaultBySlug.get(data.article.slug);
+          const mergedArticle = localMatch ? { ...localMatch, ...data.article, title_ru: data.article.title_ru || localMatch.title_ru, title_en: data.article.title_en || localMatch.title_en, excerpt_ru: data.article.excerpt_ru || localMatch.excerpt_ru, excerpt_en: data.article.excerpt_en || localMatch.excerpt_en, content_ru: data.article.content_ru || localMatch.content_ru, content_en: data.article.content_en || localMatch.content_en, read_time_ru: data.article.read_time_ru || localMatch.read_time_ru, read_time_en: data.article.read_time_en || localMatch.read_time_en, tags_ru: data.article.tags_ru || localMatch.tags_ru, tags_en: data.article.tags_en || localMatch.tags_en } : data.article;
+          const mergedRelated = (data.related || []).map((r) => {
+            const rm = defaultBySlug.get(r.slug);
+            return rm ? { ...rm, ...r, title_ru: r.title_ru || rm.title_ru, title_en: r.title_en || rm.title_en, read_time_ru: r.read_time_ru || rm.read_time_ru, read_time_en: r.read_time_en || rm.read_time_en } : r;
+          });
+          applyArticleData(mergedArticle, mergedRelated);
           return;
         }
       }
@@ -854,3 +862,5 @@
 </script>
 </body>
 </html>
+
+
