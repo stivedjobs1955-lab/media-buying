@@ -3,7 +3,7 @@ const ARTICLES_DATA = [
     "id": 1,
     "slug": "meta-product-browsing-on-by-default-october-28-2026",
     "category": "facebook",
-    "image_url": "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-product-browsing-on-by-default-october-28-2026.jpg",
     "author": "The Unique Media",
     "created_at": "2026-10-20T14:00:00.000Z",
     "views": 295,
@@ -75,7 +75,7 @@ const ARTICLES_DATA = [
       "SearchAds",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-ads-channel-prioritization-budget-allocation-2026.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -120,7 +120,7 @@ const ARTICLES_DATA = [
       "Whitelist",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-eu-regulators-igaming-whitelist-meta-ads-2026.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -162,7 +162,7 @@ const ARTICLES_DATA = [
       "Analytics",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-ads-ai-max-search-terms-report-update-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -207,7 +207,7 @@ const ARTICLES_DATA = [
       "Algorithm",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/facebook-your-algorithm-ai-feed-reels-control-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -249,7 +249,7 @@ const ARTICLES_DATA = [
       "AntiFraud",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-blocks-3-7-million-scam-accounts-ad-networks-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -291,7 +291,7 @@ const ARTICLES_DATA = [
       "ECommerce",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-merchant-center-low-image-quality-policy-2026.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -333,7 +333,7 @@ const ARTICLES_DATA = [
       "ValueRules",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/facebook-ads-removing-ad-set-placement-exclusions-2026.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -378,7 +378,7 @@ const ARTICLES_DATA = [
       "Moderation",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1614680376593-902f749f7ffc?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/brazil-ad-crackdown-google-ads-meta-telegram-channels-2026.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -423,7 +423,7 @@ const ARTICLES_DATA = [
       "Report",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/facebook-instagram-moderation-report-2026.jpg",
     "author": "The Unique Media",
     "read_time": "9 daqiqa",
     "read_time_ru": "9 мин",
@@ -465,7 +465,7 @@ const ARTICLES_DATA = [
       "InMarket",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/fb-in-market-categories-testing.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -507,7 +507,7 @@ const ARTICLES_DATA = [
       "Bidding",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-bid-caps-cost-caps-strategy-2026.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -549,7 +549,7 @@ const ARTICLES_DATA = [
       "GoogleTagManager",
       "Analytics"
     ],
-    "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/server-side-gtm-stape-cloud-setup-guide.jpg",
     "author": "The Unique Media",
     "read_time": "8 daqiqa",
     "read_time_ru": "8 мин",
@@ -591,7 +591,7 @@ const ARTICLES_DATA = [
       "PerformanceMax",
       "PPC"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-ads-pmax-roas-optimization-guide-2026.jpg",
     "author": "The Unique Media",
     "read_time": "8 daqiqa",
     "read_time_ru": "8 мин",
@@ -633,7 +633,7 @@ const ARTICLES_DATA = [
       "ECommerce",
       "CatalogAds"
     ],
-    "image_url": "https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-advantage-plus-shopping-catalog-guide.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -675,7 +675,7 @@ const ARTICLES_DATA = [
       "Marketing",
       "Telegram"
     ],
-    "image_url": "https://images.unsplash.com/photo-1614680376593-902f749f7ffc?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-ads-conversion-scaling-strategies.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -717,7 +717,7 @@ const ARTICLES_DATA = [
       "PPC",
       "AdGroups"
     ],
-    "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-ads-skag-vs-stag-architecture-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -759,7 +759,7 @@ const ARTICLES_DATA = [
       "SaaS",
       "Fintech"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/x-ads-video-app-install-tech-saas.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -801,7 +801,7 @@ const ARTICLES_DATA = [
       "Pixel",
       "ServerSide"
     ],
-    "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-capi-server-side-tracking-2026.jpg",
     "author": "The Unique Media",
     "read_time": "8 daqiqa",
     "read_time_ru": "8 мин",
@@ -843,7 +843,7 @@ const ARTICLES_DATA = [
       "tROAS",
       "PPC"
     ],
-    "image_url": "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-smart-bidding-tcpa-troas-control.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -885,7 +885,7 @@ const ARTICLES_DATA = [
       "LeadGen",
       "Marketing"
     ],
-    "image_url": "https://images.unsplash.com/photo-1616469829941-c7200edec809?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/linkedin-abm-b2b-strategy-2026.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -927,7 +927,7 @@ const ARTICLES_DATA = [
       "HookRate",
       "Targeting"
     ],
-    "image_url": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-reels-9-16-video-ads-framework.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -969,7 +969,7 @@ const ARTICLES_DATA = [
       "TechMarketing",
       "SaaS"
     ],
-    "image_url": "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/x-ads-algorithm-video-strategy-2026.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1011,7 +1011,7 @@ const ARTICLES_DATA = [
       "AdCopy",
       "Marketing"
     ],
-    "image_url": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-ads-copywriting-160-char-hacks.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1050,7 +1050,7 @@ const ARTICLES_DATA = [
       "LastClick",
       "MarketingAnalytics"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/multi-touch-attribution-models-performance-marketing.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -1092,7 +1092,7 @@ const ARTICLES_DATA = [
       "Discover",
       "ECommerce"
     ],
-    "image_url": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-demand-gen-youtube-shorts-ads.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1134,7 +1134,7 @@ const ARTICLES_DATA = [
       "B2B",
       "LeadGen"
     ],
-    "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-lead-ads-conditional-logic-instant-forms.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1176,7 +1176,7 @@ const ARTICLES_DATA = [
       "WebApps",
       "Funnel"
     ],
-    "image_url": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-mini-apps-tma-funnel-guide.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -1218,7 +1218,7 @@ const ARTICLES_DATA = [
       "HubSpot",
       "B2B"
     ],
-    "image_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/linkedin-lead-gen-forms-crm-sync-guide.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1260,7 +1260,7 @@ const ARTICLES_DATA = [
       "Scaling",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-cbo-vs-abo-scaling-strategy-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1302,7 +1302,7 @@ const ARTICLES_DATA = [
       "TelegramAds",
       "Budgeting"
     ],
-    "image_url": "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-stars-ton-official-ad-payments.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1344,7 +1344,7 @@ const ARTICLES_DATA = [
       "B2B",
       "Executive"
     ],
-    "image_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/linkedin-thought-leader-ads-executive-brand.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1386,7 +1386,7 @@ const ARTICLES_DATA = [
       "NegativeKeywords",
       "PPC"
     ],
-    "image_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-search-match-types-exact-vs-phrase-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1428,7 +1428,7 @@ const ARTICLES_DATA = [
       "MediaBuying",
       "BI"
     ],
-    "image_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/utm-architecture-naming-conventions-7-figure-campaigns.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1470,7 +1470,7 @@ const ARTICLES_DATA = [
       "GTM",
       "Analytics"
     ],
-    "image_url": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-consent-mode-v2-enhanced-conversions.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -1509,7 +1509,7 @@ const ARTICLES_DATA = [
       "Branding",
       "XAds"
     ],
-    "image_url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/x-trend-takeover-real-time-keyword-targeting.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1551,7 +1551,7 @@ const ARTICLES_DATA = [
       "Arbitrage",
       "Security"
     ],
-    "image_url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/facebook-ads-ban-prevention-antidetect-guide.jpg",
     "author": "The Unique Media",
     "read_time": "9 daqiqa",
     "read_time_ru": "9 мин",
@@ -1593,7 +1593,7 @@ const ARTICLES_DATA = [
       "CRM",
       "LeadGen"
     ],
-    "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-chatbots-lead-generation-automation.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1635,7 +1635,7 @@ const ARTICLES_DATA = [
       "PaybackPeriod",
       "Finance"
     ],
-    "image_url": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/unit-economics-cac-ltv-payback-period-media-buying.jpg",
     "author": "The Unique Media",
     "read_time": "8 daqiqa",
     "read_time_ru": "8 мин",
@@ -1677,7 +1677,7 @@ const ARTICLES_DATA = [
       "Audiences",
       "Strategy"
     ],
-    "image_url": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/lookalike-vs-broad-targeting-meta-2026.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1716,7 +1716,7 @@ const ARTICLES_DATA = [
       "GlobalMarketing",
       "B2B"
     ],
-    "image_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/linkedin-matched-audiences-job-title-targeting.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1758,7 +1758,7 @@ const ARTICLES_DATA = [
       "LeadGen",
       "Google"
     ],
-    "image_url": "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/youtube-shorts-video-funnels-conversion.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1800,7 +1800,7 @@ const ARTICLES_DATA = [
       "Targeting",
       "MediaBuying"
     ],
-    "image_url": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/telegram-topic-vs-channel-bidding-strategies.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1839,7 +1839,7 @@ const ARTICLES_DATA = [
       "FeedOptimization",
       "ECommerce"
     ],
-    "image_url": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/google-shopping-feed-custom-labels-optimization.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -1881,7 +1881,7 @@ const ARTICLES_DATA = [
       "ROAS",
       "Creatives"
     ],
-    "image_url": "https://images.unsplash.com/photo-1542744094-3a3172720a8a?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/meta-creative-fatigue-dynamic-creative-testing.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
@@ -1920,7 +1920,7 @@ const ARTICLES_DATA = [
       "ConversionTracking",
       "Analytics"
     ],
-    "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/x-conversion-pixel-web-attribution-models.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -1959,7 +1959,7 @@ const ARTICLES_DATA = [
       "LeadGeneration",
       "LinkedInAds"
     ],
-    "image_url": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/linkedin-document-ads-whitepaper-funnel.jpg",
     "author": "The Unique Media",
     "read_time": "5 daqiqa",
     "read_time_ru": "5 мин",
@@ -2001,7 +2001,7 @@ const ARTICLES_DATA = [
       "CRO",
       "ECommerce"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/ga4-custom-funnels-exploration-ecommerce.jpg",
     "author": "The Unique Media",
     "read_time": "7 daqiqa",
     "read_time_ru": "7 мин",
@@ -2043,7 +2043,7 @@ const ARTICLES_DATA = [
       "CTR",
       "Creatives"
     ],
-    "image_url": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&h=675&q=85",
+    "image_url": "https://raw.githubusercontent.com/stivedjobs1955-lab/media-buying/main/public/images/articles/creative-analytics-hook-rate-hold-rate-ctr-metrics.jpg",
     "author": "The Unique Media",
     "read_time": "6 daqiqa",
     "read_time_ru": "6 мин",
