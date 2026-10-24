@@ -5,7 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Maqola — Unique Media Buying</title>
 <meta name="description" id="pageDesc" content="Media buying, target va performance marketing bo'yicha eksklyuziv maqolalar va tahlillar.">
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:site_name" content="Unique Media Buying">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.theunique.uz/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -409,13 +419,17 @@
         <button data-lang="en" class="lang-btn" title="English"><span class="flag">🇬🇧</span> EN</button>
       </div>
 
-      <nav class="nav-links">
+      <nav class="nav-links" id="navLinks">
         <a href="/" data-i18n="nav.home">Bosh sahifa</a>
         <a href="/#xizmatlar" data-i18n="nav.services">Xizmatlar</a>
         <a href="/blueprint" style="color: var(--flow-600); font-weight: 700; display: inline-flex; align-items: center; gap: 4px;"><span data-i18n="nav.mentorship">Mentorlik</span> <span style="background: #dbeafe; color: #1d4ed8; font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; font-weight: 800;" data-i18n="nav.mentorshipBadge">Praktikum</span></a>
         <a href="/maqolalar" class="active" style="color: var(--flow-600); font-weight:700;" data-i18n="nav.articles">Maqolalar</a>
         <a href="/#aloqa" class="btn-primary btn-sm" data-i18n="nav.cta">Konsultatsiya olish</a>
       </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menyu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -661,6 +675,18 @@
 <script src="translations.js"></script>
 <script src="articles-data.js"></script>
 <script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  }
+
   let cachedArticle = null;
   let cachedRelated = [];
 

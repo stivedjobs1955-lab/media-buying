@@ -14,7 +14,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Biznes Egalari uchun Media Buying & Target Praktikumi — Unique</title>
 <meta name="description" content="Targetologlarga qaram bo'lmasdan, o'z biznesingizga barqaror mijozlar oqimini yarating. 1 oylik amaliy media buying va Meta Ads tizimi.">
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="canonical" href="https://www.theunique.uz/blueprint">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:site_name" content="Unique Media Buying">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.theunique.uz/blueprint">
+<meta property="og:title" content="Biznes Egalari uchun Media Buying & Target Praktikumi — Unique">
+<meta property="og:description" content="Targetologlarga qaram bo'lmasdan, o'z biznesingizga barqaror mijozlar oqimini yarating. 1 oylik amaliy media buying va Meta Ads tizimi.">
+<meta property="og:image" content="https://www.theunique.uz/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -1204,6 +1218,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
     });
   }
 
