@@ -3,6 +3,7 @@ const TRANSLATIONS = {
     'nav.services': "Xizmatlar",
     'nav.articles': "Maqolalar",
     'nav.mentorship': "Mentorlik",
+    'nav.mentorshipBadge': "Praktikum",
     'nav.analysis': "Tahlil va Target",
     'nav.clients': "Mijozlar",
     'nav.process': "Jarayon",
@@ -179,6 +180,7 @@ const TRANSLATIONS = {
     'nav.services': "Услуги",
     'nav.articles': "Статьи",
     'nav.mentorship': "Менторство",
+    'nav.mentorshipBadge': "Практикум",
     'nav.analysis': "Аналитика и таргет",
     'nav.clients': "Клиенты",
     'nav.process': "Процесс",
@@ -355,6 +357,7 @@ const TRANSLATIONS = {
     'nav.services': "Services",
     'nav.articles': "Articles",
     'nav.mentorship': "Mentorship",
+    'nav.mentorshipBadge': "Practicum",
     'nav.analysis': "Analytics & Targeting",
     'nav.clients': "Clients",
     'nav.process': "Process",
@@ -487,6 +490,7 @@ const TRANSLATIONS = {
     'contact.success': "Thank you! We'll be in touch shortly.",
     'contact.sideTitle': "Get in touch directly",
     'contact.sideText': "Have a question or need a faster answer — reach out through the channels below.",
+    'contact.phoneLabel': "Phone",
     'hero.liveStatus': "Live monitoring active (24/7)",
 
     'calc.eyebrow': "BUDGET & ROI",
@@ -531,26 +535,87 @@ const LANG_OPTIONS = [
   { code: 'en', label: 'EN', flag: '🇬🇧', name: 'English' },
 ];
 
+const SUPPORTED_LANGS = LANG_OPTIONS.map((l) => l.code);
+
+function getLangFromUrl() {
+  if (typeof window === 'undefined') return null;
+  const rawHash = (window.location.hash || '').replace(/^#\/?/, '').trim().toLowerCase();
+  if (SUPPORTED_LANGS.includes(rawHash)) {
+    return rawHash;
+  }
+  if (rawHash.startsWith('lang=')) {
+    const code = rawHash.split('=')[1];
+    if (SUPPORTED_LANGS.includes(code)) return code;
+  }
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const qLang = (params.get('lang') || '').trim().toLowerCase();
+    if (SUPPORTED_LANGS.includes(qLang)) return qLang;
+  } catch (e) {}
+  return null;
+}
+
+function syncUrlHashWithLang(lang, replace = false) {
+  if (typeof window === 'undefined' || !window.history) return;
+  const targetHash = `#${lang}`;
+  if (window.location.hash === targetHash) return;
+  const newUrl = `${window.location.pathname}${window.location.search}${targetHash}`;
+  try {
+    if (replace) {
+      window.history.replaceState({ lang }, '', newUrl);
+    } else {
+      window.history.pushState({ lang }, '', newUrl);
+    }
+  } catch (e) {
+    window.location.hash = lang;
+  }
+}
+
+function updateInternalLinksHash(lang) {
+  if (typeof document === 'undefined') return;
+  document.querySelectorAll('a[href]').forEach((a) => {
+    const rawHref = a.getAttribute('href') || '';
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) {
+      return;
+    }
+    if (a.target === '_blank' && !rawHref.startsWith('/')) return;
+    try {
+      const url = new URL(rawHref, window.location.origin);
+      if (url.origin !== window.location.origin) return;
+      if (url.pathname.match(/\.(docx|pdf|png|jpg|jpeg|webp|svg|ico)$/i)) return;
+      const hashCode = (url.hash || '').replace(/^#\/?/, '').trim().toLowerCase();
+      if (!url.hash || SUPPORTED_LANGS.includes(hashCode) || hashCode === 'home') {
+        a.setAttribute('href', `${url.pathname}${url.search}#${lang}`);
+      }
+    } catch (e) {}
+  });
+}
+
 function renderLanguageSwitcher(currentLang) {
   const switchWrap = document.getElementById('langSwitch');
   if (!switchWrap) return;
 
   // Render all language buttons, marking current active
   switchWrap.innerHTML = LANG_OPTIONS.map((l) => `
-    <button data-lang="${l.code}" class="lang-btn ${l.code === currentLang ? 'active' : ''}" title="${l.name}">
+    <button type="button" data-lang="${l.code}" class="lang-btn ${l.code === currentLang ? 'active' : ''}" title="${l.name}">
       <span class="flag">${l.flag}</span> ${l.label}
     </button>
   `).join('');
 
   switchWrap.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang, { updateUrl: true, replaceUrl: false }));
   });
 }
 
-function applyLanguage(lang) {
+function applyLanguage(lang, options = {}) {
+  lang = String(lang || '').trim().toLowerCase();
   if (!TRANSLATIONS[lang]) lang = 'uz';
   document.documentElement.lang = lang;
   localStorage.setItem('unique_lang', lang);
+
+  if (options.updateUrl !== false) {
+    syncUrlHashWithLang(lang, Boolean(options.replaceUrl));
+  }
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
@@ -564,6 +629,7 @@ function applyLanguage(lang) {
   });
 
   renderLanguageSwitcher(lang);
+  updateInternalLinksHash(lang);
   if (typeof updateCalculator === 'function') updateCalculator();
 
   // Notify active listeners (e.g. articles catalog, reader page)
@@ -571,10 +637,79 @@ function applyLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('unique_lang') || 'uz';
-  applyLanguage(saved);
+  const rawHash = (window.location.hash || '').replace(/^#\/?/, '').trim();
+  const urlLang = getLangFromUrl();
+  const saved = urlLang || localStorage.getItem('unique_lang') || 'uz';
+
+  // Check if initial hash points to a section element on the page (e.g., #xizmatlar, #aloqa)
+  const isSectionHash = rawHash && !SUPPORTED_LANGS.includes(rawHash.toLowerCase()) && !rawHash.toLowerCase().startsWith('lang=');
+  const sectionEl = isSectionHash ? document.getElementById(rawHash) : null;
+
+  applyLanguage(saved, { updateUrl: !sectionEl, replaceUrl: true });
+
+  if (sectionEl) {
+    setTimeout(() => {
+      sectionEl.scrollIntoView({ behavior: 'smooth' });
+      syncUrlHashWithLang(saved, true);
+    }, 100);
+  }
+});
+
+// Listen for URL hash changes (e.g., manual edit to #ru / #uz / #en or Back/Forward buttons)
+window.addEventListener('hashchange', () => {
+  const urlLang = getLangFromUrl();
+  if (urlLang) {
+    if (document.documentElement.lang !== urlLang || localStorage.getItem('unique_lang') !== urlLang) {
+      applyLanguage(urlLang, { updateUrl: false });
+    }
+    return;
+  }
+  const rawHash = (window.location.hash || '').replace(/^#\/?/, '').trim();
+  if (rawHash) {
+    const targetEl = document.getElementById(rawHash);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+      const currentLang = localStorage.getItem('unique_lang') || 'uz';
+      syncUrlHashWithLang(currentLang, true);
+    }
+  }
+});
+
+window.addEventListener('popstate', (e) => {
+  const stateLang = e.state && e.state.lang;
+  const urlLang = getLangFromUrl() || (SUPPORTED_LANGS.includes(stateLang) ? stateLang : null);
+  if (urlLang && (document.documentElement.lang !== urlLang || localStorage.getItem('unique_lang') !== urlLang)) {
+    applyLanguage(urlLang, { updateUrl: false });
+  }
+});
+
+// Intercept same-page section anchor clicks (e.g. #xizmatlar, #aloqa, #home) so smooth scroll works while preserving #<lang> in the URL
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href]');
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+  if (href.startsWith('#') && href.length > 1) {
+    const hashVal = href.slice(1).trim();
+    const lowerHash = hashVal.toLowerCase();
+    if (SUPPORTED_LANGS.includes(lowerHash)) {
+      e.preventDefault();
+      applyLanguage(lowerHash, { updateUrl: true, replaceUrl: false });
+      return;
+    }
+    const targetEl = document.getElementById(hashVal);
+    if (targetEl) {
+      e.preventDefault();
+      if (lowerHash === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+      const currentLang = localStorage.getItem('unique_lang') || 'uz';
+      syncUrlHashWithLang(currentLang, true);
+    }
+  }
 });
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { TRANSLATIONS, LANG_OPTIONS, applyLanguage };
+  module.exports = { TRANSLATIONS, LANG_OPTIONS, SUPPORTED_LANGS, getLangFromUrl, applyLanguage };
 }

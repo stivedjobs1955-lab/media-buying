@@ -166,7 +166,7 @@ function updateCalculator() {
   if (!calcSlider) return;
   const sliderVal = parseInt(calcSlider.value, 10);
   const usd = sliderToBudget(sliderVal);
-  const currentLang = localStorage.getItem('unique_lang') || 'uz';
+  const currentLang = (typeof getLangFromUrl === 'function' && getLangFromUrl()) || localStorage.getItem('unique_lang') || 'uz';
   const leadsUnit = currentLang === 'ru' ? 'лидов' : (currentLang === 'en' ? 'leads' : 'ta lid');
 
   // Format budget display in USD ($)
@@ -263,9 +263,9 @@ async function fetchAndRenderArticles() {
     const res = await fetch('/api/articles?' + params.toString());
     if (!res.ok) throw new Error('API offline');
     const articles = await res.json();
+    const currentLang = (typeof getLangFromUrl === 'function' && getLangFromUrl()) || localStorage.getItem('unique_lang') || 'uz';
 
     if (!articles || articles.length === 0) {
-      const currentLang = localStorage.getItem('unique_lang') || 'uz';
       const notFoundText = (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang]['articles.notFound'])
         ? TRANSLATIONS[currentLang]['articles.notFound']
         : 'Maqolalar topilmadi.';
@@ -278,7 +278,7 @@ async function fetchAndRenderArticles() {
       const m = d.toLocaleDateString('uz-UZ', { month: 'long', year: 'numeric' });
       const dateStr = m.charAt(0).toUpperCase() + m.slice(1);
       return `
-        <a href="/maqola?slug=${encodeURIComponent(a.slug)}" class="cpa-article-card reveal in" data-category="${a.category}">
+        <a href="/maqola?slug=${encodeURIComponent(a.slug)}#${currentLang}" class="cpa-article-card reveal in" data-category="${a.category}">
           <div class="cpa-card-thumb-wrap">
             <img src="${a.image_url || 'images/logo-mark.png'}" alt="${a.title}" loading="lazy">
             <span class="cpa-badge-overlay">${a.category.toUpperCase()}</span>
